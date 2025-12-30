@@ -1,0 +1,58 @@
+{
+  "name": "mcp-server-verkada",
+  "version": "0.1.0",
+  "description": "MCP server for Verkada API - code execution compatible",
+  "type": "module",
+  "main": "dist/server/index.js",
+  "scripts": {
+    "generate": "tsx generator/index.ts",
+    "generate:watch": "tsx generator/index.ts --watch",
+    "generate:dry-run": "tsx generator/index.ts --dry-run",
+    "generate:verbose": "tsx generator/index.ts --verbose",
+    "build": "tsc -p tsconfig.server.json --outDir dist/server",
+    "build:all": "tsc",
+    "start": "node dist/server/index.js",
+    "dev": "tsx server/index.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "verkada",
+    "api",
+    "ai",
+    "agent",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.3.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "handlebars": "^4.7.8",
+    "chokidar": "^3.5.3",
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "msw": "^2.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
