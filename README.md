@@ -13,7 +13,7 @@ A Model Context Protocol (MCP) server that provides AI agents with access to the
 ## Prerequisites
 
 - Node.js >= 18.0.0
-- Verkada API Token or API Key
+- Verkada API Key
 
 ## Installation
 
@@ -53,6 +53,7 @@ npm run build
 To use this MCP server with Claude Desktop, add the following to your Claude Desktop configuration file:
 
 **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
