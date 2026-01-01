@@ -61,7 +61,7 @@ To use this MCP server with Claude Desktop, add the following to your Claude Des
   "mcpServers": {
     "verkada": {
       "command": "node",
-      "args": ["/absolute/path/to/mcp-server-verkada/dist/server/index.js"],
+      "args": ["/absolute/path/to/mcp-server-verkada/dist/src/index.js"],
       "env": {
         "VERKADA_API_TOKEN": "your_api_token_here",
         "VERKADA_REGION": "api"
@@ -79,7 +79,7 @@ After updating the configuration, restart Claude Desktop to load the server.
 
 ```
 mcp-server-verkada/
-├── server/                 # MCP server implementation
+├── src/                   # MCP server implementation
 │   ├── index.ts           # Server entry point
 │   ├── client.ts          # HTTP client for Verkada API
 │   ├── config.ts          # Runtime configuration

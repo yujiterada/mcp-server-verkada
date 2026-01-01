@@ -27,13 +27,13 @@
     "baseUrl": ".",
     "paths": {
       "@generator/*": ["generator/*"],
-      "@server/*": ["server/*"],
+      "@src/*": ["src/*"],
       "@test/*": ["test/*"]
     }
   },
   "include": [
     "generator/**/*.ts",
-    "server/**/*.ts",
+    "src/**/*.ts",
     "test/**/*.ts"
   ],
   "exclude": [
