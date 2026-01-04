@@ -46,6 +46,9 @@ type GetThumbnailImageInput = z.infer<typeof GetThumbnailImageInputSchema>;
  * Returns image data in base64 format
  */
 const GetThumbnailImageOutputSchema = z.object({
+  type: z.literal('image'),
+  data: z.string(),
+  mimeType: z.string(),
 });
 
 type GetThumbnailImageOutput = z.infer<typeof GetThumbnailImageOutputSchema>;
