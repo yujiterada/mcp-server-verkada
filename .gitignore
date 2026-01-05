@@ -35,3 +35,12 @@ coverage/
 *.bck
 *.bak
 *.backup
+
+# Custom
+docs/
+generator/
+test/
+CLAUDE.md
+*.json
+*.bck
+vitest.config.ts
