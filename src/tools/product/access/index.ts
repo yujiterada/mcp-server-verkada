@@ -51,8 +51,8 @@ export { listAccessEvents, listAccessEventsMetadata } from './list-access-events
 export { listAccessGroups, listAccessGroupsMetadata } from './list-access-groups.js';
 export { listAccessScenarioList, listAccessScenarioListMetadata } from './list-access-scenario-list.js';
 export { postMfaCodeViewV1, postMfaCodeViewV1Metadata } from './post-mfa-code-view-v1.js';
-export { unlockAccessAdminAPIUnlock, unlockAccessAdminAPIUnlockMetadata } from './unlock-access-admin-a-p-i-unlock.js';
-export { unlockAccessUserAPIUnlock, unlockAccessUserAPIUnlockMetadata } from './unlock-access-user-a-p-i-unlock.js';
+export { unlockAccessAdminApiUnlock, unlockAccessAdminApiUnlockMetadata } from './unlock-access-admin-api-unlock.js';
+export { unlockAccessUserApiUnlock, unlockAccessUserApiUnlockMetadata } from './unlock-access-user-api-unlock.js';
 export { unlockFaceUnlockCopyUserPhotoExternalUser, unlockFaceUnlockCopyUserPhotoExternalUserMetadata } from './unlock-face-unlock-copy-user-photo-external-user.js';
 export { unlockFaceUnlockCopyUserPhotoUser, unlockFaceUnlockCopyUserPhotoUserMetadata } from './unlock-face-unlock-copy-user-photo-user.js';
 export { unlockFaceUnlockInviteExternalUser, unlockFaceUnlockInviteExternalUserMetadata } from './unlock-face-unlock-invite-external-user.js';
