@@ -12,6 +12,8 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import type { CallToolResult } from '@modelcontextprotocol/sdk/types.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 import {
   loadServerConfig,
@@ -342,8 +344,27 @@ async function main(): Promise<void> {
 }
 
 // Run if this is the main module
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
-if (isMainModule) {
+function isMainModule(): boolean {
+  // Get the current file path from import.meta.url
+  const currentFile = fileURLToPath(import.meta.url);
+  
+  // Get the main file path from process.argv[1]
+  if (!process.argv[1]) {
+    return false;
+  }
+  
+  // Resolve to absolute path and normalize
+  const mainFile = path.resolve(process.argv[1]);
+  
+  // Compare normalized paths
+  // Also check with .ts extension for tsx execution
+  return currentFile === mainFile || 
+         currentFile === mainFile + '.ts' ||
+         currentFile.replace(/\.ts$/, '.js') === mainFile;
+}
+
+// Run if this is the main module
+if (isMainModule()) {
   main().catch((error) => {
     console.error('Unhandled error:', error);
     process.exit(1);
