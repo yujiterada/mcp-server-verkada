@@ -1,79 +1,72 @@
-# MCP Server for Verkada API
+# Verkada MCP Server
 
-A Model Context Protocol (MCP) server that provides AI agents with access to the Verkada API. Built for code execution compatibility, allowing agents to discover and use tools progressively.
+The Verkada [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) connects AI tools to Command platform. This enables AI agents, assistants, and chatbots to interact with Command using the [Verkada APIs](https://apidocs.verkada.com/reference/introduction).
 
-## Features
+Currently, there isn't a Verkada MCP server.
 
-- 120+ tools covering Verkada's API endpoints
-- Code execution compatible design (tools discovered on-demand)
-- TypeScript with full type safety
-- Zod validation for all inputs
-- Organized by product categories (Access, Camera, Guest, Sensor, etc.)
+## Local Verkada MCP Server
 
-## Prerequisites
+### Prerequisites
 
-- Node.js >= 18.0.0
-- Verkada API Key
+- [Node.js](https://nodejs.org/en/download) >= 18.0.0
+- [Verkada API Key](https://apidocs.verkada.com/reference/quick-start-guide)
 
-## Installation
+### Installation
 
-```bash
-npm install
-```
+Below is an example of installing Verkada MCP Server to Claude Desktop.
 
-## Configuration
+1. Install dependencies
 
-Copy the example environment file and configure your credentials:
+   ```bash
+   npm install
+   ```
 
-```bash
-cp .env.example .env
-```
+2. Build the project
 
-Edit `.env` with your Verkada credentials:
+   ```bash
+   # Build the server
+   npm run build
+   ```
 
-```env
-# Use API Token (recommended) or API Key
-VERKADA_API_TOKEN=your_api_token_here
+3. Configure Claude Desktop
 
-# API Region: api (US), api.eu (Europe), api.au (Australia)
-VERKADA_REGION=api
-```
+    To use this MCP server with Claude Desktop, add the following to your Claude Desktop configuration file:
 
-## Usage
+     **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+     
+     ```json
+     {
+       "mcpServers": {
+         "verkada": {
+           "command": "node",
+           "args": ["/absolute/path/to/mcp-server-verkada/dist/src/index.js"],
+           "env": {
+             "VERKADA_API_KEY": "your_api_key_here",
+             "VERKADA_REGION": "your_region_here"
+           }
+         }
+       }
+     }
+   ```
 
-### Build
+     **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-```bash
-# Build the server
-npm run build
-```
-
-### Claude Desktop
-
-To use this MCP server with Claude Desktop, add the following to your Claude Desktop configuration file:
-
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "verkada": {
-      "command": "node",
-      "args": ["/absolute/path/to/mcp-server-verkada/dist/src/index.js"],
-      "env": {
-        "VERKADA_API_TOKEN": "your_api_token_here",
-        "VERKADA_REGION": "api"
-      }
+     ```json
+    "mcpServers": {
+        "verkada": {
+            "command": "node",
+            "args": ["drive:\\absolute\\path\\to\\mcp-server-verkada\\dist\\src\\index.js"],
+            "env": {
+                "VERKADA_API_KEY": "your_api_key_here",
+                "VERKADA_REGION": "your_region_here"
+            }
+        }
     }
-  }
-}
-```
+     ```
 
-Replace `/absolute/path/to/mcp-server-verkada` with the actual path to this project.
+   Replace `/absolute/path/to/mcp-server-verkada` with the actual path to this project, `your_api_key_here` with your Verkada API key, and `your_region_here` with your Verkada Command region.
 
-After updating the configuration, restart Claude Desktop to load the server.
+   After updating the configuration, restart Claude Desktop to load the server.
 
 ## Project Structure
 
