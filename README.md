@@ -2,7 +2,7 @@
 
 The Verkada [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) connects AI tools to Command platform. This enables AI agents, assistants, and chatbots to interact with Command using the [Verkada APIs](https://apidocs.verkada.com/reference/introduction).
 
-Currently, there isn't a Verkada MCP server.
+Currently, there isn't a remote Verkada MCP server.
 
 ## Local Verkada MCP Server
 
