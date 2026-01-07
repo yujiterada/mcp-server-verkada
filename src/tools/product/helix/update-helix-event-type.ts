@@ -1,11 +1,11 @@
 /**
- * DeleteVideoTaggingEventType Tool
+ * UpdateHelixEventType Tool
  *
- * Delete a video tagging event type. This action cannot be undone.
+ * Update an existing helix event type. Only the provided fields will be changed.
  *
- * @category command/alert
- * @operationId deleteVideoTaggingEventTypeViewV1
- * @method DELETE
+ * @category product/helix
+ * @operationId patchVideoTaggingEventTypeViewV1
+ * @method PATCH
  * @path /cameras/v1/video_tagging/event_type
  * @tags Methods
  *
@@ -21,46 +21,55 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for deleteVideoTaggingEventType
+ * Input parameters for updateHelixEventType
  */
-const DeleteVideoTaggingEventTypeInputSchema = z.object({
+const UpdateHelixEventTypeInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The event_type_uid parameter (required) */
     event_type_uid: z.string(),
   }),
+  /** Body parameters */
+  body: z.object({
+    /** The schema of the event type. */
+    event_schema: z.object({}).optional(),
+    /** The name of the event type. */
+    name: z.string().optional(),
+  }),
 });
 
-type DeleteVideoTaggingEventTypeInput = z.infer<typeof DeleteVideoTaggingEventTypeInputSchema>;
+type UpdateHelixEventTypeInput = z.infer<typeof UpdateHelixEventTypeInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for deleteVideoTaggingEventType
+ * Output schema for updateHelixEventType
  * ok
  */
-const DeleteVideoTaggingEventTypeOutputSchema = z.object({
+const UpdateHelixEventTypeOutputSchema = z.object({
 });
 
-type DeleteVideoTaggingEventTypeOutput = z.infer<typeof DeleteVideoTaggingEventTypeOutputSchema>;
+type UpdateHelixEventTypeOutput = z.infer<typeof UpdateHelixEventTypeOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Delete a video tagging event type. This action cannot be undone.
+ * Update an existing helix event type. Only the provided fields will be changed.
  *
  * @param input.query.event_type_uid - The event_type_uid parameter
+ * @param input.body.event_schema - The schema of the event type.
+ * @param input.body.name - The name of the event type.
  * @returns ok
  */
-export async function deleteVideoTaggingEventType(
-  input: DeleteVideoTaggingEventTypeInput
-): Promise<APIResponse<DeleteVideoTaggingEventTypeOutput>> {
+export async function updateHelixEventType(
+  input: UpdateHelixEventTypeInput
+): Promise<APIResponse<UpdateHelixEventTypeOutput>> {
   // Validate input
-  const validated = DeleteVideoTaggingEventTypeInputSchema.parse(input);
+  const validated = UpdateHelixEventTypeInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event_type';
@@ -74,15 +83,19 @@ export async function deleteVideoTaggingEventType(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<DeleteVideoTaggingEventTypeOutput>({
-    method: 'DELETE',
+  const response = await callVerkadaAPI<UpdateHelixEventTypeOutput>({
+    method: 'PATCH',
     path: fullPath,
+    body: {
+      event_schema: validated.body.event_schema,
+      name: validated.body.name,
+    },
   });
 
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = DeleteVideoTaggingEventTypeOutputSchema.parse(response.data);
+      response.data = UpdateHelixEventTypeOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -99,14 +112,14 @@ export async function deleteVideoTaggingEventType(
 /**
  * Metadata for MCP tool registration
  */
-export const deleteVideoTaggingEventTypeMetadata = {
-  name: 'delete_video_tagging_event_type',
-  description: `Delete a video tagging event type. This action cannot be undone.`,
-  inputSchema: DeleteVideoTaggingEventTypeInputSchema,
-  outputSchema: DeleteVideoTaggingEventTypeOutputSchema,
-  category: 'command/alert',
-  operationId: 'deleteVideoTaggingEventTypeViewV1',
-  method: 'DELETE' as const,
+export const updateHelixEventTypeMetadata = {
+  name: 'update_helix_event_type',
+  description: `Update an existing helix event type. Only the provided fields will be changed.`,
+  inputSchema: UpdateHelixEventTypeInputSchema,
+  outputSchema: UpdateHelixEventTypeOutputSchema,
+  category: 'product/helix',
+  operationId: 'patchVideoTaggingEventTypeViewV1',
+  method: 'PATCH' as const,
   path: '/cameras/v1/video_tagging/event_type',
   requiresAuth: true,
   tags: ['Methods'],

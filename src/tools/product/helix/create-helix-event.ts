@@ -1,9 +1,9 @@
 /**
- * CreateVideoTaggingEvent Tool
+ * CreateHelixEvent Tool
  *
- * Create a new video tagging event. Provide the required fields in the request body.
+ * Create a new helix event. Provide the required fields in the request body.
  *
- * @category command/alert
+ * @category product/helix
  * @operationId postVideoTaggingEventViewV1
  * @method POST
  * @path /cameras/v1/video_tagging/event
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for createVideoTaggingEvent
+ * Input parameters for createHelixEvent
  */
-const CreateVideoTaggingEventInputSchema = z.object({
+const CreateHelixEventInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** List of event attributes. */
@@ -39,27 +39,27 @@ const CreateVideoTaggingEventInputSchema = z.object({
   }),
 });
 
-type CreateVideoTaggingEventInput = z.infer<typeof CreateVideoTaggingEventInputSchema>;
+type CreateHelixEventInput = z.infer<typeof CreateHelixEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for createVideoTaggingEvent
+ * Output schema for createHelixEvent
  * ok
  */
-const CreateVideoTaggingEventOutputSchema = z.object({
+const CreateHelixEventOutputSchema = z.object({
 });
 
-type CreateVideoTaggingEventOutput = z.infer<typeof CreateVideoTaggingEventOutputSchema>;
+type CreateHelixEventOutput = z.infer<typeof CreateHelixEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Create a new video tagging event. Provide the required fields in the request body.
+ * Create a new helix event. Provide the required fields in the request body.
  *
  * @param input.body.attributes - List of event attributes.
  * @param input.body.camera_id - The unique identifier of the camera.
@@ -68,11 +68,11 @@ type CreateVideoTaggingEventOutput = z.infer<typeof CreateVideoTaggingEventOutpu
  * @param input.body.time_ms - The event epoch time in milliseconds.
  * @returns ok
  */
-export async function createVideoTaggingEvent(
-  input: CreateVideoTaggingEventInput
-): Promise<APIResponse<CreateVideoTaggingEventOutput>> {
+export async function createHelixEvent(
+  input: CreateHelixEventInput
+): Promise<APIResponse<CreateHelixEventOutput>> {
   // Validate input
-  const validated = CreateVideoTaggingEventInputSchema.parse(input);
+  const validated = CreateHelixEventInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event';
@@ -80,7 +80,7 @@ export async function createVideoTaggingEvent(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<CreateVideoTaggingEventOutput>({
+  const response = await callVerkadaAPI<CreateHelixEventOutput>({
     method: 'POST',
     path: fullPath,
     body: {
@@ -95,7 +95,7 @@ export async function createVideoTaggingEvent(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = CreateVideoTaggingEventOutputSchema.parse(response.data);
+      response.data = CreateHelixEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -112,12 +112,12 @@ export async function createVideoTaggingEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const createVideoTaggingEventMetadata = {
-  name: 'create_video_tagging_event',
-  description: `Create a new video tagging event. Provide the required fields in the request body.`,
-  inputSchema: CreateVideoTaggingEventInputSchema,
-  outputSchema: CreateVideoTaggingEventOutputSchema,
-  category: 'command/alert',
+export const createHelixEventMetadata = {
+  name: 'create_helix_event',
+  description: `Create a new helix event. Provide the required fields in the request body.`,
+  inputSchema: CreateHelixEventInputSchema,
+  outputSchema: CreateHelixEventOutputSchema,
+  category: 'product/helix',
   operationId: 'postVideoTaggingEventViewV1',
   method: 'POST' as const,
   path: '/cameras/v1/video_tagging/event',

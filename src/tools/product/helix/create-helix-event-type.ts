@@ -1,9 +1,9 @@
 /**
- * CreateVideoTaggingEventType Tool
+ * CreateHelixEventType Tool
  *
- * Create a new video tagging event type. Provide the required fields in the request body.
+ * Create a new helix event type. Provide the required fields in the request body.
  *
- * @category command/alert
+ * @category product/helix
  * @operationId postVideoTaggingEventTypeViewV1
  * @method POST
  * @path /cameras/v1/video_tagging/event_type
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for createVideoTaggingEventType
+ * Input parameters for createHelixEventType
  */
-const CreateVideoTaggingEventTypeInputSchema = z.object({
+const CreateHelixEventTypeInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** The schema of the event type. (required) */
@@ -33,17 +33,17 @@ const CreateVideoTaggingEventTypeInputSchema = z.object({
   }),
 });
 
-type CreateVideoTaggingEventTypeInput = z.infer<typeof CreateVideoTaggingEventTypeInputSchema>;
+type CreateHelixEventTypeInput = z.infer<typeof CreateHelixEventTypeInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for createVideoTaggingEventType
+ * Output schema for createHelixEventType
  * OK
  */
-const CreateVideoTaggingEventTypeOutputSchema = z.object({
+const CreateHelixEventTypeOutputSchema = z.object({
   /** The schema of the event type. */
   event_schema: z.object({}),
   /** The unique identifier of the event type. */
@@ -54,24 +54,24 @@ const CreateVideoTaggingEventTypeOutputSchema = z.object({
   org_id: z.string(),
 });
 
-type CreateVideoTaggingEventTypeOutput = z.infer<typeof CreateVideoTaggingEventTypeOutputSchema>;
+type CreateHelixEventTypeOutput = z.infer<typeof CreateHelixEventTypeOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Create a new video tagging event type. Provide the required fields in the request body.
+ * Create a new helix event type. Provide the required fields in the request body.
  *
  * @param input.body.event_schema - The schema of the event type.
  * @param input.body.name - The name of the event type.
  * @returns OK
  */
-export async function createVideoTaggingEventType(
-  input: CreateVideoTaggingEventTypeInput
-): Promise<APIResponse<CreateVideoTaggingEventTypeOutput>> {
+export async function createHelixEventType(
+  input: CreateHelixEventTypeInput
+): Promise<APIResponse<CreateHelixEventTypeOutput>> {
   // Validate input
-  const validated = CreateVideoTaggingEventTypeInputSchema.parse(input);
+  const validated = CreateHelixEventTypeInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event_type';
@@ -79,7 +79,7 @@ export async function createVideoTaggingEventType(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<CreateVideoTaggingEventTypeOutput>({
+  const response = await callVerkadaAPI<CreateHelixEventTypeOutput>({
     method: 'POST',
     path: fullPath,
     body: {
@@ -91,7 +91,7 @@ export async function createVideoTaggingEventType(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = CreateVideoTaggingEventTypeOutputSchema.parse(response.data);
+      response.data = CreateHelixEventTypeOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -108,12 +108,12 @@ export async function createVideoTaggingEventType(
 /**
  * Metadata for MCP tool registration
  */
-export const createVideoTaggingEventTypeMetadata = {
-  name: 'create_video_tagging_event_type',
-  description: `Create a new video tagging event type. Provide the required fields in the request body.`,
-  inputSchema: CreateVideoTaggingEventTypeInputSchema,
-  outputSchema: CreateVideoTaggingEventTypeOutputSchema,
-  category: 'command/alert',
+export const createHelixEventTypeMetadata = {
+  name: 'create_helix_event_type',
+  description: `Create a new helix event type. Provide the required fields in the request body.`,
+  inputSchema: CreateHelixEventTypeInputSchema,
+  outputSchema: CreateHelixEventTypeOutputSchema,
+  category: 'product/helix',
   operationId: 'postVideoTaggingEventTypeViewV1',
   method: 'POST' as const,
   path: '/cameras/v1/video_tagging/event_type',

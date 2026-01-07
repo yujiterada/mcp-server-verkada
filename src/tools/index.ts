@@ -8,15 +8,6 @@
 import { registerToolFromMetadata, ToolRegistry, RegisteredTool } from '../tool-registry.js';
 import {
   getNotifications, getNotificationsMetadata,
-  getVideoTaggingEvent, getVideoTaggingEventMetadata,
-  createVideoTaggingEvent, createVideoTaggingEventMetadata,
-  updateVideoTaggingEvent, updateVideoTaggingEventMetadata,
-  deleteVideoTaggingEvent, deleteVideoTaggingEventMetadata,
-  searchVideoTaggingEventSearch, searchVideoTaggingEventSearchMetadata,
-  getVideoTaggingEventType, getVideoTaggingEventTypeMetadata,
-  createVideoTaggingEventType, createVideoTaggingEventTypeMetadata,
-  updateVideoTaggingEventType, updateVideoTaggingEventTypeMetadata,
-  deleteVideoTaggingEventType, deleteVideoTaggingEventTypeMetadata,
   listSensorAlerts, listSensorAlertsMetadata,
   listProductEvents, listProductEventsMetadata,
 } from './command/alert/index.js';
@@ -150,21 +141,23 @@ import {
   getHost, getHostMetadata,
 } from './product/guest/index.js';
 import {
+  getHelixEvent, getHelixEventMetadata,
+  createHelixEvent, createHelixEventMetadata,
+  updateHelixEvent, updateHelixEventMetadata,
+  deleteHelixEvent, deleteHelixEventMetadata,
+  searchHelixEvent, searchHelixEventMetadata,
+  listHelixEventTypes, listHelixEventTypesMetadata,
+  createHelixEventType, createHelixEventTypeMetadata,
+  updateHelixEventType, updateHelixEventTypeMetadata,
+  deleteHelixEventType, deleteHelixEventTypeMetadata,
+} from './product/helix/index.js';
+import {
   getSensorData, getSensorDataMetadata,
 } from './product/sensor/index.js';
 
 export const allTools = [
-  // - command/alert: 12 tools
+  // - command/alert: 3 tools
   registerToolFromMetadata(getNotificationsMetadata, getNotifications),
-  registerToolFromMetadata(getVideoTaggingEventMetadata, getVideoTaggingEvent),
-  registerToolFromMetadata(createVideoTaggingEventMetadata, createVideoTaggingEvent),
-  registerToolFromMetadata(updateVideoTaggingEventMetadata, updateVideoTaggingEvent),
-  registerToolFromMetadata(deleteVideoTaggingEventMetadata, deleteVideoTaggingEvent),
-  registerToolFromMetadata(searchVideoTaggingEventSearchMetadata, searchVideoTaggingEventSearch),
-  registerToolFromMetadata(getVideoTaggingEventTypeMetadata, getVideoTaggingEventType),
-  registerToolFromMetadata(createVideoTaggingEventTypeMetadata, createVideoTaggingEventType),
-  registerToolFromMetadata(updateVideoTaggingEventTypeMetadata, updateVideoTaggingEventType),
-  registerToolFromMetadata(deleteVideoTaggingEventTypeMetadata, deleteVideoTaggingEventType),
   registerToolFromMetadata(listSensorAlertsMetadata, listSensorAlerts),
   registerToolFromMetadata(listProductEventsMetadata, listProductEvents),
   // - command/audit-log: 1 tools
@@ -288,6 +281,16 @@ export const allTools = [
   registerToolFromMetadata(deleteGuestSingleEventMetadata, deleteGuestSingleEvent),
   registerToolFromMetadata(getGuestTypeMetadata, getGuestType),
   registerToolFromMetadata(getHostMetadata, getHost),
+  // - product/helix: 9 tools
+  registerToolFromMetadata(getHelixEventMetadata, getHelixEvent),
+  registerToolFromMetadata(createHelixEventMetadata, createHelixEvent),
+  registerToolFromMetadata(updateHelixEventMetadata, updateHelixEvent),
+  registerToolFromMetadata(deleteHelixEventMetadata, deleteHelixEvent),
+  registerToolFromMetadata(searchHelixEventMetadata, searchHelixEvent),
+  registerToolFromMetadata(listHelixEventTypesMetadata, listHelixEventTypes),
+  registerToolFromMetadata(createHelixEventTypeMetadata, createHelixEventType),
+  registerToolFromMetadata(updateHelixEventTypeMetadata, updateHelixEventType),
+  registerToolFromMetadata(deleteHelixEventTypeMetadata, deleteHelixEventType),
   // - product/sensor: 1 tools
   registerToolFromMetadata(getSensorDataMetadata, getSensorData),
 ];

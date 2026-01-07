@@ -1,11 +1,11 @@
 /**
- * GetVideoTaggingEvent Tool
+ * DeleteHelixEvent Tool
  *
- * Get a specific video tagging event by ID. Returns detailed information about the video tagging event.
+ * Delete a helix event. This action cannot be undone.
  *
- * @category command/alert
- * @operationId getVideoTaggingEventViewV1
- * @method GET
+ * @category product/helix
+ * @operationId deleteVideoTaggingEventViewV1
+ * @method DELETE
  * @path /cameras/v1/video_tagging/event
  * @tags Methods
  *
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getVideoTaggingEvent
+ * Input parameters for deleteHelixEvent
  */
-const GetVideoTaggingEventInputSchema = z.object({
+const DeleteHelixEventInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The camera_id parameter (required) */
@@ -35,50 +35,38 @@ const GetVideoTaggingEventInputSchema = z.object({
   }),
 });
 
-type GetVideoTaggingEventInput = z.infer<typeof GetVideoTaggingEventInputSchema>;
+type DeleteHelixEventInput = z.infer<typeof DeleteHelixEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getVideoTaggingEvent
- * OK
+ * Output schema for deleteHelixEvent
+ * ok
  */
-const GetVideoTaggingEventOutputSchema = z.object({
-  /** list of event attributes. */
-  attributes: z.object({}),
-  /** The unique identifier of the camera. */
-  camera_id: z.string(),
-  /** The unique identifier of the event type. */
-  event_type_uid: z.string(),
-  /** Whether or not an event is flagged. */
-  flagged: z.boolean(),
-  /** The unique identifier of the organization. */
-  org_id: z.string(),
-  /** The event epoch time in milliseconds. */
-  time_ms: z.number().int(),
+const DeleteHelixEventOutputSchema = z.object({
 });
 
-type GetVideoTaggingEventOutput = z.infer<typeof GetVideoTaggingEventOutputSchema>;
+type DeleteHelixEventOutput = z.infer<typeof DeleteHelixEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific video tagging event by ID. Returns detailed information about the video tagging event.
+ * Delete a helix event. This action cannot be undone.
  *
  * @param input.query.camera_id - The camera_id parameter
  * @param input.query.time_ms - The time_ms parameter
  * @param input.query.event_type_uid - The event_type_uid parameter
- * @returns OK
+ * @returns ok
  */
-export async function getVideoTaggingEvent(
-  input: GetVideoTaggingEventInput
-): Promise<APIResponse<GetVideoTaggingEventOutput>> {
+export async function deleteHelixEvent(
+  input: DeleteHelixEventInput
+): Promise<APIResponse<DeleteHelixEventOutput>> {
   // Validate input
-  const validated = GetVideoTaggingEventInputSchema.parse(input);
+  const validated = DeleteHelixEventInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event';
@@ -98,15 +86,15 @@ export async function getVideoTaggingEvent(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetVideoTaggingEventOutput>({
-    method: 'GET',
+  const response = await callVerkadaAPI<DeleteHelixEventOutput>({
+    method: 'DELETE',
     path: fullPath,
   });
 
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetVideoTaggingEventOutputSchema.parse(response.data);
+      response.data = DeleteHelixEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -123,14 +111,14 @@ export async function getVideoTaggingEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const getVideoTaggingEventMetadata = {
-  name: 'get_video_tagging_event',
-  description: `Get a specific video tagging event by ID. Returns detailed information about the video tagging event.`,
-  inputSchema: GetVideoTaggingEventInputSchema,
-  outputSchema: GetVideoTaggingEventOutputSchema,
-  category: 'command/alert',
-  operationId: 'getVideoTaggingEventViewV1',
-  method: 'GET' as const,
+export const deleteHelixEventMetadata = {
+  name: 'delete_helix_event',
+  description: `Delete a helix event. This action cannot be undone.`,
+  inputSchema: DeleteHelixEventInputSchema,
+  outputSchema: DeleteHelixEventOutputSchema,
+  category: 'product/helix',
+  operationId: 'deleteVideoTaggingEventViewV1',
+  method: 'DELETE' as const,
   path: '/cameras/v1/video_tagging/event',
   requiresAuth: true,
   tags: ['Methods'],

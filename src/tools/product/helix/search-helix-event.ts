@@ -1,9 +1,9 @@
 /**
- * SearchVideoTaggingEventSearch Tool
+ * SearchHelixEvent Tool
  *
- * Search for video tagging event search matching the provided criteria.
+ * Search for helix event matching the provided criteria.
  *
- * @category command/alert
+ * @category product/helix
  * @operationId postVideoTaggingEventSearchViewV1
  * @method POST
  * @path /cameras/v1/video_tagging/event/search
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for searchVideoTaggingEventSearch
+ * Input parameters for searchHelixEvent
  */
-const SearchVideoTaggingEventSearchInputSchema = z.object({
+const SearchHelixEventInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** List of search filters. */
@@ -43,31 +43,31 @@ const SearchVideoTaggingEventSearchInputSchema = z.object({
   }),
 });
 
-type SearchVideoTaggingEventSearchInput = z.infer<typeof SearchVideoTaggingEventSearchInputSchema>;
+type SearchHelixEventInput = z.infer<typeof SearchHelixEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for searchVideoTaggingEventSearch
+ * Output schema for searchHelixEvent
  * OK
  */
-const SearchVideoTaggingEventSearchOutputSchema = z.object({
+const SearchHelixEventOutputSchema = z.object({
   /** A list of events. */
   events: z.array(z.object({ attributes: z.object({}).optional(), camera_id: z.string(), event_type_uid: z.string(), flagged: z.boolean().optional(), org_id: z.string(), time_ms: z.number().int() })),
   /** Next token for pagination. */
   next_token: z.number().int(),
 });
 
-type SearchVideoTaggingEventSearchOutput = z.infer<typeof SearchVideoTaggingEventSearchOutputSchema>;
+type SearchHelixEventOutput = z.infer<typeof SearchHelixEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Search for video tagging event search matching the provided criteria.
+ * Search for helix event matching the provided criteria.
  *
  * @param input.body.attribute_filters - List of search filters.
  * @param input.body.camera_ids - List of unique identifiers of cameras
@@ -78,11 +78,11 @@ type SearchVideoTaggingEventSearchOutput = z.infer<typeof SearchVideoTaggingEven
  * @param input.body.start_time_ms - Query start epoch time in milliseconds.
  * @returns OK
  */
-export async function searchVideoTaggingEventSearch(
-  input: SearchVideoTaggingEventSearchInput
-): Promise<APIResponse<SearchVideoTaggingEventSearchOutput>> {
+export async function searchHelixEvent(
+  input: SearchHelixEventInput
+): Promise<APIResponse<SearchHelixEventOutput>> {
   // Validate input
-  const validated = SearchVideoTaggingEventSearchInputSchema.parse(input);
+  const validated = SearchHelixEventInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event/search';
@@ -90,7 +90,7 @@ export async function searchVideoTaggingEventSearch(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<SearchVideoTaggingEventSearchOutput>({
+  const response = await callVerkadaAPI<SearchHelixEventOutput>({
     method: 'POST',
     path: fullPath,
     body: {
@@ -107,7 +107,7 @@ export async function searchVideoTaggingEventSearch(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = SearchVideoTaggingEventSearchOutputSchema.parse(response.data);
+      response.data = SearchHelixEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -124,12 +124,12 @@ export async function searchVideoTaggingEventSearch(
 /**
  * Metadata for MCP tool registration
  */
-export const searchVideoTaggingEventSearchMetadata = {
-  name: 'search_video_tagging_event_search',
-  description: `Search for video tagging event search matching the provided criteria.`,
-  inputSchema: SearchVideoTaggingEventSearchInputSchema,
-  outputSchema: SearchVideoTaggingEventSearchOutputSchema,
-  category: 'command/alert',
+export const searchHelixEventMetadata = {
+  name: 'search_helix_event',
+  description: `Search for helix event matching the provided criteria.`,
+  inputSchema: SearchHelixEventInputSchema,
+  outputSchema: SearchHelixEventOutputSchema,
+  category: 'product/helix',
   operationId: 'postVideoTaggingEventSearchViewV1',
   method: 'POST' as const,
   path: '/cameras/v1/video_tagging/event/search',

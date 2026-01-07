@@ -1,11 +1,11 @@
 /**
- * UpdateVideoTaggingEvent Tool
+ * GetHelixEvent Tool
  *
- * Update an existing video tagging event. Only the provided fields will be changed.
+ * Get a specific helix event by ID. Returns detailed information about the helix event.
  *
- * @category command/alert
- * @operationId patchVideoTaggingEventViewV1
- * @method PATCH
+ * @category product/helix
+ * @operationId getVideoTaggingEventViewV1
+ * @method GET
  * @path /cameras/v1/video_tagging/event
  * @tags Methods
  *
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for updateVideoTaggingEvent
+ * Input parameters for getHelixEvent
  */
-const UpdateVideoTaggingEventInputSchema = z.object({
+const GetHelixEventInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The camera_id parameter (required) */
@@ -33,49 +33,52 @@ const UpdateVideoTaggingEventInputSchema = z.object({
     /** The event_type_uid parameter (required) */
     event_type_uid: z.string(),
   }),
-  /** Body parameters */
-  body: z.object({
-    /** list of event attributes. */
-    attributes: z.object({}).optional(),
-    /** Whether or not an event is flagged. */
-    flagged: z.boolean().optional(),
-  }),
 });
 
-type UpdateVideoTaggingEventInput = z.infer<typeof UpdateVideoTaggingEventInputSchema>;
+type GetHelixEventInput = z.infer<typeof GetHelixEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for updateVideoTaggingEvent
- * ok
+ * Output schema for getHelixEvent
+ * OK
  */
-const UpdateVideoTaggingEventOutputSchema = z.object({
+const GetHelixEventOutputSchema = z.object({
+  /** list of event attributes. */
+  attributes: z.object({}),
+  /** The unique identifier of the camera. */
+  camera_id: z.string(),
+  /** The unique identifier of the event type. */
+  event_type_uid: z.string(),
+  /** Whether or not an event is flagged. */
+  flagged: z.boolean(),
+  /** The unique identifier of the organization. */
+  org_id: z.string(),
+  /** The event epoch time in milliseconds. */
+  time_ms: z.number().int(),
 });
 
-type UpdateVideoTaggingEventOutput = z.infer<typeof UpdateVideoTaggingEventOutputSchema>;
+type GetHelixEventOutput = z.infer<typeof GetHelixEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Update an existing video tagging event. Only the provided fields will be changed.
+ * Get a specific helix event by ID. Returns detailed information about the helix event.
  *
  * @param input.query.camera_id - The camera_id parameter
  * @param input.query.time_ms - The time_ms parameter
  * @param input.query.event_type_uid - The event_type_uid parameter
- * @param input.body.attributes - list of event attributes.
- * @param input.body.flagged - Whether or not an event is flagged.
- * @returns ok
+ * @returns OK
  */
-export async function updateVideoTaggingEvent(
-  input: UpdateVideoTaggingEventInput
-): Promise<APIResponse<UpdateVideoTaggingEventOutput>> {
+export async function getHelixEvent(
+  input: GetHelixEventInput
+): Promise<APIResponse<GetHelixEventOutput>> {
   // Validate input
-  const validated = UpdateVideoTaggingEventInputSchema.parse(input);
+  const validated = GetHelixEventInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event';
@@ -95,19 +98,15 @@ export async function updateVideoTaggingEvent(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<UpdateVideoTaggingEventOutput>({
-    method: 'PATCH',
+  const response = await callVerkadaAPI<GetHelixEventOutput>({
+    method: 'GET',
     path: fullPath,
-    body: {
-      attributes: validated.body.attributes,
-      flagged: validated.body.flagged,
-    },
   });
 
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = UpdateVideoTaggingEventOutputSchema.parse(response.data);
+      response.data = GetHelixEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -124,14 +123,14 @@ export async function updateVideoTaggingEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const updateVideoTaggingEventMetadata = {
-  name: 'update_video_tagging_event',
-  description: `Update an existing video tagging event. Only the provided fields will be changed.`,
-  inputSchema: UpdateVideoTaggingEventInputSchema,
-  outputSchema: UpdateVideoTaggingEventOutputSchema,
-  category: 'command/alert',
-  operationId: 'patchVideoTaggingEventViewV1',
-  method: 'PATCH' as const,
+export const getHelixEventMetadata = {
+  name: 'get_helix_event',
+  description: `Get a specific helix event by ID. Returns detailed information about the helix event.`,
+  inputSchema: GetHelixEventInputSchema,
+  outputSchema: GetHelixEventOutputSchema,
+  category: 'product/helix',
+  operationId: 'getVideoTaggingEventViewV1',
+  method: 'GET' as const,
   path: '/cameras/v1/video_tagging/event',
   requiresAuth: true,
   tags: ['Methods'],
