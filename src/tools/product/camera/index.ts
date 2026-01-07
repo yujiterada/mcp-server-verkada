@@ -16,6 +16,7 @@ export { deleteLicensePlateOfInterest, deleteLicensePlateOfInterestMetadata } fr
 export { deleteLicensePlateOfInterestBulkOperation, deleteLicensePlateOfInterestBulkOperationMetadata } from './delete-license-plate-of-interest-bulk-operation.js';
 export { deletePersonOfInterest, deletePersonOfInterestMetadata } from './delete-person-of-interest.js';
 export { getCameraAudio, getCameraAudioMetadata } from './get-camera-audio.js';
+export { getCameraSnapshot, getCameraSnapshotMetadata } from './get-camera-snapshot.js';
 export { getCloudBackup, getCloudBackupMetadata } from './get-cloud-backup.js';
 export { getDashboardOccupancyTrends, getDashboardOccupancyTrendsMetadata } from './get-dashboard-occupancy-trends.js';
 export { getFootageStream, getFootageStreamMetadata } from './get-footage-stream.js';
@@ -27,7 +28,6 @@ export { getObjectCounts, getObjectCountsMetadata } from './get-object-counts.js
 export { getOccupancyTrends, getOccupancyTrendsMetadata } from './get-occupancy-trends.js';
 export { getOccupancyTrendsCameras, getOccupancyTrendsCamerasMetadata } from './get-occupancy-trends-cameras.js';
 export { getPersonOfInterest, getPersonOfInterestMetadata } from './get-person-of-interest.js';
-export { getThumbnailImage, getThumbnailImageMetadata } from './get-thumbnail-image.js';
 export { getThumbnailLatest, getThumbnailLatestMetadata } from './get-thumbnail-latest.js';
 export { getThumbnailLink, getThumbnailLinkMetadata } from './get-thumbnail-link.js';
 export { listLprImages, listLprImagesMetadata } from './list-lpr-images.js';

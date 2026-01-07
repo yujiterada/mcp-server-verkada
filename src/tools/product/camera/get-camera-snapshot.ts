@@ -1,7 +1,7 @@
 /**
- * GetThumbnailImage Tool
+ * GetCameraSnapshot Tool
  *
- * Get a specific thumbnail image by ID. Returns detailed information about the thumbnail image.
+ * Get a specific camera snapshot by ID. Returns detailed information about the camera snapshot.
  *
  * @category product/camera
  * @operationId getThumbnailImageViewV1
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getThumbnailImage
+ * Input parameters for getCameraSnapshot
  */
-const GetThumbnailImageInputSchema = z.object({
+const GetCameraSnapshotInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The camera_id parameter (required) */
@@ -35,41 +35,41 @@ const GetThumbnailImageInputSchema = z.object({
   }),
 });
 
-type GetThumbnailImageInput = z.infer<typeof GetThumbnailImageInputSchema>;
+type GetCameraSnapshotInput = z.infer<typeof GetCameraSnapshotInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getThumbnailImage
+ * Output schema for getCameraSnapshot
  * Returns image data in base64 format
  */
-const GetThumbnailImageOutputSchema = z.object({
+const GetCameraSnapshotOutputSchema = z.object({
   type: z.literal('image'),
   data: z.string(),
   mimeType: z.string(),
 });
 
-type GetThumbnailImageOutput = z.infer<typeof GetThumbnailImageOutputSchema>;
+type GetCameraSnapshotOutput = z.infer<typeof GetCameraSnapshotOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific thumbnail image by ID. Returns detailed information about the thumbnail image.
+ * Get a specific camera snapshot by ID. Returns detailed information about the camera snapshot.
  *
  * @param input.query.camera_id - The camera_id parameter
  * @param input.query.timestamp - The timestamp parameter
  * @param input.query.resolution - The resolution parameter
  * @returns ok
  */
-export async function getThumbnailImage(
-  input: GetThumbnailImageInput
-): Promise<APIResponse<GetThumbnailImageOutput>> {
+export async function getCameraSnapshot(
+  input: GetCameraSnapshotInput
+): Promise<APIResponse<GetCameraSnapshotOutput>> {
   // Validate input
-  const validated = GetThumbnailImageInputSchema.parse(input);
+  const validated = GetCameraSnapshotInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/footage/thumbnails';
@@ -89,7 +89,7 @@ export async function getThumbnailImage(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetThumbnailImageOutput>({
+  const response = await callVerkadaAPI<GetCameraSnapshotOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -97,7 +97,7 @@ export async function getThumbnailImage(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetThumbnailImageOutputSchema.parse(response.data);
+      response.data = GetCameraSnapshotOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -114,11 +114,11 @@ export async function getThumbnailImage(
 /**
  * Metadata for MCP tool registration
  */
-export const getThumbnailImageMetadata = {
-  name: 'get_thumbnail_image',
-  description: `Get a specific thumbnail image by ID. Returns detailed information about the thumbnail image.`,
-  inputSchema: GetThumbnailImageInputSchema,
-  outputSchema: GetThumbnailImageOutputSchema,
+export const getCameraSnapshotMetadata = {
+  name: 'get_camera_snapshot',
+  description: `Get a specific camera snapshot by ID. Returns detailed information about the camera snapshot.`,
+  inputSchema: GetCameraSnapshotInputSchema,
+  outputSchema: GetCameraSnapshotOutputSchema,
   category: 'product/camera',
   operationId: 'getThumbnailImageViewV1',
   method: 'GET' as const,
