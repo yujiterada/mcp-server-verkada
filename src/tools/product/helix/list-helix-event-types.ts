@@ -41,11 +41,18 @@ type ListHelixEventTypesInput = z.infer<typeof ListHelixEventTypesInputSchema>;
 
 /**
  * Output schema for listHelixEventTypes
- * OK
+ * Returns a list of event types
  */
 const ListHelixEventTypesOutputSchema = z.object({
   /** A list of event types. */
-  event_types: z.array(z.object({ event_schema: z.object({}), event_type_uid: z.string(), name: z.string(), org_id: z.string() })),
+  event_types: z.array(
+    z.object({
+      event_schema: z.record(z.string()),
+      event_type_uid: z.string(),
+      name: z.string(),
+      org_id: z.string()
+    })
+  ),
 });
 
 type ListHelixEventTypesOutput = z.infer<typeof ListHelixEventTypesOutputSchema>;
