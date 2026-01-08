@@ -22,6 +22,7 @@ import type { APIResponse } from '../../../types/common.js';
 
 /**
  * Input parameters for updateHelixEvent
+ * 
  */
 const UpdateHelixEventInputSchema = z.object({
   /** Path parameters */

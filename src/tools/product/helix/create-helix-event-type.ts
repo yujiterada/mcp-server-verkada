@@ -22,7 +22,7 @@ import type { APIResponse } from '../../../types/common.js';
 
 /**
  * Input parameters for createHelixEventType
- *
+ * 
  */
 const CreateHelixEventTypeInputSchema = z.object({
   /** Body parameters */
