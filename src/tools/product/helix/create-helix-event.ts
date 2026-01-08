@@ -26,16 +26,19 @@ import type { APIResponse } from '../../../types/common.js';
 const CreateHelixEventInputSchema = z.object({
   /** Body parameters */
   body: z.object({
-    /** List of event attributes. */
-    attributes: z.object({}).optional(),
+    /** List of event attributes (key-value pairs matching the event type schema). */
+    attributes: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
     /** The unique identifier of the camera. (required) */
     camera_id: z.string(),
     /** The unique identifier of the event type. (required) */
     event_type_uid: z.string(),
     /** Whether or not an event is flagged. */
     flagged: z.boolean().optional(),
-    /** The event epoch time in milliseconds. (required) */
-    time_ms: z.number().int(),
+    /** The event epoch time in milliseconds. Must be within the last 30 days. (required) */
+    time_ms: z.number().int().refine(
+      (val) => val >= Date.now() - 30 * 24 * 60 * 60 * 1000,
+      { message: 'time_ms must be within the last 30 days' }
+    ),
   }),
 });
 

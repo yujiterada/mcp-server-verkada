@@ -35,8 +35,8 @@ const UpdateHelixEventInputSchema = z.object({
   }),
   /** Body parameters */
   body: z.object({
-    /** list of event attributes. */
-    attributes: z.object({}).optional(),
+    /** list of event attributes (key-value pairs matching the event type schema). */
+    attributes: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
     /** Whether or not an event is flagged. */
     flagged: z.boolean().optional(),
   }),

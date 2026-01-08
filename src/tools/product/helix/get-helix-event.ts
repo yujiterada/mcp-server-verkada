@@ -47,7 +47,8 @@ type GetHelixEventInput = z.infer<typeof GetHelixEventInputSchema>;
  */
 const GetHelixEventOutputSchema = z.object({
   /** list of event attributes. */
-  attributes: z.object({}),
+  attributes: z.record(z.string()),
+  //attributes: z.record(z.union([z.string(), z.number(), z.boolean()])),
   /** The unique identifier of the camera. */
   camera_id: z.string(),
   /** The unique identifier of the event type. */

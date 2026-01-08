@@ -55,7 +55,7 @@ type SearchHelixEventInput = z.infer<typeof SearchHelixEventInputSchema>;
  */
 const SearchHelixEventOutputSchema = z.object({
   /** A list of events. */
-  events: z.array(z.object({ attributes: z.object({}).optional(), camera_id: z.string(), event_type_uid: z.string(), flagged: z.boolean().optional(), org_id: z.string(), time_ms: z.number().int() })),
+  events: z.array(z.object({ attributes: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(), camera_id: z.string(), event_type_uid: z.string(), flagged: z.boolean().optional(), org_id: z.string(), time_ms: z.number().int() })),
   /** Next token for pagination. */
   next_token: z.number().int(),
 });
