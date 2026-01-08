@@ -22,6 +22,7 @@ import type { APIResponse } from '../../../types/common.js';
 
 /**
  * Input parameters for updateHelixEventType
+ * Input schema for patchVideoTaggingEventTypeViewV1
  */
 const UpdateHelixEventTypeInputSchema = z.object({
   /** Path parameters */
@@ -32,7 +33,7 @@ const UpdateHelixEventTypeInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** The schema of the event type. */
-    event_schema: z.object({}).optional(),
+    event_schema: z.record(z.enum(['string', 'integer', 'float', 'boolean'])).optional(),
     /** The name of the event type. */
     name: z.string().optional(),
   }),
