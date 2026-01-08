@@ -22,12 +22,13 @@ import type { APIResponse } from '../../../types/common.js';
 
 /**
  * Input parameters for createHelixEventType
+ *
  */
 const CreateHelixEventTypeInputSchema = z.object({
   /** Body parameters */
   body: z.object({
-    /** The schema of the event type. (required) */
-    event_schema: z.object({}),
+    /** The schema of the event type. */
+    event_schema: z.record(z.enum(['string', 'integer', 'float', 'boolean'])).optional(),
     /** The name of the event type. (required) */
     name: z.string(),
   }),
@@ -41,11 +42,11 @@ type CreateHelixEventTypeInput = z.infer<typeof CreateHelixEventTypeInputSchema>
 
 /**
  * Output schema for createHelixEventType
- * OK
+ * Return the create event type
  */
 const CreateHelixEventTypeOutputSchema = z.object({
   /** The schema of the event type. */
-  event_schema: z.object({}),
+  event_schema: z.record(z.enum(['string', 'integer', 'float', 'boolean'])),
   /** The unique identifier of the event type. */
   event_type_uid: z.string(),
   /** The name of the event type. */
