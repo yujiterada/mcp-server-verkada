@@ -1,7 +1,7 @@
 /**
- * CreateCloudBackup Tool
+ * UpdateCloudBackupConfiguration Tool
  *
- * Create a new cloud backup. Provide the required fields in the request body.
+ * Update an existing cloud backup configuration. Only the provided fields will be changed.
  *
  * @category product/camera
  * @operationId postCloudBackupViewV1
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for createCloudBackup
+ * Input parameters for updateCloudBackupConfiguration
  */
-const CreateCloudBackupInputSchema = z.object({
+const UpdateCloudBackupConfigurationInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** The unique identifier of the camera. (required) */
@@ -43,27 +43,27 @@ const CreateCloudBackupInputSchema = z.object({
   }),
 });
 
-type CreateCloudBackupInput = z.infer<typeof CreateCloudBackupInputSchema>;
+type UpdateCloudBackupConfigurationInput = z.infer<typeof UpdateCloudBackupConfigurationInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for createCloudBackup
+ * Output schema for updateCloudBackupConfiguration
  * ok
  */
-const CreateCloudBackupOutputSchema = z.object({
+const UpdateCloudBackupConfigurationOutputSchema = z.object({
 });
 
-type CreateCloudBackupOutput = z.infer<typeof CreateCloudBackupOutputSchema>;
+type UpdateCloudBackupConfigurationOutput = z.infer<typeof UpdateCloudBackupConfigurationOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Create a new cloud backup. Provide the required fields in the request body.
+ * Update an existing cloud backup configuration. Only the provided fields will be changed.
  *
  * @param input.body.camera_id - The unique identifier of the camera.
  * @param input.body.days_to_preserve - Delimited list of booleans indicating which days footage         should be uploaded. The elements in the array indicate the following days in order:         Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday. If value is 1,         cloud backup is on for that day. If value is 0, cloud backup is off for that day.        For example, &lt;code&gt;0,1,1,1,1,1,0&lt;/code&gt; means only backup on weekdays.
@@ -74,11 +74,11 @@ type CreateCloudBackupOutput = z.infer<typeof CreateCloudBackupOutputSchema>;
  * @param input.body.video_to_upload - The type of video that is backed-up.         Two values are possible: &lt;code&gt;MOTION&lt;/code&gt; and &lt;code&gt;ALL&lt;/code&gt;.
  * @returns ok
  */
-export async function createCloudBackup(
-  input: CreateCloudBackupInput
-): Promise<APIResponse<CreateCloudBackupOutput>> {
+export async function updateCloudBackupConfiguration(
+  input: UpdateCloudBackupConfigurationInput
+): Promise<APIResponse<UpdateCloudBackupConfigurationOutput>> {
   // Validate input
-  const validated = CreateCloudBackupInputSchema.parse(input);
+  const validated = UpdateCloudBackupConfigurationInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/cloud_backup/settings';
@@ -86,7 +86,7 @@ export async function createCloudBackup(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<CreateCloudBackupOutput>({
+  const response = await callVerkadaAPI<UpdateCloudBackupConfigurationOutput>({
     method: 'POST',
     path: fullPath,
     body: {
@@ -103,7 +103,7 @@ export async function createCloudBackup(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = CreateCloudBackupOutputSchema.parse(response.data);
+      response.data = UpdateCloudBackupConfigurationOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -120,11 +120,11 @@ export async function createCloudBackup(
 /**
  * Metadata for MCP tool registration
  */
-export const createCloudBackupMetadata = {
-  name: 'create_cloud_backup',
-  description: `Create a new cloud backup. Provide the required fields in the request body.`,
-  inputSchema: CreateCloudBackupInputSchema,
-  outputSchema: CreateCloudBackupOutputSchema,
+export const updateCloudBackupConfigurationMetadata = {
+  name: 'update_cloud_backup_configuration',
+  description: `Update an existing cloud backup configuration. Only the provided fields will be changed.`,
+  inputSchema: UpdateCloudBackupConfigurationInputSchema,
+  outputSchema: UpdateCloudBackupConfigurationOutputSchema,
   category: 'product/camera',
   operationId: 'postCloudBackupViewV1',
   method: 'POST' as const,

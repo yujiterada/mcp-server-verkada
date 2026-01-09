@@ -1,7 +1,7 @@
 /**
- * GetCloudBackup Tool
+ * GetCloudBackupConfiguration Tool
  *
- * Get a specific cloud backup by ID. Returns detailed information about the cloud backup.
+ * Get a specific cloud backup configuration by ID. Returns detailed information about the cloud backup configuration.
  *
  * @category product/camera
  * @operationId getCloudBackupViewV1
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getCloudBackup
+ * Input parameters for getCloudBackupConfiguration
  */
-const GetCloudBackupInputSchema = z.object({
+const GetCloudBackupConfigurationInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The camera_id parameter (required) */
@@ -31,17 +31,17 @@ const GetCloudBackupInputSchema = z.object({
   }),
 });
 
-type GetCloudBackupInput = z.infer<typeof GetCloudBackupInputSchema>;
+type GetCloudBackupConfigurationInput = z.infer<typeof GetCloudBackupConfigurationInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getCloudBackup
+ * Output schema for getCloudBackupConfiguration
  * OK
  */
-const GetCloudBackupOutputSchema = z.object({
+const GetCloudBackupConfigurationOutputSchema = z.object({
   /** The unique identifier of the camera. */
   camera_id: z.string(),
   /** Array of booleans indicating for which days footage         should be uploaded. In order the elements in the array indicate the following days:         Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday. If value is 1,         cloud backup is on for that day. If value is 0, cloud backup is off for that day */
@@ -62,23 +62,23 @@ const GetCloudBackupOutputSchema = z.object({
   video_to_upload: z.string(),
 });
 
-type GetCloudBackupOutput = z.infer<typeof GetCloudBackupOutputSchema>;
+type GetCloudBackupConfigurationOutput = z.infer<typeof GetCloudBackupConfigurationOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific cloud backup by ID. Returns detailed information about the cloud backup.
+ * Get a specific cloud backup configuration by ID. Returns detailed information about the cloud backup configuration.
  *
  * @param input.query.camera_id - The camera_id parameter
  * @returns OK
  */
-export async function getCloudBackup(
-  input: GetCloudBackupInput
-): Promise<APIResponse<GetCloudBackupOutput>> {
+export async function getCloudBackupConfiguration(
+  input: GetCloudBackupConfigurationInput
+): Promise<APIResponse<GetCloudBackupConfigurationOutput>> {
   // Validate input
-  const validated = GetCloudBackupInputSchema.parse(input);
+  const validated = GetCloudBackupConfigurationInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/cloud_backup/settings';
@@ -92,7 +92,7 @@ export async function getCloudBackup(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetCloudBackupOutput>({
+  const response = await callVerkadaAPI<GetCloudBackupConfigurationOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -100,7 +100,7 @@ export async function getCloudBackup(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetCloudBackupOutputSchema.parse(response.data);
+      response.data = GetCloudBackupConfigurationOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -117,11 +117,11 @@ export async function getCloudBackup(
 /**
  * Metadata for MCP tool registration
  */
-export const getCloudBackupMetadata = {
-  name: 'get_cloud_backup',
-  description: `Get a specific cloud backup by ID. Returns detailed information about the cloud backup.`,
-  inputSchema: GetCloudBackupInputSchema,
-  outputSchema: GetCloudBackupOutputSchema,
+export const getCloudBackupConfigurationMetadata = {
+  name: 'get_cloud_backup_configuration',
+  description: `Get a specific cloud backup configuration by ID. Returns detailed information about the cloud backup configuration.`,
+  inputSchema: GetCloudBackupConfigurationInputSchema,
+  outputSchema: GetCloudBackupConfigurationOutputSchema,
   category: 'product/camera',
   operationId: 'getCloudBackupViewV1',
   method: 'GET' as const,
