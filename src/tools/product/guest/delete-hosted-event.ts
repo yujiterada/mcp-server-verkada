@@ -1,7 +1,7 @@
 /**
- * DeleteGuestSingleEvent Tool
+ * DeleteHostedEvent Tool
  *
- * Delete a guest single event. This action cannot be undone.
+ * Delete a hosted event. This action cannot be undone.
  *
  * @category product/guest
  * @operationId deleteGuestSingleEventViewV2
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for deleteGuestSingleEvent
+ * Input parameters for deleteHostedEvent
  */
-const DeleteGuestSingleEventInputSchema = z.object({
+const DeleteHostedEventInputSchema = z.object({
   /** Path parameters */
   path: z.object({
     /** The guest_event_id parameter (required) */
@@ -31,36 +31,36 @@ const DeleteGuestSingleEventInputSchema = z.object({
   }),
 });
 
-type DeleteGuestSingleEventInput = z.infer<typeof DeleteGuestSingleEventInputSchema>;
+type DeleteHostedEventInput = z.infer<typeof DeleteHostedEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for deleteGuestSingleEvent
+ * Output schema for deleteHostedEvent
  * ok
  */
-const DeleteGuestSingleEventOutputSchema = z.object({
+const DeleteHostedEventOutputSchema = z.object({
 });
 
-type DeleteGuestSingleEventOutput = z.infer<typeof DeleteGuestSingleEventOutputSchema>;
+type DeleteHostedEventOutput = z.infer<typeof DeleteHostedEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Delete a guest single event. This action cannot be undone.
+ * Delete a hosted event. This action cannot be undone.
  *
  * @param input.path.guest_event_id - The guest_event_id parameter
  * @returns ok
  */
-export async function deleteGuestSingleEvent(
-  input: DeleteGuestSingleEventInput
-): Promise<APIResponse<DeleteGuestSingleEventOutput>> {
+export async function deleteHostedEvent(
+  input: DeleteHostedEventInput
+): Promise<APIResponse<DeleteHostedEventOutput>> {
   // Validate input
-  const validated = DeleteGuestSingleEventInputSchema.parse(input);
+  const validated = DeleteHostedEventInputSchema.parse(input);
 
   // Build path with parameters
   let path = '/v2/guest/guest_events/{guest_event_id}';
@@ -69,7 +69,7 @@ export async function deleteGuestSingleEvent(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<DeleteGuestSingleEventOutput>({
+  const response = await callVerkadaAPI<DeleteHostedEventOutput>({
     method: 'DELETE',
     path: fullPath,
   });
@@ -77,7 +77,7 @@ export async function deleteGuestSingleEvent(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = DeleteGuestSingleEventOutputSchema.parse(response.data);
+      response.data = DeleteHostedEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -94,11 +94,11 @@ export async function deleteGuestSingleEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const deleteGuestSingleEventMetadata = {
-  name: 'delete_guest_single_event',
-  description: `Delete a guest single event. This action cannot be undone.`,
-  inputSchema: DeleteGuestSingleEventInputSchema,
-  outputSchema: DeleteGuestSingleEventOutputSchema,
+export const deleteHostedEventMetadata = {
+  name: 'delete_hosted_event',
+  description: `Delete a hosted event. This action cannot be undone.`,
+  inputSchema: DeleteHostedEventInputSchema,
+  outputSchema: DeleteHostedEventOutputSchema,
   category: 'product/guest',
   operationId: 'deleteGuestSingleEventViewV2',
   method: 'DELETE' as const,

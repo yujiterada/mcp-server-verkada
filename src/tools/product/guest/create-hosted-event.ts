@@ -1,7 +1,7 @@
 /**
- * CreateGuestEvent Tool
+ * CreateHostedEvent Tool
  *
- * Create a new guest event. Provide the required fields in the request body. Supports bulk operations.
+ * Create a new hosted event. Provide the required fields in the request body. Supports bulk operations.
  *
  * @category product/guest
  * @operationId postGuestEventViewV2
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for createGuestEvent
+ * Input parameters for createHostedEvent
  */
-const CreateGuestEventInputSchema = z.object({
+const CreateHostedEventInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** The location of the event. */
@@ -49,17 +49,17 @@ const CreateGuestEventInputSchema = z.object({
   }),
 });
 
-type CreateGuestEventInput = z.infer<typeof CreateGuestEventInputSchema>;
+type CreateHostedEventInput = z.infer<typeof CreateHostedEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for createGuestEvent
+ * Output schema for createHostedEvent
  * OK
  */
-const CreateGuestEventOutputSchema = z.object({
+const CreateHostedEventOutputSchema = z.object({
   /** The ending time of the event. This will be for the last event part of multi-part events in RFC 3339 format (e.g., &#x27;2025-01-17T21:06:20+00:00&#x27;). */
   end_time: z.string(),
   /** The location of the event taking place. */
@@ -92,14 +92,14 @@ const CreateGuestEventOutputSchema = z.object({
   walk_in_enabled: z.boolean(),
 });
 
-type CreateGuestEventOutput = z.infer<typeof CreateGuestEventOutputSchema>;
+type CreateHostedEventOutput = z.infer<typeof CreateHostedEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Create a new guest event. Provide the required fields in the request body. Supports bulk operations.
+ * Create a new hosted event. Provide the required fields in the request body. Supports bulk operations.
  *
  * @param input.body.event_address - The location of the event.
  * @param input.body.event_description - A description of the event.
@@ -113,11 +113,11 @@ type CreateGuestEventOutput = z.infer<typeof CreateGuestEventOutputSchema>;
  * @param input.body.walk_in_enabled - Whether walk-ins are allowed to the event.
  * @returns OK
  */
-export async function createGuestEvent(
-  input: CreateGuestEventInput
-): Promise<APIResponse<CreateGuestEventOutput>> {
+export async function createHostedEvent(
+  input: CreateHostedEventInput
+): Promise<APIResponse<CreateHostedEventOutput>> {
   // Validate input
-  const validated = CreateGuestEventInputSchema.parse(input);
+  const validated = CreateHostedEventInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/v2/guest/guest_events';
@@ -125,7 +125,7 @@ export async function createGuestEvent(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<CreateGuestEventOutput>({
+  const response = await callVerkadaAPI<CreateHostedEventOutput>({
     method: 'POST',
     path: fullPath,
     body: {
@@ -145,7 +145,7 @@ export async function createGuestEvent(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = CreateGuestEventOutputSchema.parse(response.data);
+      response.data = CreateHostedEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -162,11 +162,11 @@ export async function createGuestEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const createGuestEventMetadata = {
-  name: 'create_guest_event',
-  description: `Create a new guest event. Provide the required fields in the request body. Supports bulk operations.`,
-  inputSchema: CreateGuestEventInputSchema,
-  outputSchema: CreateGuestEventOutputSchema,
+export const createHostedEventMetadata = {
+  name: 'create_hosted_event',
+  description: `Create a new hosted event. Provide the required fields in the request body. Supports bulk operations.`,
+  inputSchema: CreateHostedEventInputSchema,
+  outputSchema: CreateHostedEventOutputSchema,
   category: 'product/guest',
   operationId: 'postGuestEventViewV2',
   method: 'POST' as const,

@@ -1,7 +1,7 @@
 /**
- * GetGuestSingleEvent Tool
+ * GetHostedEvent Tool
  *
- * Get a specific guest single event by ID. Returns detailed information about the guest single event.
+ * Get a specific hosted event by ID. Returns detailed information about the hosted event.
  *
  * @category product/guest
  * @operationId getGuestSingleEventViewV2
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getGuestSingleEvent
+ * Input parameters for getHostedEvent
  */
-const GetGuestSingleEventInputSchema = z.object({
+const GetHostedEventInputSchema = z.object({
   /** Path parameters */
   path: z.object({
     /** The guest_event_id parameter (required) */
@@ -31,17 +31,17 @@ const GetGuestSingleEventInputSchema = z.object({
   }),
 });
 
-type GetGuestSingleEventInput = z.infer<typeof GetGuestSingleEventInputSchema>;
+type GetHostedEventInput = z.infer<typeof GetHostedEventInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getGuestSingleEvent
+ * Output schema for getHostedEvent
  * OK
  */
-const GetGuestSingleEventOutputSchema = z.object({
+const GetHostedEventOutputSchema = z.object({
   /** The ending time of the event. This will be for the last event part of multi-part events in RFC 3339 format (e.g., &#x27;2025-01-17T21:06:20+00:00&#x27;). */
   end_time: z.string(),
   /** The location of the event taking place. */
@@ -74,23 +74,23 @@ const GetGuestSingleEventOutputSchema = z.object({
   walk_in_enabled: z.boolean(),
 });
 
-type GetGuestSingleEventOutput = z.infer<typeof GetGuestSingleEventOutputSchema>;
+type GetHostedEventOutput = z.infer<typeof GetHostedEventOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific guest single event by ID. Returns detailed information about the guest single event.
+ * Get a specific hosted event by ID. Returns detailed information about the hosted event.
  *
  * @param input.path.guest_event_id - The guest_event_id parameter
  * @returns OK
  */
-export async function getGuestSingleEvent(
-  input: GetGuestSingleEventInput
-): Promise<APIResponse<GetGuestSingleEventOutput>> {
+export async function getHostedEvent(
+  input: GetHostedEventInput
+): Promise<APIResponse<GetHostedEventOutput>> {
   // Validate input
-  const validated = GetGuestSingleEventInputSchema.parse(input);
+  const validated = GetHostedEventInputSchema.parse(input);
 
   // Build path with parameters
   let path = '/v2/guest/guest_events/{guest_event_id}';
@@ -99,7 +99,7 @@ export async function getGuestSingleEvent(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetGuestSingleEventOutput>({
+  const response = await callVerkadaAPI<GetHostedEventOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -107,7 +107,7 @@ export async function getGuestSingleEvent(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetGuestSingleEventOutputSchema.parse(response.data);
+      response.data = GetHostedEventOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -124,11 +124,11 @@ export async function getGuestSingleEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const getGuestSingleEventMetadata = {
-  name: 'get_guest_single_event',
-  description: `Get a specific guest single event by ID. Returns detailed information about the guest single event.`,
-  inputSchema: GetGuestSingleEventInputSchema,
-  outputSchema: GetGuestSingleEventOutputSchema,
+export const getHostedEventMetadata = {
+  name: 'get_hosted_event',
+  description: `Get a specific hosted event by ID. Returns detailed information about the hosted event.`,
+  inputSchema: GetHostedEventInputSchema,
+  outputSchema: GetHostedEventOutputSchema,
   category: 'product/guest',
   operationId: 'getGuestSingleEventViewV2',
   method: 'GET' as const,

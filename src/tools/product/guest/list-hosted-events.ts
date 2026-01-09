@@ -1,7 +1,7 @@
 /**
- * GetGuestEvent Tool
+ * ListHostedEvents Tool
  *
- * Get a specific guest event by ID. Returns detailed information about the guest event. Supports pagination.
+ * List all hosted events. Use this to enumerate or search through hosted events. Supports pagination.
  *
  * @category product/guest
  * @operationId getGuestEventViewV2
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getGuestEvent
+ * Input parameters for listHostedEvents
  */
-const GetGuestEventInputSchema = z.object({
+const ListHostedEventsInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The site_id parameter (required) */
@@ -39,31 +39,31 @@ const GetGuestEventInputSchema = z.object({
   }),
 });
 
-type GetGuestEventInput = z.infer<typeof GetGuestEventInputSchema>;
+type ListHostedEventsInput = z.infer<typeof ListHostedEventsInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getGuestEvent
+ * Output schema for listHostedEvents
  * OK
  */
-const GetGuestEventOutputSchema = z.object({
+const ListHostedEventsOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. */
   cursor: z.string(),
   /** List of events, their event parts and invitees. */
   items: z.array(z.object({ end_time: z.string(), event_name: z.string(), event_part_id: z.string().uuid().optional(), guest_event_id: z.string().uuid(), is_multipart: z.boolean(), start_time: z.string() })),
 });
 
-type GetGuestEventOutput = z.infer<typeof GetGuestEventOutputSchema>;
+type ListHostedEventsOutput = z.infer<typeof ListHostedEventsOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific guest event by ID. Returns detailed information about the guest event. Supports pagination.
+ * List all hosted events. Use this to enumerate or search through hosted events. Supports pagination.
  *
  * @param input.query.site_id - The site_id parameter
  * @param input.query.start_time - The start_time parameter
@@ -72,11 +72,11 @@ type GetGuestEventOutput = z.infer<typeof GetGuestEventOutputSchema>;
  * @param input.query.cursor - The cursor parameter
  * @returns OK
  */
-export async function getGuestEvent(
-  input: GetGuestEventInput
-): Promise<APIResponse<GetGuestEventOutput>> {
+export async function listHostedEvents(
+  input: ListHostedEventsInput
+): Promise<APIResponse<ListHostedEventsOutput>> {
   // Validate input
-  const validated = GetGuestEventInputSchema.parse(input);
+  const validated = ListHostedEventsInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/v2/guest/guest_events';
@@ -102,7 +102,7 @@ export async function getGuestEvent(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetGuestEventOutput>({
+  const response = await callVerkadaAPI<ListHostedEventsOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -110,7 +110,7 @@ export async function getGuestEvent(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetGuestEventOutputSchema.parse(response.data);
+      response.data = ListHostedEventsOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -127,11 +127,11 @@ export async function getGuestEvent(
 /**
  * Metadata for MCP tool registration
  */
-export const getGuestEventMetadata = {
-  name: 'get_guest_event',
-  description: `Get a specific guest event by ID. Returns detailed information about the guest event. Supports pagination.`,
-  inputSchema: GetGuestEventInputSchema,
-  outputSchema: GetGuestEventOutputSchema,
+export const listHostedEventsMetadata = {
+  name: 'list_hosted_events',
+  description: `List all hosted events. Use this to enumerate or search through hosted events. Supports pagination.`,
+  inputSchema: ListHostedEventsInputSchema,
+  outputSchema: ListHostedEventsOutputSchema,
   category: 'product/guest',
   operationId: 'getGuestEventViewV2',
   method: 'GET' as const,
