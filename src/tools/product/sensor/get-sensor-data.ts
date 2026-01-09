@@ -51,21 +51,48 @@ type GetSensorDataInput = z.infer<typeof GetSensorDataInputSchema>;
 
 /**
  * Output schema for getSensorData
- * OK
+ * Returns a list of sensor data points
  */
 const GetSensorDataOutputSchema = z.object({
-  /**  */
-  data: z.array(z.object({})),
-  /** The unique identifier of the device. */
-  device_id: z.string().uuid(),
-  /** The name of the device. */
-  device_name: z.string(),
-  /** The serial number of the device. */
-  device_serial: z.string(),
-  /** The time interval of the requested sensor data. */
-  interval: z.string(),
-  /** The pagination token used to fetch the next page of results. */
-  next_page_token: z.string(),
+  /** Array of sensor data points */
+  data: z.array(z.object({
+    /** Ambient light level in lux */
+    ambient_light: z.number().optional(),
+    /** Barometric pressure in Pascals */
+    barometric_pressure: z.number().optional(),
+    /** Carbon dioxide level in ppm */
+    carbon_dioxide: z.number().optional(),
+    /** Carbon monoxide level in ppm */
+    carbon_monoxide: z.number().optional(),
+    /** Formaldehyde level */
+    formaldehyde: z.number().optional(),
+    /** Heat index temperature */
+    heat_index: z.number().optional(),
+    /** Relative humidity percentage */
+    humidity: z.number().optional(),
+    /** Motion detection (0 = no motion, 1 = motion detected) */
+    motion: z.number().optional(),
+    /** Noise level in decibels */
+    noise_level: z.number().optional(),
+    /** Particulate matter 1.0 µm concentration */
+    pm_1_0_0: z.number().optional(),
+    /** Particulate matter 2.5 µm concentration */
+    pm_2_5: z.number().optional(),
+    /** Particulate matter 4.0 µm concentration */
+    pm_4_0: z.number().optional(),
+    /** Tamper detection (0 = no tamper, 1 = tamper detected) */
+    tamper: z.number().optional(),
+    /** Temperature in Celsius */
+    temperature: z.number().optional(),
+    /** Unix timestamp of the data point */
+    time: z.number().optional(),
+    /** Total Volatile Organic Compounds index */
+    tvoc_index: z.number().optional(),
+    /** USA Air Quality Index */
+    usa_air_quality_index: z.number().optional(),
+    /** Vape detection index */
+    vape_index: z.number().optional(),
+  }))
 });
 
 type GetSensorDataOutput = z.infer<typeof GetSensorDataOutputSchema>;
