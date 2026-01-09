@@ -38,7 +38,7 @@ coverage/
 
 # Custom
 docs/
-generator/
+generator/*
 !generator/config.ts
 test/
 CLAUDE.md
