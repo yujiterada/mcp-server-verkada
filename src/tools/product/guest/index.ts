@@ -6,12 +6,12 @@
  */
 
 export { createDenyList, createDenyListMetadata } from './create-deny-list.js';
-export { createGuestEvent, createGuestEventMetadata } from './create-guest-event.js';
+export { createHostedEvent, createHostedEventMetadata } from './create-hosted-event.js';
 export { deleteDenyList, deleteDenyListMetadata } from './delete-deny-list.js';
-export { deleteGuestSingleEvent, deleteGuestSingleEventMetadata } from './delete-guest-single-event.js';
-export { getGuestEvent, getGuestEventMetadata } from './get-guest-event.js';
-export { getGuestSingleEvent, getGuestSingleEventMetadata } from './get-guest-single-event.js';
-export { getGuestType, getGuestTypeMetadata } from './get-guest-type.js';
-export { getHost, getHostMetadata } from './get-host.js';
+export { deleteHostedEvent, deleteHostedEventMetadata } from './delete-hosted-event.js';
+export { getHostedEvent, getHostedEventMetadata } from './get-hosted-event.js';
 export { getVisit, getVisitMetadata } from './get-visit.js';
 export { listDenyList, listDenyListMetadata } from './list-deny-list.js';
+export { listGuestTypes, listGuestTypesMetadata } from './list-guest-types.js';
+export { listHostedEvents, listHostedEventsMetadata } from './list-hosted-events.js';
+export { listHostsForGuestSite, listHostsForGuestSiteMetadata } from './list-hosts-for-guest-site.js';

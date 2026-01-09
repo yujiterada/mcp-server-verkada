@@ -1,13 +1,13 @@
 /**
- * GetGuestType Tool
+ * ListHostsForGuestSite Tool
  *
- * Get a specific guest type by ID. Returns detailed information about the guest type. Supports pagination.
+ * List all hosts for guest site. Use this to enumerate or search through hosts for guest site. Supports pagination.
  *
  * @category product/guest
- * @operationId getGuestTypeViewV2
+ * @operationId getHostViewV2
  * @method GET
- * @path /v2/guest/guest_types
- * @tags Guest Types
+ * @path /v2/guest/hosts
+ * @tags Hosts
  *
  * Auto-generated from OpenAPI spec. Do not edit manually.
  */
@@ -21,13 +21,15 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getGuestType
+ * Input parameters for listHostsForGuestSite
  */
-const GetGuestTypeInputSchema = z.object({
+const ListHostsForGuestSiteInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The site_id parameter (required) */
     site_id: z.string().uuid(),
+    /** The email parameter */
+    email: z.string().optional(),
     /** The cursor parameter */
     cursor: z.string().optional(),
     /** The limit parameter */
@@ -35,50 +37,54 @@ const GetGuestTypeInputSchema = z.object({
   }),
 });
 
-type GetGuestTypeInput = z.infer<typeof GetGuestTypeInputSchema>;
+type ListHostsForGuestSiteInput = z.infer<typeof ListHostsForGuestSiteInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getGuestType
+ * Output schema for listHostsForGuestSite
  * OK
  */
-const GetGuestTypeOutputSchema = z.object({
+const ListHostsForGuestSiteOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. */
   cursor: z.string(),
-  /** List of guest types. */
-  items: z.array(z.object({ enabled_for_invites: z.boolean(), guest_type_id: z.string().uuid(), name: z.string() })),
+  /** List of hosts. */
+  items: z.array(z.object({ email: z.string().optional(), first_name: z.string(), full_name: z.string(), has_delegate: z.boolean(), host_id: z.string().uuid(), last_name: z.string(), original_first_name: z.string(), phone_number: z.string().optional(), requires_host_approval: z.boolean() })),
 });
 
-type GetGuestTypeOutput = z.infer<typeof GetGuestTypeOutputSchema>;
+type ListHostsForGuestSiteOutput = z.infer<typeof ListHostsForGuestSiteOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific guest type by ID. Returns detailed information about the guest type. Supports pagination.
+ * List all hosts for guest site. Use this to enumerate or search through hosts for guest site. Supports pagination.
  *
  * @param input.query.site_id - The site_id parameter
+ * @param input.query.email - The email parameter
  * @param input.query.cursor - The cursor parameter
  * @param input.query.limit - The limit parameter
  * @returns OK
  */
-export async function getGuestType(
-  input: GetGuestTypeInput
-): Promise<APIResponse<GetGuestTypeOutput>> {
+export async function listHostsForGuestSite(
+  input: ListHostsForGuestSiteInput
+): Promise<APIResponse<ListHostsForGuestSiteOutput>> {
   // Validate input
-  const validated = GetGuestTypeInputSchema.parse(input);
+  const validated = ListHostsForGuestSiteInputSchema.parse(input);
 
   // Build path with parameters
-  const path = '/v2/guest/guest_types';
+  const path = '/v2/guest/hosts';
 
   // Build query string
   const queryParams = new URLSearchParams();
   if (validated.query.site_id !== undefined) {
     queryParams.set('site_id', String(validated.query.site_id));
+  }
+  if (validated.query.email !== undefined) {
+    queryParams.set('email', String(validated.query.email));
   }
   if (validated.query.cursor !== undefined) {
     queryParams.set('cursor', String(validated.query.cursor));
@@ -90,7 +96,7 @@ export async function getGuestType(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetGuestTypeOutput>({
+  const response = await callVerkadaAPI<ListHostsForGuestSiteOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -98,7 +104,7 @@ export async function getGuestType(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetGuestTypeOutputSchema.parse(response.data);
+      response.data = ListHostsForGuestSiteOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -115,15 +121,15 @@ export async function getGuestType(
 /**
  * Metadata for MCP tool registration
  */
-export const getGuestTypeMetadata = {
-  name: 'get_guest_type',
-  description: `Get a specific guest type by ID. Returns detailed information about the guest type. Supports pagination.`,
-  inputSchema: GetGuestTypeInputSchema,
-  outputSchema: GetGuestTypeOutputSchema,
+export const listHostsForGuestSiteMetadata = {
+  name: 'list_hosts_for_guest_site',
+  description: `List all hosts for guest site. Use this to enumerate or search through hosts for guest site. Supports pagination.`,
+  inputSchema: ListHostsForGuestSiteInputSchema,
+  outputSchema: ListHostsForGuestSiteOutputSchema,
   category: 'product/guest',
-  operationId: 'getGuestTypeViewV2',
+  operationId: 'getHostViewV2',
   method: 'GET' as const,
-  path: '/v2/guest/guest_types',
+  path: '/v2/guest/hosts',
   requiresAuth: true,
-  tags: ['Guest Types'],
+  tags: ['Hosts'],
 };

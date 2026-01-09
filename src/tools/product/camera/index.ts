@@ -6,7 +6,6 @@
  */
 
 export { createCameraAudio, createCameraAudioMetadata } from './create-camera-audio.js';
-export { createCloudBackup, createCloudBackupMetadata } from './create-cloud-backup.js';
 export { createDashboardWidgetTrends, createDashboardWidgetTrendsMetadata } from './create-dashboard-widget-trends.js';
 export { createLicensePlateOfInterest, createLicensePlateOfInterestMetadata } from './create-license-plate-of-interest.js';
 export { createLicensePlateOfInterestBulkOperation, createLicensePlateOfInterestBulkOperationMetadata } from './create-license-plate-of-interest-bulk-operation.js';
@@ -17,7 +16,7 @@ export { deleteLicensePlateOfInterestBulkOperation, deleteLicensePlateOfInterest
 export { deletePersonOfInterest, deletePersonOfInterestMetadata } from './delete-person-of-interest.js';
 export { getCameraAudio, getCameraAudioMetadata } from './get-camera-audio.js';
 export { getCameraSnapshot, getCameraSnapshotMetadata } from './get-camera-snapshot.js';
-export { getCloudBackup, getCloudBackupMetadata } from './get-cloud-backup.js';
+export { getCloudBackupConfiguration, getCloudBackupConfigurationMetadata } from './get-cloud-backup-configuration.js';
 export { getDashboardOccupancyTrends, getDashboardOccupancyTrendsMetadata } from './get-dashboard-occupancy-trends.js';
 export { getFootageStream, getFootageStreamMetadata } from './get-footage-stream.js';
 export { getFootageToken, getFootageTokenMetadata } from './get-footage-token.js';
@@ -32,5 +31,6 @@ export { getThumbnailLatest, getThumbnailLatestMetadata } from './get-thumbnail-
 export { getThumbnailLink, getThumbnailLinkMetadata } from './get-thumbnail-link.js';
 export { listLprImages, listLprImagesMetadata } from './list-lpr-images.js';
 export { listLprTimestampsView, listLprTimestampsViewMetadata } from './list-lpr-timestamps-view.js';
+export { updateCloudBackupConfiguration, updateCloudBackupConfigurationMetadata } from './update-cloud-backup-configuration.js';
 export { updateLicensePlateOfInterest, updateLicensePlateOfInterestMetadata } from './update-license-plate-of-interest.js';
 export { updatePersonOfInterest, updatePersonOfInterestMetadata } from './update-person-of-interest.js';
