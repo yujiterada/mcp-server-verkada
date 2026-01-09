@@ -39,6 +39,7 @@ coverage/
 # Custom
 docs/
 generator/
+!generator/config.ts
 test/
 CLAUDE.md
 *.json
