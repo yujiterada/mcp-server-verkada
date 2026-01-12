@@ -22,6 +22,7 @@ import type { APIResponse } from '../../../types/common.js';
 
 /**
  * Input parameters for createHostedEvent
+ * 
  */
 const CreateHostedEventInputSchema = z.object({
   /** Body parameters */
@@ -39,7 +40,7 @@ const CreateHostedEventInputSchema = z.object({
     /** The unique identifier of the host. Valid hosts can be retrieved with the Guest Host API. (required) */
     host_id: z.string().uuid(),
     /** List of invitees for the event. */
-    invitees: z.array(z.object({ email: z.string().optional(), full_name: z.string(), notes: z.string().max(100).optional(), phone_number: z.string().optional() })).optional(),
+    invitees: z.array(z.object({ email: z.string().optional(), full_name: z.string(), notes: z.string().max(100).optional(), phone_number: z.string().optional() })).min(0),
     /** Whether a RSVP link should be generated. */
     rsvp_enabled: z.boolean().optional(),
     /** The unique identifier of the Guest site. Valid sites can be retrieved with the Guest Site API. (required) */

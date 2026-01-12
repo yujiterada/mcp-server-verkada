@@ -205,6 +205,34 @@ export const defaultConfig: GeneratorConfig = {
   }),
 })`,
         description: '',
+      },
+      'postGuestEventViewV2': {
+        schema: `z.object({
+  /** Body parameters */
+  body: z.object({
+    /** The location of the event. */
+    event_address: z.string().optional(),
+    /** A description of the event. */
+    event_description: z.string().optional(),
+    /** The name of the Guest event. If not specified, defaults to &#x27;New Event&#x27;. */
+    event_name: z.string().optional(),
+    /** A list of start and end times for each event part. If only one time span specified, will be treated as a single day event. A maximum of 30 time spans may be specified and must occur in the future within 1 year. (required) */
+    event_times: z.array(z.object({ end_time: z.string(), start_time: z.string() })),
+    /** The unique identifier of the Guest type for this event. Guest types must be eligible and allowed for invites in visibility controls. Guest types can be retrieved with the Guest Type API. (required) */
+    guest_type_id: z.string().uuid(),
+    /** The unique identifier of the host. Valid hosts can be retrieved with the Guest Host API. (required) */
+    host_id: z.string().uuid(),
+    /** List of invitees for the event. */
+    invitees: z.array(z.object({ email: z.string().optional(), full_name: z.string(), notes: z.string().max(100).optional(), phone_number: z.string().optional() })).min(0),
+    /** Whether a RSVP link should be generated. */
+    rsvp_enabled: z.boolean().optional(),
+    /** The unique identifier of the Guest site. Valid sites can be retrieved with the Guest Site API. (required) */
+    site_id: z.string().uuid(),
+    /** Whether walk-ins are allowed to the event. */
+    walk_in_enabled: z.boolean().optional(),
+  }),
+})`,
+        description: '',
       }
       // Examples:
       // 'postSomeOperationV1': {
