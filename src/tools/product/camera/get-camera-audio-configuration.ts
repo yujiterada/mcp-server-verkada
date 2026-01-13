@@ -1,7 +1,7 @@
 /**
- * GetCameraAudio Tool
+ * GetCameraAudioConfiguration Tool
  *
- * Get a specific camera audio by ID. Returns detailed information about the camera audio.
+ * Get a specific camera audio configuration by ID. Returns detailed information about the camera audio configuration.
  *
  * @category product/camera
  * @operationId getCameraAudioViewV1
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getCameraAudio
+ * Input parameters for getCameraAudioConfiguration
  */
-const GetCameraAudioInputSchema = z.object({
+const GetCameraAudioConfigurationInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The camera_id parameter (required) */
@@ -31,40 +31,40 @@ const GetCameraAudioInputSchema = z.object({
   }),
 });
 
-type GetCameraAudioInput = z.infer<typeof GetCameraAudioInputSchema>;
+type GetCameraAudioConfigurationInput = z.infer<typeof GetCameraAudioConfigurationInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getCameraAudio
+ * Output schema for getCameraAudioConfiguration
  * OK
  */
-const GetCameraAudioOutputSchema = z.object({
+const GetCameraAudioConfigurationOutputSchema = z.object({
   /** The unique identifier of the camera. */
   camera_id: z.string(),
   /** The status of audio for the camera. If value is True, audio is turned on for the camera. */
   enabled: z.boolean(),
 });
 
-type GetCameraAudioOutput = z.infer<typeof GetCameraAudioOutputSchema>;
+type GetCameraAudioConfigurationOutput = z.infer<typeof GetCameraAudioConfigurationOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific camera audio by ID. Returns detailed information about the camera audio.
+ * Get a specific camera audio configuration by ID. Returns detailed information about the camera audio configuration.
  *
  * @param input.query.camera_id - The camera_id parameter
  * @returns OK
  */
-export async function getCameraAudio(
-  input: GetCameraAudioInput
-): Promise<APIResponse<GetCameraAudioOutput>> {
+export async function getCameraAudioConfiguration(
+  input: GetCameraAudioConfigurationInput
+): Promise<APIResponse<GetCameraAudioConfigurationOutput>> {
   // Validate input
-  const validated = GetCameraAudioInputSchema.parse(input);
+  const validated = GetCameraAudioConfigurationInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/audio/status';
@@ -78,7 +78,7 @@ export async function getCameraAudio(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetCameraAudioOutput>({
+  const response = await callVerkadaAPI<GetCameraAudioConfigurationOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -86,7 +86,7 @@ export async function getCameraAudio(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetCameraAudioOutputSchema.parse(response.data);
+      response.data = GetCameraAudioConfigurationOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -103,11 +103,11 @@ export async function getCameraAudio(
 /**
  * Metadata for MCP tool registration
  */
-export const getCameraAudioMetadata = {
-  name: 'get_camera_audio',
-  description: `Get a specific camera audio by ID. Returns detailed information about the camera audio.`,
-  inputSchema: GetCameraAudioInputSchema,
-  outputSchema: GetCameraAudioOutputSchema,
+export const getCameraAudioConfigurationMetadata = {
+  name: 'get_camera_audio_configuration',
+  description: `Get a specific camera audio configuration by ID. Returns detailed information about the camera audio configuration.`,
+  inputSchema: GetCameraAudioConfigurationInputSchema,
+  outputSchema: GetCameraAudioConfigurationOutputSchema,
   category: 'product/camera',
   operationId: 'getCameraAudioViewV1',
   method: 'GET' as const,

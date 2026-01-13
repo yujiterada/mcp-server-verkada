@@ -1,7 +1,7 @@
 /**
- * CreateCameraAudio Tool
+ * UpdateCameraAudioConfiguration Tool
  *
- * Create a new camera audio. Provide the required fields in the request body.
+ * Update an existing camera audio configuration. Only the provided fields will be changed.
  *
  * @category product/camera
  * @operationId postCameraAudioViewV1
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for createCameraAudio
+ * Input parameters for updateCameraAudioConfiguration
  */
-const CreateCameraAudioInputSchema = z.object({
+const UpdateCameraAudioConfigurationInputSchema = z.object({
   /** Body parameters */
   body: z.object({
     /** The unique identifier of the camera. (required) */
@@ -33,37 +33,37 @@ const CreateCameraAudioInputSchema = z.object({
   }),
 });
 
-type CreateCameraAudioInput = z.infer<typeof CreateCameraAudioInputSchema>;
+type UpdateCameraAudioConfigurationInput = z.infer<typeof UpdateCameraAudioConfigurationInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for createCameraAudio
+ * Output schema for updateCameraAudioConfiguration
  * ok
  */
-const CreateCameraAudioOutputSchema = z.object({
+const UpdateCameraAudioConfigurationOutputSchema = z.object({
 });
 
-type CreateCameraAudioOutput = z.infer<typeof CreateCameraAudioOutputSchema>;
+type UpdateCameraAudioConfigurationOutput = z.infer<typeof UpdateCameraAudioConfigurationOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Create a new camera audio. Provide the required fields in the request body.
+ * Update an existing camera audio configuration. Only the provided fields will be changed.
  *
  * @param input.body.camera_id - The unique identifier of the camera.
  * @param input.body.enabled - The status of audio for the camera. If value is True, audio is turned on for the camera.
  * @returns ok
  */
-export async function createCameraAudio(
-  input: CreateCameraAudioInput
-): Promise<APIResponse<CreateCameraAudioOutput>> {
+export async function updateCameraAudioConfiguration(
+  input: UpdateCameraAudioConfigurationInput
+): Promise<APIResponse<UpdateCameraAudioConfigurationOutput>> {
   // Validate input
-  const validated = CreateCameraAudioInputSchema.parse(input);
+  const validated = UpdateCameraAudioConfigurationInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/audio/status';
@@ -71,7 +71,7 @@ export async function createCameraAudio(
   const fullPath = path;
 
   // Make API request
-  const response = await callVerkadaAPI<CreateCameraAudioOutput>({
+  const response = await callVerkadaAPI<UpdateCameraAudioConfigurationOutput>({
     method: 'POST',
     path: fullPath,
     body: {
@@ -83,7 +83,7 @@ export async function createCameraAudio(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = CreateCameraAudioOutputSchema.parse(response.data);
+      response.data = UpdateCameraAudioConfigurationOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -100,11 +100,11 @@ export async function createCameraAudio(
 /**
  * Metadata for MCP tool registration
  */
-export const createCameraAudioMetadata = {
-  name: 'create_camera_audio',
-  description: `Create a new camera audio. Provide the required fields in the request body.`,
-  inputSchema: CreateCameraAudioInputSchema,
-  outputSchema: CreateCameraAudioOutputSchema,
+export const updateCameraAudioConfigurationMetadata = {
+  name: 'update_camera_audio_configuration',
+  description: `Update an existing camera audio configuration. Only the provided fields will be changed.`,
+  inputSchema: UpdateCameraAudioConfigurationInputSchema,
+  outputSchema: UpdateCameraAudioConfigurationOutputSchema,
   category: 'product/camera',
   operationId: 'postCameraAudioViewV1',
   method: 'POST' as const,

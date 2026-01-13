@@ -127,7 +127,9 @@ export const defaultConfig: GeneratorConfig = {
       "getGuestEventViewV2": "list_hosted_events",
       "postGuestEventViewV2": "create_hosted_event",
       "getGuestSingleEventViewV2": "get_hosted_event",
-      "deleteGuestSingleEventViewV2": "delete_hosted_event"
+      "deleteGuestSingleEventViewV2": "delete_hosted_event",
+      "getCameraAudioViewV1": "get_camera_audio_configuration",
+      "postCameraAudioViewV1": "update_camera_audio_configuration",
     },
     descriptionOverrides: {
       // Examples:
