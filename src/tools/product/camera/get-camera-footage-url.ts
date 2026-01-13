@@ -1,7 +1,7 @@
 /**
- * GetHistoryUrl Tool
+ * GetCameraFootageUrl Tool
  *
- * Get a specific history url by ID. Returns detailed information about the history url.
+ * Get a specific camera footage url by ID. Returns detailed information about the camera footage url.
  *
  * @category product/camera
  * @operationId getHistoryUrlViewV1
@@ -21,9 +21,9 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for getHistoryUrl
+ * Input parameters for getCameraFootageUrl
  */
-const GetHistoryUrlInputSchema = z.object({
+const GetCameraFootageUrlInputSchema = z.object({
   /** Path parameters */
   query: z.object({
     /** The camera_id parameter (required) */
@@ -33,39 +33,39 @@ const GetHistoryUrlInputSchema = z.object({
   }),
 });
 
-type GetHistoryUrlInput = z.infer<typeof GetHistoryUrlInputSchema>;
+type GetCameraFootageUrlInput = z.infer<typeof GetCameraFootageUrlInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for getHistoryUrl
+ * Output schema for getCameraFootageUrl
  * OK
  */
-const GetHistoryUrlOutputSchema = z.object({
+const GetCameraFootageUrlOutputSchema = z.object({
   /** The link to the video footage. */
   url: z.string(),
 });
 
-type GetHistoryUrlOutput = z.infer<typeof GetHistoryUrlOutputSchema>;
+type GetCameraFootageUrlOutput = z.infer<typeof GetCameraFootageUrlOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * Get a specific history url by ID. Returns detailed information about the history url.
+ * Get a specific camera footage url by ID. Returns detailed information about the camera footage url.
  *
  * @param input.query.camera_id - The camera_id parameter
  * @param input.query.timestamp - The timestamp parameter
  * @returns OK
  */
-export async function getHistoryUrl(
-  input: GetHistoryUrlInput
-): Promise<APIResponse<GetHistoryUrlOutput>> {
+export async function getCameraFootageUrl(
+  input: GetCameraFootageUrlInput
+): Promise<APIResponse<GetCameraFootageUrlOutput>> {
   // Validate input
-  const validated = GetHistoryUrlInputSchema.parse(input);
+  const validated = GetCameraFootageUrlInputSchema.parse(input);
 
   // Build path with parameters
   const path = '/cameras/v1/footage/link';
@@ -82,7 +82,7 @@ export async function getHistoryUrl(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<GetHistoryUrlOutput>({
+  const response = await callVerkadaAPI<GetCameraFootageUrlOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -90,7 +90,7 @@ export async function getHistoryUrl(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = GetHistoryUrlOutputSchema.parse(response.data);
+      response.data = GetCameraFootageUrlOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -107,11 +107,11 @@ export async function getHistoryUrl(
 /**
  * Metadata for MCP tool registration
  */
-export const getHistoryUrlMetadata = {
-  name: 'get_history_url',
-  description: `Get a specific history url by ID. Returns detailed information about the history url.`,
-  inputSchema: GetHistoryUrlInputSchema,
-  outputSchema: GetHistoryUrlOutputSchema,
+export const getCameraFootageUrlMetadata = {
+  name: 'get_camera_footage_url',
+  description: `Get a specific camera footage url by ID. Returns detailed information about the camera footage url.`,
+  inputSchema: GetCameraFootageUrlInputSchema,
+  outputSchema: GetCameraFootageUrlOutputSchema,
   category: 'product/camera',
   operationId: 'getHistoryUrlViewV1',
   method: 'GET' as const,

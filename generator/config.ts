@@ -130,6 +130,7 @@ export const defaultConfig: GeneratorConfig = {
       "deleteGuestSingleEventViewV2": "delete_hosted_event",
       "getCameraAudioViewV1": "get_camera_audio_configuration",
       "postCameraAudioViewV1": "update_camera_audio_configuration",
+      "getHistoryUrlViewV1": "get_camera_footage_url"
     },
     descriptionOverrides: {
       // Examples:
@@ -137,6 +138,20 @@ export const defaultConfig: GeneratorConfig = {
     },
     // Input schema overrides for operations that need custom input schemas
     inputSchemaOverrides: {
+      "getThumbnailImageViewV1": {
+        schema: `z.object({
+  /** Path parameters */
+  query: z.object({
+    /** The camera_id parameter (required) */
+    camera_id: z.string(),
+    /** The timestamp parameter */
+    timestamp: z.number().int().optional(),
+    /** The resolution parameter */
+    resolution: z.enum(['low-res', 'hi-res']).default('low-res'),
+  }),
+})`,
+        description: 'Returns image data in base64 format',
+      },
       'patchVideoTaggingEventTypeViewV1' : {
         schema: `z.object({
   /** Path parameters */
