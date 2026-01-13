@@ -22,6 +22,7 @@ import type { APIResponse } from '../../../types/common.js';
 
 /**
  * Input parameters for getCameraSnapshot
+ * Returns image data in base64 format
  */
 const GetCameraSnapshotInputSchema = z.object({
   /** Path parameters */
@@ -31,7 +32,7 @@ const GetCameraSnapshotInputSchema = z.object({
     /** The timestamp parameter */
     timestamp: z.number().int().optional(),
     /** The resolution parameter */
-    resolution: z.enum(['low-res', 'hi-res']).optional(),
+    resolution: z.enum(['low-res', 'hi-res']).default('low-res'),
   }),
 });
 
