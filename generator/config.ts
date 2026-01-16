@@ -424,8 +424,7 @@ export const defaultConfig: GeneratorConfig = {
       { pattern: /^\/v2\/guest\/guest_events/, category: 'product/guest' },
       { pattern: /^\/guest\/v1\/deny_list/, category: 'product/guest' },
       { pattern: /^\/guest\/v1\/visits/, category: 'product/guest' },
-      { pattern: /^\/v2\/guest\/guest_types/, category: 'product/guest' },
-      { pattern: /^\/v2\/guest\/hosts/, category: 'product/guest' }
+      { pattern: /^\/v2\/guest\//, category: 'product/guest' }
     ],
     defaultCategory: 'misc',
   },
