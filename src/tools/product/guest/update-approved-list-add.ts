@@ -3,7 +3,7 @@
  *
  * Update an existing approved list add. Only the provided fields will be changed. Supports bulk operations.
  *
- * @category misc
+ * @category product/guest
  * @operationId patchApprovedListAddViewV2
  * @method PATCH
  * @path /v2/guest/approved_lists/add
@@ -103,7 +103,7 @@ export const updateApprovedListAddMetadata = {
   description: `Update an existing approved list add. Only the provided fields will be changed. Supports bulk operations.`,
   inputSchema: UpdateApprovedListAddInputSchema,
   outputSchema: UpdateApprovedListAddOutputSchema,
-  category: 'misc',
+  category: 'product/guest',
   operationId: 'patchApprovedListAddViewV2',
   method: 'PATCH' as const,
   path: '/v2/guest/approved_lists/add',

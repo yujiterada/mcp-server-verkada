@@ -3,7 +3,7 @@
  *
  * Update an existing approved list reset. Only the provided fields will be changed.
  *
- * @category misc
+ * @category product/guest
  * @operationId patchApprovedListResetViewV2
  * @method PATCH
  * @path /v2/guest/approved_lists/{approved_list_id}/reset
@@ -101,7 +101,7 @@ export const updateApprovedListResetMetadata = {
   description: `Update an existing approved list reset. Only the provided fields will be changed.`,
   inputSchema: UpdateApprovedListResetInputSchema,
   outputSchema: UpdateApprovedListResetOutputSchema,
-  category: 'misc',
+  category: 'product/guest',
   operationId: 'patchApprovedListResetViewV2',
   method: 'PATCH' as const,
   path: '/v2/guest/approved_lists/{approved_list_id}/reset',

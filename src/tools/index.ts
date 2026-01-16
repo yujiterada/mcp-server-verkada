@@ -33,13 +33,6 @@ import {
   deleteUser, deleteUserMetadata,
 } from './command/user/index.js';
 import {
-  listApprovedLists, listApprovedListsMetadata,
-  updateApprovedListAdd, updateApprovedListAddMetadata,
-  updateApprovedListRemove, updateApprovedListRemoveMetadata,
-  listApprovedListMembers, listApprovedListMembersMetadata,
-  updateApprovedListReset, updateApprovedListResetMetadata,
-} from './misc/index.js';
-import {
   listAccessGroups, listAccessGroupsMetadata,
   getAccessGroup, getAccessGroupMetadata,
   createAccessGroup, createAccessGroupMetadata,
@@ -140,6 +133,11 @@ import {
   createDenyList, createDenyListMetadata,
   deleteDenyList, deleteDenyListMetadata,
   getVisit, getVisitMetadata,
+  listApprovedLists, listApprovedListsMetadata,
+  updateApprovedListAdd, updateApprovedListAddMetadata,
+  updateApprovedListRemove, updateApprovedListRemoveMetadata,
+  listApprovedListMembers, listApprovedListMembersMetadata,
+  updateApprovedListReset, updateApprovedListResetMetadata,
   listHostedEvents, listHostedEventsMetadata,
   createHostedEvent, createHostedEventMetadata,
   getHostedEvent, getHostedEventMetadata,
@@ -183,12 +181,6 @@ export const allTools = [
   registerToolFromMetadata(createUserMetadata, createUser),
   registerToolFromMetadata(updateUserMetadata, updateUser),
   registerToolFromMetadata(deleteUserMetadata, deleteUser),
-  // - misc: 5 tools
-  registerToolFromMetadata(listApprovedListsMetadata, listApprovedLists),
-  registerToolFromMetadata(updateApprovedListAddMetadata, updateApprovedListAdd),
-  registerToolFromMetadata(updateApprovedListRemoveMetadata, updateApprovedListRemove),
-  registerToolFromMetadata(listApprovedListMembersMetadata, listApprovedListMembers),
-  registerToolFromMetadata(updateApprovedListResetMetadata, updateApprovedListReset),
   // - product/access: 63 tools
   registerToolFromMetadata(listAccessGroupsMetadata, listAccessGroups),
   registerToolFromMetadata(getAccessGroupMetadata, getAccessGroup),
@@ -283,11 +275,16 @@ export const allTools = [
   registerToolFromMetadata(deletePersonOfInterestMetadata, deletePersonOfInterest),
   registerToolFromMetadata(getFootageStreamMetadata, getFootageStream),
   registerToolFromMetadata(createDashboardWidgetTrendsMetadata, createDashboardWidgetTrends),
-  // - product/guest: 10 tools
+  // - product/guest: 15 tools
   registerToolFromMetadata(listDenyListMetadata, listDenyList),
   registerToolFromMetadata(createDenyListMetadata, createDenyList),
   registerToolFromMetadata(deleteDenyListMetadata, deleteDenyList),
   registerToolFromMetadata(getVisitMetadata, getVisit),
+  registerToolFromMetadata(listApprovedListsMetadata, listApprovedLists),
+  registerToolFromMetadata(updateApprovedListAddMetadata, updateApprovedListAdd),
+  registerToolFromMetadata(updateApprovedListRemoveMetadata, updateApprovedListRemove),
+  registerToolFromMetadata(listApprovedListMembersMetadata, listApprovedListMembers),
+  registerToolFromMetadata(updateApprovedListResetMetadata, updateApprovedListReset),
   registerToolFromMetadata(listHostedEventsMetadata, listHostedEvents),
   registerToolFromMetadata(createHostedEventMetadata, createHostedEvent),
   registerToolFromMetadata(getHostedEventMetadata, getHostedEvent),

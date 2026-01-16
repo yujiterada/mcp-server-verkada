@@ -3,7 +3,7 @@
  *
  * Update an existing approved list remove. Only the provided fields will be changed.
  *
- * @category misc
+ * @category product/guest
  * @operationId patchApprovedListRemoveViewV2
  * @method PATCH
  * @path /v2/guest/approved_lists/remove
@@ -103,7 +103,7 @@ export const updateApprovedListRemoveMetadata = {
   description: `Update an existing approved list remove. Only the provided fields will be changed.`,
   inputSchema: UpdateApprovedListRemoveInputSchema,
   outputSchema: UpdateApprovedListRemoveOutputSchema,
-  category: 'misc',
+  category: 'product/guest',
   operationId: 'patchApprovedListRemoveViewV2',
   method: 'PATCH' as const,
   path: '/v2/guest/approved_lists/remove',

@@ -1,12 +1,12 @@
 /**
- * ListApprovedListMembers Tool
+ * ListApprovedLists Tool
  *
- * List all approved list members. Use this to enumerate or search through approved list members. Supports pagination.
+ * List all approved lists. Use this to enumerate or search through approved lists. Supports pagination. Supports filtering.
  *
- * @category misc
- * @operationId getApprovedListMembersViewV2
+ * @category product/guest
+ * @operationId getApprovedListsViewV2
  * @method GET
- * @path /v2/guest/approved_lists/{approved_list_id}
+ * @path /v2/guest/approved_lists
  * @tags Approved Lists
  *
  * Auto-generated from OpenAPI spec. Do not edit manually.
@@ -21,16 +21,13 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * Input parameters for listApprovedListMembers
+ * Input parameters for listApprovedLists
  */
-const ListApprovedListMembersInputSchema = z.object({
-  /** Path parameters */
-  path: z.object({
-    /** The approved_list_id parameter (required) */
-    approved_list_id: z.string(),
-  }),
+const ListApprovedListsInputSchema = z.object({
   /** Path parameters */
   query: z.object({
+    /** The site_id parameter */
+    site_id: z.string().uuid().optional(),
     /** The cursor parameter */
     cursor: z.string().optional(),
     /** The limit parameter */
@@ -38,49 +35,51 @@ const ListApprovedListMembersInputSchema = z.object({
   }),
 });
 
-type ListApprovedListMembersInput = z.infer<typeof ListApprovedListMembersInputSchema>;
+type ListApprovedListsInput = z.infer<typeof ListApprovedListsInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
 // ============================================================================
 
 /**
- * Output schema for listApprovedListMembers
+ * Output schema for listApprovedLists
  * OK
  */
-const ListApprovedListMembersOutputSchema = z.object({
+const ListApprovedListsOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. Continue paginating while this field is present. */
   cursor: z.string(),
-  /** List of people on the approved list. */
-  people: z.array(z.object({ address: z.string().optional(), date_of_birth: z.string().optional(), email: z.string(), expiration_timestamp: z.string().optional(), external_id: z.string().optional(), full_name: z.string(), person_id: z.string(), phone_number: z.string().optional() })),
+  /** List of approved lists. */
+  items: z.array(z.object({ approved_list_id: z.string(), name: z.string(), site_id: z.string() })),
 });
 
-type ListApprovedListMembersOutput = z.infer<typeof ListApprovedListMembersOutputSchema>;
+type ListApprovedListsOutput = z.infer<typeof ListApprovedListsOutputSchema>;
 
 // ============================================================================
 // TOOL FUNCTION
 // ============================================================================
 
 /**
- * List all approved list members. Use this to enumerate or search through approved list members. Supports pagination.
+ * List all approved lists. Use this to enumerate or search through approved lists. Supports pagination. Supports filtering.
  *
- * @param input.path.approved_list_id - The approved_list_id parameter
+ * @param input.query.site_id - The site_id parameter
  * @param input.query.cursor - The cursor parameter
  * @param input.query.limit - The limit parameter
  * @returns OK
  */
-export async function listApprovedListMembers(
-  input: ListApprovedListMembersInput
-): Promise<APIResponse<ListApprovedListMembersOutput>> {
+export async function listApprovedLists(
+  input: ListApprovedListsInput
+): Promise<APIResponse<ListApprovedListsOutput>> {
   // Validate input
-  const validated = ListApprovedListMembersInputSchema.parse(input);
+  const validated = ListApprovedListsInputSchema.parse(input);
 
   // Build path with parameters
-  let path = '/v2/guest/approved_lists/{approved_list_id}';
-  path = path.replace('{approved_list_id}', encodeURIComponent(String(validated.path.approved_list_id)));
+  const path = '/v2/guest/approved_lists';
 
   // Build query string
   const queryParams = new URLSearchParams();
+  if (validated.query.site_id !== undefined) {
+    queryParams.set('site_id', String(validated.query.site_id));
+  }
   if (validated.query.cursor !== undefined) {
     queryParams.set('cursor', String(validated.query.cursor));
   }
@@ -91,7 +90,7 @@ export async function listApprovedListMembers(
   const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
-  const response = await callVerkadaAPI<ListApprovedListMembersOutput>({
+  const response = await callVerkadaAPI<ListApprovedListsOutput>({
     method: 'GET',
     path: fullPath,
   });
@@ -99,7 +98,7 @@ export async function listApprovedListMembers(
   // Validate response
   if (response.success && response.data) {
     try {
-      response.data = ListApprovedListMembersOutputSchema.parse(response.data);
+      response.data = ListApprovedListsOutputSchema.parse(response.data);
     } catch (error) {
       // Log validation warning but don't fail
       console.warn('Response validation warning:', error);
@@ -116,15 +115,15 @@ export async function listApprovedListMembers(
 /**
  * Metadata for MCP tool registration
  */
-export const listApprovedListMembersMetadata = {
-  name: 'list_approved_list_members',
-  description: `List all approved list members. Use this to enumerate or search through approved list members. Supports pagination.`,
-  inputSchema: ListApprovedListMembersInputSchema,
-  outputSchema: ListApprovedListMembersOutputSchema,
-  category: 'misc',
-  operationId: 'getApprovedListMembersViewV2',
+export const listApprovedListsMetadata = {
+  name: 'list_approved_lists',
+  description: `List all approved lists. Use this to enumerate or search through approved lists. Supports pagination. Supports filtering.`,
+  inputSchema: ListApprovedListsInputSchema,
+  outputSchema: ListApprovedListsOutputSchema,
+  category: 'product/guest',
+  operationId: 'getApprovedListsViewV2',
   method: 'GET' as const,
-  path: '/v2/guest/approved_lists/{approved_list_id}',
+  path: '/v2/guest/approved_lists',
   requiresAuth: true,
   tags: ['Approved Lists'],
 };
