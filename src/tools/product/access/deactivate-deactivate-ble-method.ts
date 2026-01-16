@@ -60,6 +60,8 @@ const DeactivateDeactivateBleMethodOutputSchema = z.object({
   entry_code: z.string(),
   /** A unique identifier managed externally provided by the customer. */
   external_id: z.string(),
+  /** The face credential of the user. */
+  face_credential: z.object({ source: z.string().optional(), status: z.string() }),
   /** A flag that states whether or not the user has a profile photo. */
   has_profile_photo: z.boolean(),
   /** License plates associated with the user. */

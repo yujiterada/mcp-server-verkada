@@ -33,6 +33,13 @@ import {
   deleteUser, deleteUserMetadata,
 } from './command/user/index.js';
 import {
+  listApprovedLists, listApprovedListsMetadata,
+  updateApprovedListAdd, updateApprovedListAddMetadata,
+  updateApprovedListRemove, updateApprovedListRemoveMetadata,
+  listApprovedListMembers, listApprovedListMembersMetadata,
+  updateApprovedListReset, updateApprovedListResetMetadata,
+} from './misc/index.js';
+import {
   listAccessGroups, listAccessGroupsMetadata,
   getAccessGroup, getAccessGroupMetadata,
   createAccessGroup, createAccessGroupMetadata,
@@ -176,6 +183,12 @@ export const allTools = [
   registerToolFromMetadata(createUserMetadata, createUser),
   registerToolFromMetadata(updateUserMetadata, updateUser),
   registerToolFromMetadata(deleteUserMetadata, deleteUser),
+  // - misc: 5 tools
+  registerToolFromMetadata(listApprovedListsMetadata, listApprovedLists),
+  registerToolFromMetadata(updateApprovedListAddMetadata, updateApprovedListAdd),
+  registerToolFromMetadata(updateApprovedListRemoveMetadata, updateApprovedListRemove),
+  registerToolFromMetadata(listApprovedListMembersMetadata, listApprovedListMembers),
+  registerToolFromMetadata(updateApprovedListResetMetadata, updateApprovedListReset),
   // - product/access: 63 tools
   registerToolFromMetadata(listAccessGroupsMetadata, listAccessGroups),
   registerToolFromMetadata(getAccessGroupMetadata, getAccessGroup),

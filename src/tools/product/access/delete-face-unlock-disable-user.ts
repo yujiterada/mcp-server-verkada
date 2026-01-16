@@ -39,11 +39,9 @@ type DeleteFaceUnlockDisableUserInput = z.infer<typeof DeleteFaceUnlockDisableUs
 
 /**
  * Output schema for deleteFaceUnlockDisableUser
- * OK
+ * ok
  */
 const DeleteFaceUnlockDisableUserOutputSchema = z.object({
-  /** Whether the operation was successful */
-  success: z.boolean(),
 });
 
 type DeleteFaceUnlockDisableUserOutput = z.infer<typeof DeleteFaceUnlockDisableUserOutputSchema>;
@@ -56,7 +54,7 @@ type DeleteFaceUnlockDisableUserOutput = z.infer<typeof DeleteFaceUnlockDisableU
  * Delete a face unlock disable user. This action cannot be undone.
  *
  * @param input.path.user_id - The user_id parameter
- * @returns OK
+ * @returns ok
  */
 export async function deleteFaceUnlockDisableUser(
   input: DeleteFaceUnlockDisableUserInput

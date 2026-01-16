@@ -29,9 +29,11 @@ const UnlockFaceUnlockInviteUserInputSchema = z.object({
     /** The user_id parameter (required) */
     user_id: z.string(),
   }),
-  /** Path parameters */
-  query: z.object({
-    /** The overwrite parameter */
+  /** Body parameters */
+  body: z.object({
+    /** Methods to send invitation through (email, sms). Default is [&quot;email&quot;, &quot;sms&quot;]. */
+    invitation_methods: z.array(z.string()).optional(),
+    /** Whether to overwrite an existing face credential. Default is false. */
     overwrite: z.boolean().optional(),
   }),
 });
@@ -59,7 +61,8 @@ type UnlockFaceUnlockInviteUserOutput = z.infer<typeof UnlockFaceUnlockInviteUse
  * Remotely unlock the specified face unlock invite user.
  *
  * @param input.path.user_id - The user_id parameter
- * @param input.query.overwrite - The overwrite parameter
+ * @param input.body.invitation_methods - Methods to send invitation through (email, sms). Default is [&quot;email&quot;, &quot;sms&quot;].
+ * @param input.body.overwrite - Whether to overwrite an existing face credential. Default is false.
  * @returns ok
  */
 export async function unlockFaceUnlockInviteUser(
@@ -72,18 +75,16 @@ export async function unlockFaceUnlockInviteUser(
   let path = '/v2/access/users/{user_id}/face_unlock/invite';
   path = path.replace('{user_id}', encodeURIComponent(String(validated.path.user_id)));
 
-  // Build query string
-  const queryParams = new URLSearchParams();
-  if (validated.query.overwrite !== undefined) {
-    queryParams.set('overwrite', String(validated.query.overwrite));
-  }
-  const queryString = queryParams.toString();
-  const fullPath = queryString ? `${path}?${queryString}` : path;
+  const fullPath = path;
 
   // Make API request
   const response = await callVerkadaAPI<UnlockFaceUnlockInviteUserOutput>({
     method: 'POST',
     path: fullPath,
+    body: {
+      invitation_methods: validated.body.invitation_methods,
+      overwrite: validated.body.overwrite,
+    },
   });
 
   // Validate response

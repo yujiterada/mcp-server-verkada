@@ -29,9 +29,9 @@ const UnlockFaceUnlockUploadPhotoExternalUserInputSchema = z.object({
     /** The external_id parameter (required) */
     external_id: z.string(),
   }),
-  /** Path parameters */
-  query: z.object({
-    /** The overwrite parameter */
+  /** Body parameters */
+  body: z.object({
+    /** Whether to overwrite an existing face credential. Default is false. */
     overwrite: z.boolean().optional(),
   }),
 });
@@ -59,7 +59,7 @@ type UnlockFaceUnlockUploadPhotoExternalUserOutput = z.infer<typeof UnlockFaceUn
  * Remotely unlock the specified face unlock upload photo external user.
  *
  * @param input.path.external_id - The external_id parameter
- * @param input.query.overwrite - The overwrite parameter
+ * @param input.body.overwrite - Whether to overwrite an existing face credential. Default is false.
  * @returns ok
  */
 export async function unlockFaceUnlockUploadPhotoExternalUser(
@@ -72,18 +72,15 @@ export async function unlockFaceUnlockUploadPhotoExternalUser(
   let path = '/v2/access/external_users/{external_id}/face_unlock/upload_photo';
   path = path.replace('{external_id}', encodeURIComponent(String(validated.path.external_id)));
 
-  // Build query string
-  const queryParams = new URLSearchParams();
-  if (validated.query.overwrite !== undefined) {
-    queryParams.set('overwrite', String(validated.query.overwrite));
-  }
-  const queryString = queryParams.toString();
-  const fullPath = queryString ? `${path}?${queryString}` : path;
+  const fullPath = path;
 
   // Make API request
   const response = await callVerkadaAPI<UnlockFaceUnlockUploadPhotoExternalUserOutput>({
     method: 'POST',
     path: fullPath,
+    body: {
+      overwrite: validated.body.overwrite,
+    },
   });
 
   // Validate response

@@ -39,11 +39,9 @@ type DeleteFaceUnlockDisableExternalUserInput = z.infer<typeof DeleteFaceUnlockD
 
 /**
  * Output schema for deleteFaceUnlockDisableExternalUser
- * OK
+ * ok
  */
 const DeleteFaceUnlockDisableExternalUserOutputSchema = z.object({
-  /** Whether the operation was successful */
-  success: z.boolean(),
 });
 
 type DeleteFaceUnlockDisableExternalUserOutput = z.infer<typeof DeleteFaceUnlockDisableExternalUserOutputSchema>;
@@ -56,7 +54,7 @@ type DeleteFaceUnlockDisableExternalUserOutput = z.infer<typeof DeleteFaceUnlock
  * Delete a face unlock disable external user. This action cannot be undone.
  *
  * @param input.path.external_id - The external_id parameter
- * @returns OK
+ * @returns ok
  */
 export async function deleteFaceUnlockDisableExternalUser(
   input: DeleteFaceUnlockDisableExternalUserInput
