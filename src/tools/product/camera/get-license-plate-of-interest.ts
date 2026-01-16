@@ -47,7 +47,7 @@ const GetLicensePlateOfInterestOutputSchema = z.object({
   /** A list of License Plates of Interest. */
   license_plate_of_interest: z.array(z.object({ creation_time: z.number().int().optional(), description: z.string().optional(), license_plate: z.string().optional() })),
   /** The pagination token used to fetch the next page of results. */
-  next_page_token: z.string(),
+  next_page_token: z.string().nullable(),
 });
 
 type GetLicensePlateOfInterestOutput = z.infer<typeof GetLicensePlateOfInterestOutputSchema>;

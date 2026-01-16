@@ -51,7 +51,7 @@ type GetObjectCountsInput = z.infer<typeof GetObjectCountsInputSchema>;
  */
 const GetObjectCountsOutputSchema = z.object({
   /** The pagination token used to fetch the next page of results. */
-  next_page_token: z.string(),
+  next_page_token: z.string().nullable(),
   /** Object counts */
   object_counts: z.array(z.object({ detected_time: z.number().int().optional(), people_count: z.number().int().optional(), vehicle_count: z.number().int().optional() })),
 });

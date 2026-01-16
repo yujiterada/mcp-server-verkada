@@ -57,7 +57,7 @@ const ListLprImagesOutputSchema = z.object({
   /** The detected license plates */
   detections: z.array(z.object({ image_url: z.string().optional(), license_plate: z.string().optional(), timestamp: z.number().int().optional(), vehicle_image_url: z.string().optional() })),
   /** The pagination token used to fetch the next page of results. */
-  next_page_token: z.number().int(),
+  next_page_token: z.number().int().nullable(),
 });
 
 type ListLprImagesOutput = z.infer<typeof ListLprImagesOutputSchema>;

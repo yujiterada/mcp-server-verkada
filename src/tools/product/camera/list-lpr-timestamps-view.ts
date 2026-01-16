@@ -60,7 +60,7 @@ Formatted as a Unix timestamp in seconds. */
   /** The requested license plate number. */
   license_plate: z.string(),
   /** The pagination token used to fetch the next page of results. */
-  next_page_token: z.number().int(),
+  next_page_token: z.number().int().nullable(),
 });
 
 type ListLprTimestampsViewOutput = z.infer<typeof ListLprTimestampsViewOutputSchema>;
