@@ -45,7 +45,7 @@ type GetAccessUserInput = z.infer<typeof GetAccessUserInputSchema>;
 
 /**
  * Output schema for getAccessUser
- * OK
+ * 
  */
 const GetAccessUserOutputSchema = z.object({
   /** Access Groups to which a user belongs. */
@@ -55,7 +55,7 @@ const GetAccessUserOutputSchema = z.object({
   /** Access cards associated with the user. */
   cards: z.array(z.object({ active: z.boolean().optional(), card_id: z.string().optional(), card_number: z.string().optional(), card_number_base36: z.string().optional(), card_number_hex: z.string().optional(), facility_code: z.string().optional(), type: z.string().optional() })),
   /** The end time value of the time range controlling when a users credentials are active. Formatted as a Unix timestamp in seconds. Default is Null. */
-  end_date: z.string(),
+  end_date: z.string().optional(),
   /** The access pin code used for keypad readers alone or in 2FA mode. Formatted as a string of digits between 4 and 16 in length. Must be unique within the organization. */
   entry_code: z.string(),
   /** A unique identifier managed externally provided by the customer. */
@@ -69,16 +69,16 @@ const GetAccessUserOutputSchema = z.object({
   /** MFA codes associated with the user. */
   mfa_codes: z.array(z.object({ code: z.string() })),
   /** The timestamp when the user&#x27;s profile photo was last updated. */
-  profile_photo_last_updated: z.string().datetime(),
+  profile_photo_last_updated: z.string().datetime().optional(),
   /** QR codes associated with the user. */
   qr_codes: z.array(z.object({ activation_state: z.string().optional(), active: z.boolean().optional(), card_number: z.string().optional(), card_number_base36: z.string().optional(), card_number_hex: z.string().optional(), encoding_type: z.string(), facility_code: z.string().optional(), qr_code: z.string().optional() })),
   /** The permission state of a user&#x27;s ability to perform a Remote Unlock. Format is a boolean True or False. Default is False. */
   remote_unlock: z.boolean(),
   /** The start time value of the time range controlling when a users credentials are active. Formatted as a Unix timestamp in seconds. Default is Null. */
-  start_date: z.string(),
+  start_date: z.string().optional(),
   /** The unique identifier of the user managed by Verkada. */
   user_id: z.string().uuid(),
-});
+});;
 
 type GetAccessUserOutput = z.infer<typeof GetAccessUserOutputSchema>;
 
