@@ -49,7 +49,7 @@ const ListApprovedListsOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. Continue paginating while this field is present. */
   cursor: z.string().nullable(),
   /** List of approved lists. */
-  items: z.array(z.object({ approved_list_id: z.string(), name: z.string(), site_id: z.string() })).nullable(),
+  items: z.array(z.object({ approved_list_id: z.string().nullable(), name: z.string().nullable(), site_id: z.string().nullable() })).nullable(),
 });
 
 type ListApprovedListsOutput = z.infer<typeof ListApprovedListsOutputSchema>;

@@ -43,7 +43,7 @@ type ListDenyListInput = z.infer<typeof ListDenyListInputSchema>;
  */
 const ListDenyListOutputSchema = z.object({
   /** A list of Deny List Entry objects. */
-  deny_list_entries: z.array(z.object({ date_of_birth: z.string().optional(), deny_list_entry_id: z.string().uuid(), description: z.string().optional(), first_name: z.string(), last_name: z.string(), presigned_url: z.string().optional() })).nullable(),
+  deny_list_entries: z.array(z.object({ date_of_birth: z.string().nullable().optional(), deny_list_entry_id: z.string().uuid().nullable(), description: z.string().nullable().optional(), first_name: z.string().nullable(), last_name: z.string().nullable(), presigned_url: z.string().nullable().optional() })).nullable(),
   /** The unique identifier of the organization to which the Guest site belongs. */
   org_id: z.string().uuid().nullable(),
   /** The unique identifier of the Guest site. */

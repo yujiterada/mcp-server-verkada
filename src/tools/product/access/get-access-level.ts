@@ -36,7 +36,7 @@ const GetAccessLevelInputSchema = z.object({});
  */
 const GetAccessLevelOutputSchema = z.object({
   /**  */
-  access_levels: z.array(z.object({ access_groups: z.array(z.string()), access_level_id: z.string(), access_schedule_events: z.array(z.object({ access_schedule_event_id: z.string().optional(), door_status: z.enum(['access_granted']).optional(), end_time: z.string(), start_time: z.string(), weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']) })), doors: z.array(z.string()), last_updated_at: z.number().int(), name: z.string(), sites: z.array(z.string()) })).nullable(),
+  access_levels: z.array(z.object({ access_groups: z.array(z.string()).nullable(), access_level_id: z.string().nullable(), access_schedule_events: z.array(z.object({ access_schedule_event_id: z.string().nullable().optional(), door_status: z.enum(['access_granted']).nullable().optional(), end_time: z.string().nullable(), start_time: z.string().nullable(), weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']).nullable() })).nullable(), doors: z.array(z.string()).nullable(), last_updated_at: z.number().int().nullable(), name: z.string().nullable(), sites: z.array(z.string()).nullable() })).nullable(),
 });
 
 type GetAccessLevelOutput = z.infer<typeof GetAccessLevelOutputSchema>;

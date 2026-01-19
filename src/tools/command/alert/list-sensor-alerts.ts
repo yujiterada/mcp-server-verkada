@@ -53,7 +53,7 @@ type ListSensorAlertsInput = z.infer<typeof ListSensorAlertsInputSchema>;
  */
 const ListSensorAlertsOutputSchema = z.object({
   /** A list of sensor alert events. */
-  alert_events: z.array(z.object({ alert_event_id: z.string().uuid().optional(), device_id: z.string().uuid().optional(), device_name: z.string().optional(), device_serial: z.string().optional(), end_time: z.number().int().optional(), is_above_max_event: z.boolean().optional(), most_extreme_value: z.number().optional(), reading: z.string().optional(), start_time: z.number().int().optional(), threshold: z.number().optional() })).nullable(),
+  alert_events: z.array(z.object({ alert_event_id: z.string().uuid().nullable().optional(), device_id: z.string().uuid().nullable().optional(), device_name: z.string().nullable().optional(), device_serial: z.string().nullable().optional(), end_time: z.number().int().nullable().optional(), is_above_max_event: z.boolean().nullable().optional(), most_extreme_value: z.number().nullable().optional(), reading: z.string().nullable().optional(), start_time: z.number().int().nullable().optional(), threshold: z.number().nullable().optional() })).nullable(),
   /** The pagination token used to fetch the next page of results. */
   next_page_token: z.string().nullable(),
 });

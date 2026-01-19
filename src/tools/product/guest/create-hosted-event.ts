@@ -70,7 +70,7 @@ const CreateHostedEventOutputSchema = z.object({
   /** The name of the Guest event. If not specified, defaults to &#x27;New Event&#x27;. */
   event_name: z.string().nullable(),
   /** List of event parts for multi-part events. */
-  event_parts: z.array(z.object({ end_time: z.string(), event_part_id: z.string().uuid().optional(), start_time: z.string() })).nullable(),
+  event_parts: z.array(z.object({ end_time: z.string().nullable(), event_part_id: z.string().uuid().nullable().optional(), start_time: z.string().nullable() })).nullable(),
   /** The source at which the event was created from. */
   event_source: z.string().nullable(),
   /** The unique identifier of the Guest event. */
@@ -80,7 +80,7 @@ const CreateHostedEventOutputSchema = z.object({
   /** The unique identifier of the host. Hosts can be retrieved with the Guest Host API. */
   host_id: z.string().uuid().nullable(),
   /** List of invitees for the event. */
-  invitees: z.array(z.object({ guest_email: z.string().optional(), guest_full_name: z.string(), guest_phone_number: z.string().optional(), invited_guest_id: z.string().uuid(), notes: z.string().optional(), registered_time: z.string().optional(), visit_id: z.string().uuid().optional() })).nullable(),
+  invitees: z.array(z.object({ guest_email: z.string().nullable().optional(), guest_full_name: z.string().nullable(), guest_phone_number: z.string().nullable().optional(), invited_guest_id: z.string().uuid().nullable(), notes: z.string().nullable().optional(), registered_time: z.string().nullable().optional(), visit_id: z.string().uuid().nullable().optional() })).nullable(),
   /** The RSVP link of the event if generated. */
   rsvp_link: z.string().nullable(),
   /** The unique identifier of the Guest site. Valid sites can be retrieved with the Guest Site API. */

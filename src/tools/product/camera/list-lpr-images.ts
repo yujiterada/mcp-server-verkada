@@ -55,7 +55,7 @@ const ListLprImagesOutputSchema = z.object({
   /** The unique identifier of the camera. */
   camera_id: z.string().nullable(),
   /** The detected license plates */
-  detections: z.array(z.object({ image_url: z.string().optional(), license_plate: z.string().optional(), timestamp: z.number().int().optional(), vehicle_image_url: z.string().optional() })).nullable(),
+  detections: z.array(z.object({ image_url: z.string().nullable().optional(), license_plate: z.string().nullable().optional(), timestamp: z.number().int().nullable().optional(), vehicle_image_url: z.string().nullable().optional() })).nullable(),
   /** The pagination token used to fetch the next page of results. */
   next_page_token: z.number().int().nullable(),
 });

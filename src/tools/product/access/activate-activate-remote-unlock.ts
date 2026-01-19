@@ -49,11 +49,11 @@ type ActivateActivateRemoteUnlockInput = z.infer<typeof ActivateActivateRemoteUn
  */
 const ActivateActivateRemoteUnlockOutputSchema = z.object({
   /** Access Groups to which a user belongs. */
-  access_groups: z.array(z.object({ group_id: z.string().uuid().optional(), name: z.string().optional() })).nullable(),
+  access_groups: z.array(z.object({ group_id: z.string().uuid().nullable().optional(), name: z.string().nullable().optional() })).nullable(),
   /** The permission state of a user&#x27;s ability to perform a Bluetooth Unlock. Format is a boolean True or False. Default is False. */
   ble_unlock: z.boolean().nullable(),
   /** Access cards associated with the user. */
-  cards: z.array(z.object({ active: z.boolean().optional(), card_id: z.string().optional(), card_number: z.string().optional(), card_number_base36: z.string().optional(), card_number_hex: z.string().optional(), facility_code: z.string().optional(), type: z.string().optional() })).nullable(),
+  cards: z.array(z.object({ active: z.boolean().nullable().optional(), card_id: z.string().nullable().optional(), card_number: z.string().nullable().optional(), card_number_base36: z.string().nullable().optional(), card_number_hex: z.string().nullable().optional(), facility_code: z.string().nullable().optional(), type: z.string().nullable().optional() })).nullable(),
   /** The end time value of the time range controlling when a users credentials are active. Formatted as a Unix timestamp in seconds. Default is Null. */
   end_date: z.string().nullable(),
   /** The access pin code used for keypad readers alone or in 2FA mode. Formatted as a string of digits between 4 and 16 in length. Must be unique within the organization. */
@@ -61,17 +61,17 @@ const ActivateActivateRemoteUnlockOutputSchema = z.object({
   /** A unique identifier managed externally provided by the customer. */
   external_id: z.string().nullable(),
   /** The face credential of the user. */
-  face_credential: z.object({ source: z.string().optional(), status: z.string() }).nullable(),
+  face_credential: z.object({ source: z.string().nullable().optional(), status: z.string().nullable() }).nullable(),
   /** A flag that states whether or not the user has a profile photo. */
   has_profile_photo: z.boolean().nullable(),
   /** License plates associated with the user. */
-  license_plates: z.array(z.object({ active: z.boolean().optional(), license_plate_number: z.string().optional(), name: z.string() })).nullable(),
+  license_plates: z.array(z.object({ active: z.boolean().nullable().optional(), license_plate_number: z.string().nullable().optional(), name: z.string().nullable() })).nullable(),
   /** MFA codes associated with the user. */
-  mfa_codes: z.array(z.object({ code: z.string() })).nullable(),
+  mfa_codes: z.array(z.object({ code: z.string().nullable() })).nullable(),
   /** The timestamp when the user&#x27;s profile photo was last updated. */
   profile_photo_last_updated: z.string().datetime().nullable(),
   /** QR codes associated with the user. */
-  qr_codes: z.array(z.object({ activation_state: z.string().optional(), active: z.boolean().optional(), card_number: z.string().optional(), card_number_base36: z.string().optional(), card_number_hex: z.string().optional(), encoding_type: z.string(), facility_code: z.string().optional(), qr_code: z.string().optional() })).nullable(),
+  qr_codes: z.array(z.object({ activation_state: z.string().nullable().optional(), active: z.boolean().nullable().optional(), card_number: z.string().nullable().optional(), card_number_base36: z.string().nullable().optional(), card_number_hex: z.string().nullable().optional(), encoding_type: z.string().nullable(), facility_code: z.string().nullable().optional(), qr_code: z.string().nullable().optional() })).nullable(),
   /** The permission state of a user&#x27;s ability to perform a Remote Unlock. Format is a boolean True or False. Default is False. */
   remote_unlock: z.boolean().nullable(),
   /** The start time value of the time range controlling when a users credentials are active. Formatted as a Unix timestamp in seconds. Default is Null. */

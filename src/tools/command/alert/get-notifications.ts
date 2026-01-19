@@ -55,7 +55,7 @@ const GetNotificationsOutputSchema = z.object({
   /** The pagination token used to fetch the next page of results. */
   next_page_token: z.string().nullable(),
   /** Notifications */
-  notifications: z.array(z.object({ camera_id: z.string().optional(), created: z.number().int().optional(), crowd_threshold: z.number().int().optional(), image_url: z.string().optional(), notification_type: z.string().optional(), objects: z.array(z.string()).optional(), person_label: z.string().optional(), video_url: z.string().optional() })).nullable(),
+  notifications: z.array(z.object({ camera_id: z.string().nullable().optional(), created: z.number().int().nullable().optional(), crowd_threshold: z.number().int().nullable().optional(), image_url: z.string().nullable().optional(), notification_type: z.string().nullable().optional(), objects: z.array(z.string()).nullable().optional(), person_label: z.string().nullable().optional(), video_url: z.string().nullable().optional() })).nullable(),
 });
 
 type GetNotificationsOutput = z.infer<typeof GetNotificationsOutputSchema>;

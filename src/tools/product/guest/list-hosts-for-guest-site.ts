@@ -51,7 +51,7 @@ const ListHostsForGuestSiteOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. */
   cursor: z.string().nullable(),
   /** List of hosts. */
-  items: z.array(z.object({ email: z.string().optional(), first_name: z.string(), full_name: z.string(), has_delegate: z.boolean(), host_id: z.string().uuid(), last_name: z.string(), original_first_name: z.string(), phone_number: z.string().optional(), requires_host_approval: z.boolean() })).nullable(),
+  items: z.array(z.object({ email: z.string().nullable().optional(), first_name: z.string().nullable(), full_name: z.string().nullable(), has_delegate: z.boolean().nullable(), host_id: z.string().uuid().nullable(), last_name: z.string().nullable(), original_first_name: z.string().nullable(), phone_number: z.string().nullable().optional(), requires_host_approval: z.boolean().nullable() })).nullable(),
 });
 
 type ListHostsForGuestSiteOutput = z.infer<typeof ListHostsForGuestSiteOutputSchema>;

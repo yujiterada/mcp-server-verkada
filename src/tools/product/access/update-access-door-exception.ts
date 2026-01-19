@@ -118,7 +118,7 @@ By default, all users with access to relevant doors will be allowed to double ba
 &lt;code&gt;first_person_in&lt;/code&gt; must also be set to &lt;code&gt;TRUE&lt;/code&gt; if this value is provided. */
   first_person_in_group_ids: z.array(z.string()).nullable(),
   /** A recurrence rule object specifying when the exception should repeat. */
-  recurrence_rule: z.object({ by_day: z.array(z.enum(['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'])).optional(), by_month: z.number().int().optional(), by_month_day: z.number().int().optional(), by_set_pos: z.number().int().optional(), count: z.number().int().optional(), excluded_dates: z.array(z.string()).optional(), frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']), interval: z.number().int(), until: z.string().optional() }).nullable(),
+  recurrence_rule: z.object({ by_day: z.array(z.enum(['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'])).nullable().optional(), by_month: z.number().int().nullable().optional(), by_month_day: z.number().int().nullable().optional(), by_set_pos: z.number().int().nullable().optional(), count: z.number().int().nullable().optional(), excluded_dates: z.array(z.string()).nullable().optional(), frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']).nullable(), interval: z.number().int().nullable(), until: z.string().nullable().optional() }).nullable(),
   /** Start time of the Door Exception formatted as &lt;code&gt;hh:mm&lt;/code&gt; (according to ISO 8601). */
   start_time: z.string().time().nullable(),
 });

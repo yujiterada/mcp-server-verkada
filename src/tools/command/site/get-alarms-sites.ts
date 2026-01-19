@@ -43,7 +43,7 @@ type GetAlarmsSitesInput = z.infer<typeof GetAlarmsSitesInputSchema>;
  */
 const GetAlarmsSitesOutputSchema = z.object({
   /** A list containing information about alarm sites */
-  sites: z.array(z.object({ site_id: z.string(), site_name: z.string(), site_security_level: z.enum(['high', 'low', 'custom']).optional(), site_state: z.enum(['disarmed', 'armed', 'alarm', 'silent_alarm']).optional() })).nullable(),
+  sites: z.array(z.object({ site_id: z.string().nullable(), site_name: z.string().nullable(), site_security_level: z.enum(['high', 'low', 'custom']).nullable().optional(), site_state: z.enum(['disarmed', 'armed', 'alarm', 'silent_alarm']).nullable().optional() })).nullable(),
 });
 
 type GetAlarmsSitesOutput = z.infer<typeof GetAlarmsSitesOutputSchema>;

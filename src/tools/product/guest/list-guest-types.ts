@@ -49,7 +49,7 @@ const ListGuestTypesOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. */
   cursor: z.string().nullable(),
   /** List of guest types. */
-  items: z.array(z.object({ enabled_for_invites: z.boolean(), guest_type_id: z.string().uuid(), name: z.string() })).nullable(),
+  items: z.array(z.object({ enabled_for_invites: z.boolean().nullable(), guest_type_id: z.string().uuid().nullable(), name: z.string().nullable() })).nullable(),
 });
 
 type ListGuestTypesOutput = z.infer<typeof ListGuestTypesOutputSchema>;

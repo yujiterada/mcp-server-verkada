@@ -45,7 +45,7 @@ type ListAlarmsDevicesInput = z.infer<typeof ListAlarmsDevicesInputSchema>;
  */
 const ListAlarmsDevicesOutputSchema = z.object({
   /** Detailed information about device(s) */
-  devices: z.array(z.object({ device_id: z.string(), device_type: z.enum(['door_contact_sensor', 'glass_break_sensor', 'motion_sensor', 'panic_button', 'water_sensor', 'wired_door_contact_sensor', 'wired_generic_sensor', 'wired_glass_break_sensor', 'wired_motion_sensor', 'wired_panic_button', 'wired_smoke_sensor', 'wired_water_sensor', 'wireless_relay']), site_id: z.string() })).nullable(),
+  devices: z.array(z.object({ device_id: z.string().nullable(), device_type: z.enum(['door_contact_sensor', 'glass_break_sensor', 'motion_sensor', 'panic_button', 'water_sensor', 'wired_door_contact_sensor', 'wired_generic_sensor', 'wired_glass_break_sensor', 'wired_motion_sensor', 'wired_panic_button', 'wired_smoke_sensor', 'wired_water_sensor', 'wireless_relay']).nullable(), site_id: z.string().nullable() })).nullable(),
 });
 
 type ListAlarmsDevicesOutput = z.infer<typeof ListAlarmsDevicesOutputSchema>;

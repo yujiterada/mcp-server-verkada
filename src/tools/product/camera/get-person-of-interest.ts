@@ -47,7 +47,7 @@ const GetPersonOfInterestOutputSchema = z.object({
   /** The pagination token used to fetch the next page of results. */
   next_token: z.string().nullable(),
   /** A list of Persons of Interest. */
-  persons_of_interest: z.array(z.object({ created: z.number().int().optional(), label: z.string().optional(), last_seen: z.number().int().optional(), person_id: z.string().uuid().optional() })).nullable(),
+  persons_of_interest: z.array(z.object({ created: z.number().int().nullable().optional(), label: z.string().nullable().optional(), last_seen: z.number().int().nullable().optional(), person_id: z.string().uuid().nullable().optional() })).nullable(),
 });
 
 type GetPersonOfInterestOutput = z.infer<typeof GetPersonOfInterestOutputSchema>;

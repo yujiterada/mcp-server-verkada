@@ -47,7 +47,7 @@ const GetAccessLevelDetailOutputSchema = z.object({
   /** Unique identifier for the Access Level */
   access_level_id: z.string().nullable(),
   /** List of Access Schedule Events associated with this Access Level */
-  access_schedule_events: z.array(z.object({ access_schedule_event_id: z.string().optional(), door_status: z.enum(['access_granted']).optional(), end_time: z.string(), start_time: z.string(), weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']) })).nullable(),
+  access_schedule_events: z.array(z.object({ access_schedule_event_id: z.string().nullable().optional(), door_status: z.enum(['access_granted']).nullable().optional(), end_time: z.string().nullable(), start_time: z.string().nullable(), weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']).nullable() })).nullable(),
   /** IDs of Doors accessible under this Access Level */
   doors: z.array(z.string()).nullable(),
   /** Last updated timestamp of the Access Level (Unix timestamp in seconds) */
