@@ -31,6 +31,19 @@ export interface InputSchemaOverride {
   description: string;
 }
 
+/**
+ * Custom code injection configuration
+ * Allows injecting additional imports and code into generated tool files
+ */
+export interface CustomCodeInjection {
+  /** Additional import statements to add at the top of the file */
+  imports?: string[];
+  /** Code to inject before the API call (after validation) */
+  preRequestCode?: string;
+  /** Replacement for body parameters (to use transformed values) */
+  bodyOverride?: Record<string, string>;
+}
+
 export interface GeneratorConfig {
   // Input/Output paths
   input: {
@@ -53,6 +66,8 @@ export interface GeneratorConfig {
     inputSchemaOverrides: Record<string, InputSchemaOverride>;
     /** Custom output schema overrides by operation ID */
     outputSchemaOverrides: Record<string, OutputSchemaOverride>;
+    /** Custom code injection by operation ID */
+    customCodeInjections: Record<string, CustomCodeInjection>;
     hiddenParameters: string[];
     defaultParameters: Record<string, unknown>;
   };
@@ -131,6 +146,26 @@ export const defaultConfig: GeneratorConfig = {
       "getCameraAudioViewV1": "get_camera_audio_configuration",
       "postCameraAudioViewV1": "update_camera_audio_configuration",
       "getHistoryUrlViewV1": "get_camera_footage_url"
+    },
+    // Custom code injections for operations that need special handling
+    customCodeInjections: {
+      // Helix event tools need type coercion for attributes
+      'postVideoTaggingEventViewV1': {
+        imports: ["import { coerceHelixAttributeValues } from '../../../utils/helix-attributes.js';"],
+        preRequestCode: `  // Coerce attribute values to appropriate types (convert numeric strings to numbers)
+  const coercedAttributes = coerceHelixAttributeValues(validated.body.attributes);`,
+        bodyOverride: {
+          'attributes': 'coercedAttributes',
+        },
+      },
+      'patchVideoTaggingEventViewV1': {
+        imports: ["import { coerceHelixAttributeValues } from '../../../utils/helix-attributes.js';"],
+        preRequestCode: `  // Coerce attribute values to appropriate types (convert numeric strings to numbers)
+  const coercedAttributes = coerceHelixAttributeValues(validated.body.attributes);`,
+        bodyOverride: {
+          'attributes': 'coercedAttributes',
+        },
+      },
     },
     descriptionOverrides: {
       // Examples:
@@ -740,6 +775,16 @@ export function validateConfig(config: GeneratorConfig): ValidationResult {
         'Output schema overrides must be an object',
         'transform.outputSchemaOverrides',
         config.transform.outputSchemaOverrides
+      )
+    );
+  }
+
+  if (typeof config.transform.customCodeInjections !== 'object' || config.transform.customCodeInjections === null) {
+    errors.push(
+      new ConfigValidationError(
+        'Custom code injections must be an object',
+        'transform.customCodeInjections',
+        config.transform.customCodeInjections
       )
     );
   }

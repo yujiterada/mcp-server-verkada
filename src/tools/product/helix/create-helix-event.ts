@@ -15,6 +15,7 @@
 import { z } from 'zod';
 import { callVerkadaAPI } from '../../../client.js';
 import type { APIResponse } from '../../../types/common.js';
+import { coerceHelixAttributeValues } from '../../../utils/helix-attributes.js';
 
 // ============================================================================
 // INPUT SCHEMA
@@ -78,6 +79,9 @@ export async function createHelixEvent(
   // Validate input
   const validated = CreateHelixEventInputSchema.parse(input);
 
+  // Coerce attribute values to appropriate types (convert numeric strings to numbers)
+  const coercedAttributes = coerceHelixAttributeValues(validated.body.attributes);
+
   // Build path with parameters
   const path = '/cameras/v1/video_tagging/event';
 
@@ -88,7 +92,7 @@ export async function createHelixEvent(
     method: 'POST',
     path: fullPath,
     body: {
-      attributes: validated.body.attributes,
+      attributes: coercedAttributes,
       camera_id: validated.body.camera_id,
       event_type_uid: validated.body.event_type_uid,
       flagged: validated.body.flagged,
