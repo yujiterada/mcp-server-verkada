@@ -51,7 +51,7 @@ type GetAuditLogsInput = z.infer<typeof GetAuditLogsInputSchema>;
  */
 const GetAuditLogsOutputSchema = z.object({
   /** A list of audit logs. */
-  audit_logs: z.array(z.object({ details: z.object({}).optional(), devices: z.array(z.object({ details: z.object({}).optional(), device_id: z.string().optional(), device_name: z.string().optional(), device_site_name: z.string().optional(), device_type: z.string().optional() })).optional(), event_description: z.string().optional(), event_name: z.string().optional(), ip_address: z.string().optional(), organization_id: z.string().uuid().optional(), processed_timestamp: z.string().optional(), timestamp: z.string().optional(), user_email: z.string().optional(), user_id: z.string().uuid().optional(), user_name: z.string().optional(), verkada_support_id: z.string().optional() })),
+  audit_logs: z.array(z.object({ details: z.object({}).optional(), devices: z.array(z.object({ details: z.object({}).optional(), device_id: z.string().optional(), device_name: z.string().optional(), device_site_name: z.string().optional(), device_type: z.string().optional() })).optional(), event_description: z.string().optional(), event_name: z.string().optional(), ip_address: z.string().optional(), organization_id: z.string().uuid().optional(), processed_timestamp: z.string().optional(), timestamp: z.string().optional(), user_email: z.string().optional(), user_id: z.string().uuid().optional(), user_name: z.string().optional(), verkada_support_id: z.string().optional() })).nullable(),
   /** The pagination token used to fetch the next page of results. */
   next_page_token: z.string().nullable(),
 });

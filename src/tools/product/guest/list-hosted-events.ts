@@ -51,9 +51,9 @@ type ListHostedEventsInput = z.infer<typeof ListHostedEventsInputSchema>;
  */
 const ListHostedEventsOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. */
-  cursor: z.string(),
+  cursor: z.string().nullable(),
   /** List of events, their event parts and invitees. */
-  items: z.array(z.object({ end_time: z.string(), event_name: z.string(), event_part_id: z.string().uuid().optional(), guest_event_id: z.string().uuid(), is_multipart: z.boolean(), start_time: z.string() })),
+  items: z.array(z.object({ end_time: z.string(), event_name: z.string(), event_part_id: z.string().uuid().optional(), guest_event_id: z.string().uuid(), is_multipart: z.boolean(), start_time: z.string() })).nullable(),
 });
 
 type ListHostedEventsOutput = z.infer<typeof ListHostedEventsOutputSchema>;

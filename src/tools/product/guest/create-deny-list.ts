@@ -48,11 +48,11 @@ type CreateDenyListInput = z.infer<typeof CreateDenyListInputSchema>;
  */
 const CreateDenyListOutputSchema = z.object({
   /** Base64 encoded (ASCII) deny list CSV data. */
-  base64_ascii_error_csv: z.string(),
+  base64_ascii_error_csv: z.string().nullable(),
   /** The unique identifier of the organization to which the Guest site belongs. */
-  org_id: z.string().uuid(),
+  org_id: z.string().uuid().nullable(),
   /** The unique identifier of the Guest site. */
-  site_id: z.string().uuid(),
+  site_id: z.string().uuid().nullable(),
 });
 
 type CreateDenyListOutput = z.infer<typeof CreateDenyListOutputSchema>;

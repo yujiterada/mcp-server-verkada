@@ -49,9 +49,9 @@ type GetMaxObjectCountsInput = z.infer<typeof GetMaxObjectCountsInputSchema>;
  */
 const GetMaxObjectCountsOutputSchema = z.object({
   /** The number of people detected. */
-  people_count: z.number().int(),
+  people_count: z.number().int().nullable(),
   /** The number of vehicle detected. */
-  vehicle_count: z.number().int(),
+  vehicle_count: z.number().int().nullable(),
 });
 
 type GetMaxObjectCountsOutput = z.infer<typeof GetMaxObjectCountsOutputSchema>;

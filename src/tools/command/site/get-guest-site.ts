@@ -36,7 +36,7 @@ const GetGuestSiteInputSchema = z.object({});
  */
 const GetGuestSiteOutputSchema = z.object({
   /**  */
-  guest_sites: z.array(z.object({ org_id: z.string().uuid(), site_id: z.string().uuid(), site_name: z.string() })),
+  guest_sites: z.array(z.object({ org_id: z.string().uuid(), site_id: z.string().uuid(), site_name: z.string() })).nullable(),
 });
 
 type GetGuestSiteOutput = z.infer<typeof GetGuestSiteOutputSchema>;

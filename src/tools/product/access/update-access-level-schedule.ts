@@ -56,15 +56,15 @@ type UpdateAccessLevelScheduleInput = z.infer<typeof UpdateAccessLevelScheduleIn
  */
 const UpdateAccessLevelScheduleOutputSchema = z.object({
   /** Unique identifier for the Access Schedule Event */
-  access_schedule_event_id: z.string(),
+  access_schedule_event_id: z.string().nullable(),
   /** Status of the door during the event */
-  door_status: z.enum(['access_granted']),
+  door_status: z.enum(['access_granted']).nullable(),
   /** End time of the event in hh:mm format (ISO 8601) */
-  end_time: z.string(),
+  end_time: z.string().nullable(),
   /** Start time of the event in hh:mm format (ISO 8601) */
-  start_time: z.string(),
+  start_time: z.string().nullable(),
   /** Day of the week for the event */
-  weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']),
+  weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']).nullable(),
 });
 
 type UpdateAccessLevelScheduleOutput = z.infer<typeof UpdateAccessLevelScheduleOutputSchema>;

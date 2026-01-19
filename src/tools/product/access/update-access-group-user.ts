@@ -50,13 +50,13 @@ type UpdateAccessGroupUserInput = z.infer<typeof UpdateAccessGroupUserInputSchem
  */
 const UpdateAccessGroupUserOutputSchema = z.object({
   /** The unique identifier of the Access Group managed by Verkada. */
-  group_id: z.string().uuid(),
+  group_id: z.string().uuid().nullable(),
   /** The unique name of the Access Group provided by the customer. */
-  name: z.string(),
+  name: z.string().nullable(),
   /** The list of successfully added Verkada-defined user identifiers. */
-  successful_adds: z.array(z.string().uuid()),
+  successful_adds: z.array(z.string().uuid()).nullable(),
   /** The list of unsuccessfully added Verkada-defined user identifiers. */
-  unsuccessful_adds: z.array(z.string().uuid()),
+  unsuccessful_adds: z.array(z.string().uuid()).nullable(),
 });
 
 type UpdateAccessGroupUserOutput = z.infer<typeof UpdateAccessGroupUserOutputSchema>;

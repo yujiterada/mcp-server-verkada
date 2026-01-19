@@ -72,33 +72,33 @@ type UpdateUserInput = z.infer<typeof UpdateUserInputSchema>;
  */
 const UpdateUserOutputSchema = z.object({
   /** Whether the user is active in the system. */
-  active: z.boolean(),
+  active: z.boolean().nullable(),
   /** The name of the company the user is part of. */
-  company_name: z.string(),
+  company_name: z.string().nullable(),
   /** The name of the department the user is part of. */
-  department: z.string(),
+  department: z.string().nullable(),
   /** The department ID of the department the user is in. */
-  department_id: z.string(),
+  department_id: z.string().nullable(),
   /** The email of the user. */
-  email: z.string(),
+  email: z.string().nullable(),
   /** The user&#x27;s employee ID, does not have to be unique. */
-  employee_id: z.string(),
+  employee_id: z.string().nullable(),
   /** The title of employee. */
-  employee_title: z.string(),
+  employee_title: z.string().nullable(),
   /** The type of employee. */
-  employee_type: z.string(),
+  employee_type: z.string().nullable(),
   /** A unique identifier managed externally provided by the consumer. */
-  external_id: z.string(),
+  external_id: z.string().nullable(),
   /** The first name of the user. */
-  first_name: z.string(),
+  first_name: z.string().nullable(),
   /** The last name of the user. */
-  last_name: z.string(),
+  last_name: z.string().nullable(),
   /** The middle name of the user. */
-  middle_name: z.string(),
+  middle_name: z.string().nullable(),
   /** The main phone number of a user, E.164 format preferred. */
-  phone: z.string(),
+  phone: z.string().nullable(),
   /** The unique identifier of the user managed by Verkada. */
-  user_id: z.string(),
+  user_id: z.string().nullable(),
 });
 
 type UpdateUserOutput = z.infer<typeof UpdateUserOutputSchema>;

@@ -43,35 +43,35 @@ type GetHostedEventInput = z.infer<typeof GetHostedEventInputSchema>;
  */
 const GetHostedEventOutputSchema = z.object({
   /** The ending time of the event. This will be for the last event part of multi-part events in RFC 3339 format (e.g., &#x27;2025-01-17T21:06:20+00:00&#x27;). */
-  end_time: z.string(),
+  end_time: z.string().nullable(),
   /** The location of the event taking place. */
-  event_address: z.string(),
+  event_address: z.string().nullable(),
   /** A description of the Guest event. */
-  event_description: z.string(),
+  event_description: z.string().nullable(),
   /** The name of the Guest event. If not specified, defaults to &#x27;New Event&#x27;. */
-  event_name: z.string(),
+  event_name: z.string().nullable(),
   /** List of event parts for multi-part events. */
-  event_parts: z.array(z.object({ end_time: z.string(), event_part_id: z.string().uuid().optional(), start_time: z.string() })),
+  event_parts: z.array(z.object({ end_time: z.string(), event_part_id: z.string().uuid().optional(), start_time: z.string() })).nullable(),
   /** The source at which the event was created from. */
-  event_source: z.string(),
+  event_source: z.string().nullable(),
   /** The unique identifier of the Guest event. */
-  guest_event_id: z.string().uuid(),
+  guest_event_id: z.string().uuid().nullable(),
   /** The unique identifier of the Guest type for this event. Guest types can be retrieved with the Guest Type API. */
-  guest_type_id: z.string().uuid(),
+  guest_type_id: z.string().uuid().nullable(),
   /** The unique identifier of the host. Hosts can be retrieved with the Guest Host API. */
-  host_id: z.string().uuid(),
+  host_id: z.string().uuid().nullable(),
   /** List of invitees for the event. */
-  invitees: z.array(z.object({ guest_email: z.string().optional(), guest_full_name: z.string(), guest_phone_number: z.string().optional(), invited_guest_id: z.string().uuid(), notes: z.string().optional(), registered_time: z.string().optional(), visit_id: z.string().uuid().optional() })),
+  invitees: z.array(z.object({ guest_email: z.string().optional(), guest_full_name: z.string(), guest_phone_number: z.string().optional(), invited_guest_id: z.string().uuid(), notes: z.string().optional(), registered_time: z.string().optional(), visit_id: z.string().uuid().optional() })).nullable(),
   /** The RSVP link of the event if generated. */
-  rsvp_link: z.string(),
+  rsvp_link: z.string().nullable(),
   /** The unique identifier of the Guest site. Valid sites can be retrieved with the Guest Site API. */
-  site_id: z.string().uuid(),
+  site_id: z.string().uuid().nullable(),
   /** The starting time of the event. This will be for the first event part of multi-part events in RFC 3339 format (e.g., &#x27;2025-01-17T21:06:20+00:00&#x27;). */
-  start_time: z.string(),
+  start_time: z.string().nullable(),
   /** The status of the event (active, canceled or rescheduled). */
-  status: z.string(),
+  status: z.string().nullable(),
   /** Whether walk-ins are allowed to the event. */
-  walk_in_enabled: z.boolean(),
+  walk_in_enabled: z.boolean().nullable(),
 });
 
 type GetHostedEventOutput = z.infer<typeof GetHostedEventOutputSchema>;

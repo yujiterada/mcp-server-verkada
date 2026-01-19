@@ -51,15 +51,15 @@ type CreateOccupancyTrendsMqttConfigInput = z.infer<typeof CreateOccupancyTrends
  */
 const CreateOccupancyTrendsMqttConfigOutputSchema = z.object({
   /** The cert set in config. */
-  broker_cert: z.string(),
+  broker_cert: z.string().nullable(),
   /** The host and port set in config. */
-  broker_host_port: z.string(),
+  broker_host_port: z.string().nullable(),
   /** The unique identifier of the camera. */
-  camera_id: z.string(),
+  camera_id: z.string().nullable(),
   /** The password set in config. */
-  client_password: z.string(),
+  client_password: z.string().nullable(),
   /** The username set in config. */
-  client_username: z.string(),
+  client_username: z.string().nullable(),
 });
 
 type CreateOccupancyTrendsMqttConfigOutput = z.infer<typeof CreateOccupancyTrendsMqttConfigOutputSchema>;

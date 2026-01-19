@@ -46,14 +46,14 @@ type CreatePersonOfInterestInput = z.infer<typeof CreatePersonOfInterestInputSch
 const CreatePersonOfInterestOutputSchema = z.object({
   /** The timestamp when the Person of Interest was created.
 Formatted as a Unix timestamp in seconds. */
-  created: z.number().int(),
+  created: z.number().int().nullable(),
   /** The name/label of the Person of Interest. */
-  label: z.string(),
+  label: z.string().nullable(),
   /** The timestamp when the Person of Interest was last seen.
 Formatted as a Unix timestamp in seconds. */
-  last_seen: z.number().int(),
+  last_seen: z.number().int().nullable(),
   /** The unique identifier of the Person of Interest. */
-  person_id: z.string().uuid(),
+  person_id: z.string().uuid().nullable(),
 });
 
 type CreatePersonOfInterestOutput = z.infer<typeof CreatePersonOfInterestOutputSchema>;

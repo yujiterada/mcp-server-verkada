@@ -86,13 +86,13 @@ const UpdateAccessDoorExceptionOutputSchema = z.object({
 - &lt;code&gt;door_status&lt;/code&gt; must be set to &lt;code&gt;access_controlled&lt;/code&gt;
 - &lt;code&gt;start_time&lt;/code&gt; and &lt;code&gt;end_time&lt;/code&gt; will automatically be set to &lt;code&gt;00:00:00&lt;/code&gt; and &lt;code&gt;23:59:59&lt;/code&gt;, respectively. Different values should not be provided.
 - &lt;code&gt;first_person_in&lt;/code&gt; and &lt;code&gt;double_badge&lt;/code&gt; must be &lt;code&gt;FALSE&lt;/code&gt; */
-  all_day_default: z.boolean(),
+  all_day_default: z.boolean().nullable(),
   /** Unique ID of the Door Exception Calendar that this Exception belongs to. */
-  calendar_id: z.string(),
+  calendar_id: z.string().nullable(),
   /** Date of the Door Exception formatted as &lt;code&gt;YYYY-MM-DD&lt;/code&gt; (according to ISO 8601). */
-  date: z.string(),
+  date: z.string().nullable(),
   /** The unique ID of the Door Exception. */
-  door_exception_id: z.string(),
+  door_exception_id: z.string().nullable(),
   /** The door status that this Exception should apply to all doors assigned to its Door Exception Calendar.
 
 Possible values are:
@@ -100,27 +100,27 @@ Possible values are:
 - &lt;code&gt;card_and_code&lt;/code&gt;
 - &lt;code&gt;access_controlled&lt;/code&gt;
 - &lt;code&gt;unlocked&lt;/code&gt; */
-  door_status: z.enum(['locked', 'card_and_code', 'access_controlled', 'unlocked']),
+  door_status: z.enum(['locked', 'card_and_code', 'access_controlled', 'unlocked']).nullable(),
   /** Bool value specifying if the Double Badge setting should be enabled for relevant doors. If &lt;code&gt;TRUE&lt;/code&gt;, &lt;code&gt;door_status&lt;/code&gt; must be set to &lt;code&gt;access_controlled&lt;/code&gt;.
 
 By default, all users with access to relevant doors will be allowed to double badge. */
-  double_badge: z.boolean(),
+  double_badge: z.boolean().nullable(),
   /** List of IDs for Access Groups that users must be a member of to be allowed to double badge on relevant doors.
 
 &lt;code&gt;double_badge&lt;/code&gt; must also be set to &lt;code&gt;TRUE&lt;/code&gt; if value is provided. */
-  double_badge_group_ids: z.array(z.string()),
+  double_badge_group_ids: z.array(z.string()).nullable(),
   /** End time of the Door Exception formatted as &lt;code&gt;hh:mm&lt;/code&gt; (according to ISO 8601). */
-  end_time: z.string().time(),
+  end_time: z.string().time().nullable(),
   /** Bool value specifying if the First Person In setting should be enabled for relevant doors. If &lt;code&gt;TRUE&lt;/code&gt;, &lt;code&gt;door_status&lt;/code&gt; must be set to &lt;code&gt;card_and_code&lt;/code&gt;, &lt;code&gt;access_controlled&lt;/code&gt;, or &lt;code&gt;unlocked&lt;/code&gt;. */
-  first_person_in: z.boolean(),
+  first_person_in: z.boolean().nullable(),
   /** List of IDs for Access Groups including supervisors used for First Person In mode.
 
 &lt;code&gt;first_person_in&lt;/code&gt; must also be set to &lt;code&gt;TRUE&lt;/code&gt; if this value is provided. */
-  first_person_in_group_ids: z.array(z.string()),
+  first_person_in_group_ids: z.array(z.string()).nullable(),
   /** A recurrence rule object specifying when the exception should repeat. */
-  recurrence_rule: z.object({ by_day: z.array(z.enum(['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'])).optional(), by_month: z.number().int().optional(), by_month_day: z.number().int().optional(), by_set_pos: z.number().int().optional(), count: z.number().int().optional(), excluded_dates: z.array(z.string()).optional(), frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']), interval: z.number().int(), until: z.string().optional() }),
+  recurrence_rule: z.object({ by_day: z.array(z.enum(['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'])).optional(), by_month: z.number().int().optional(), by_month_day: z.number().int().optional(), by_set_pos: z.number().int().optional(), count: z.number().int().optional(), excluded_dates: z.array(z.string()).optional(), frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']), interval: z.number().int(), until: z.string().optional() }).nullable(),
   /** Start time of the Door Exception formatted as &lt;code&gt;hh:mm&lt;/code&gt; (according to ISO 8601). */
-  start_time: z.string().time(),
+  start_time: z.string().time().nullable(),
 });
 
 type UpdateAccessDoorExceptionOutput = z.infer<typeof UpdateAccessDoorExceptionOutputSchema>;

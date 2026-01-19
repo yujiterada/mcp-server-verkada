@@ -45,7 +45,7 @@ type GetCameraFootageUrlInput = z.infer<typeof GetCameraFootageUrlInputSchema>;
  */
 const GetCameraFootageUrlOutputSchema = z.object({
   /** The link to the video footage. */
-  url: z.string(),
+  url: z.string().nullable(),
 });
 
 type GetCameraFootageUrlOutput = z.infer<typeof GetCameraFootageUrlOutputSchema>;

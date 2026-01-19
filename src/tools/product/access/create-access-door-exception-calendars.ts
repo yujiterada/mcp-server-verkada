@@ -47,15 +47,15 @@ type CreateAccessDoorExceptionCalendarsInput = z.infer<typeof CreateAccessDoorEx
  */
 const CreateAccessDoorExceptionCalendarsOutputSchema = z.object({
   /** Unique ID of the Door Exception Calendar. */
-  door_exception_calendar_id: z.string(),
+  door_exception_calendar_id: z.string().nullable(),
   /** Door IDs of Doors that the calendar’s Door Exceptions are being applied to. */
-  doors: z.array(z.string()),
+  doors: z.array(z.string()).nullable(),
   /** Door Exceptions for this Door Exception Calendar. */
-  exceptions: z.array(z.object({ all_day_default: z.boolean().optional(), calendar_id: z.string().optional(), date: z.string(), door_exception_id: z.string().optional(), door_status: z.enum(['locked', 'card_and_code', 'access_controlled', 'unlocked']).optional(), double_badge: z.boolean().optional(), double_badge_group_ids: z.array(z.string()).optional(), end_time: z.string().time(), first_person_in: z.boolean().optional(), first_person_in_group_ids: z.array(z.string()).optional(), recurrence_rule: z.object({ by_day: z.array(z.enum(['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'])).optional(), by_month: z.number().int().optional(), by_month_day: z.number().int().optional(), by_set_pos: z.number().int().optional(), count: z.number().int().optional(), excluded_dates: z.array(z.string()).optional(), frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']), interval: z.number().int(), until: z.string().optional() }).optional(), start_time: z.string().time() })),
+  exceptions: z.array(z.object({ all_day_default: z.boolean().optional(), calendar_id: z.string().optional(), date: z.string(), door_exception_id: z.string().optional(), door_status: z.enum(['locked', 'card_and_code', 'access_controlled', 'unlocked']).optional(), double_badge: z.boolean().optional(), double_badge_group_ids: z.array(z.string()).optional(), end_time: z.string().time(), first_person_in: z.boolean().optional(), first_person_in_group_ids: z.array(z.string()).optional(), recurrence_rule: z.object({ by_day: z.array(z.enum(['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'])).optional(), by_month: z.number().int().optional(), by_month_day: z.number().int().optional(), by_set_pos: z.number().int().optional(), count: z.number().int().optional(), excluded_dates: z.array(z.string()).optional(), frequency: z.enum(['DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY']), interval: z.number().int(), until: z.string().optional() }).optional(), start_time: z.string().time() })).nullable(),
   /** The last time the Door Exception Calendar was updated. Formatted as a Unix timestamp in seconds. */
-  last_updated_at: z.number().int(),
+  last_updated_at: z.number().int().nullable(),
   /** Name of the Door Exception Calendar. */
-  name: z.string(),
+  name: z.string().nullable(),
 });
 
 type CreateAccessDoorExceptionCalendarsOutput = z.infer<typeof CreateAccessDoorExceptionCalendarsOutputSchema>;

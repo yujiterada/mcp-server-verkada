@@ -43,11 +43,11 @@ type GetAccessGroupInput = z.infer<typeof GetAccessGroupInputSchema>;
  */
 const GetAccessGroupOutputSchema = z.object({
   /** The unique identifier of the Access Group managed by Verkada. */
-  group_id: z.string().uuid(),
+  group_id: z.string().uuid().nullable(),
   /** The unique name of the Access Group provided by the customer. */
-  name: z.string(),
+  name: z.string().nullable(),
   /** The list of Verkada-defined user identifiers within the access group. */
-  user_ids: z.array(z.string().uuid()),
+  user_ids: z.array(z.string().uuid()).nullable(),
 });
 
 type GetAccessGroupOutput = z.infer<typeof GetAccessGroupOutputSchema>;

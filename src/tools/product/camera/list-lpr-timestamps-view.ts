@@ -53,12 +53,12 @@ type ListLprTimestampsViewInput = z.infer<typeof ListLprTimestampsViewInputSchem
  */
 const ListLprTimestampsViewOutputSchema = z.object({
   /** The unique identifier of the camera. */
-  camera_id: z.string(),
+  camera_id: z.string().nullable(),
   /** The timestamps when the license plate was detected.
 Formatted as a Unix timestamp in seconds. */
-  detections: z.array(z.number().int()),
+  detections: z.array(z.number().int()).nullable(),
   /** The requested license plate number. */
-  license_plate: z.string(),
+  license_plate: z.string().nullable(),
   /** The pagination token used to fetch the next page of results. */
   next_page_token: z.number().int().nullable(),
 });

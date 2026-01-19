@@ -47,11 +47,11 @@ type ActivateLicensePlateActivateInput = z.infer<typeof ActivateLicensePlateActi
  */
 const ActivateLicensePlateActivateOutputSchema = z.object({
   /** Bool value specifying if the license plate credential is currently active. Default value is False. */
-  active: z.boolean(),
+  active: z.boolean().nullable(),
   /** The unique license plate number identifying a license plate credential for a user. */
-  license_plate_number: z.string(),
+  license_plate_number: z.string().nullable(),
   /** The name to be given to the license plate credential. */
-  name: z.string(),
+  name: z.string().nullable(),
 });
 
 type ActivateLicensePlateActivateOutput = z.infer<typeof ActivateLicensePlateActivateOutputSchema>;

@@ -36,7 +36,7 @@ const GetOccupancyTrendsCamerasInputSchema = z.object({});
  */
 const GetOccupancyTrendsCamerasOutputSchema = z.object({
   /**  */
-  cameras: z.array(z.object({ camera_id: z.string().optional(), preset_ids: z.array(z.string()).optional(), presets: z.array(z.object({ object_class: z.string().optional(), preset_id: z.string().optional() })).optional() })),
+  cameras: z.array(z.object({ camera_id: z.string().optional(), preset_ids: z.array(z.string()).optional(), presets: z.array(z.object({ object_class: z.string().optional(), preset_id: z.string().optional() })).optional() })).nullable(),
 });
 
 type GetOccupancyTrendsCamerasOutput = z.infer<typeof GetOccupancyTrendsCamerasOutputSchema>;

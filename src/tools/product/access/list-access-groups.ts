@@ -36,7 +36,7 @@ const ListAccessGroupsInputSchema = z.object({});
  */
 const ListAccessGroupsOutputSchema = z.object({
   /** The List of Access Group Objects a user belongs to. */
-  access_groups: z.array(z.object({ group_id: z.string().uuid().optional(), name: z.string().optional() })),
+  access_groups: z.array(z.object({ group_id: z.string().uuid().optional(), name: z.string().optional() })).nullable(),
 });
 
 type ListAccessGroupsOutput = z.infer<typeof ListAccessGroupsOutputSchema>;

@@ -36,7 +36,7 @@ const ListViewingStationDevicesInputSchema = z.object({});
  */
 const ListViewingStationDevicesOutputSchema = z.object({
   /** Detailed information about Viewing Station devices. */
-  devices: z.array(z.object({ app_version: z.string().optional(), claimed_serial_number: z.string(), device_id: z.string().uuid(), ip_address: z.string().optional(), last_seen_at: z.string().optional(), last_status: z.string(), location: z.string().optional(), location_lat: z.number().optional(), location_lon: z.number().optional(), name: z.string().optional(), site_id: z.string().uuid().optional(), timezone: z.string().optional() })),
+  devices: z.array(z.object({ app_version: z.string().optional(), claimed_serial_number: z.string(), device_id: z.string().uuid(), ip_address: z.string().optional(), last_seen_at: z.string().optional(), last_status: z.string(), location: z.string().optional(), location_lat: z.number().optional(), location_lon: z.number().optional(), name: z.string().optional(), site_id: z.string().uuid().optional(), timezone: z.string().optional() })).nullable(),
 });
 
 type ListViewingStationDevicesOutput = z.infer<typeof ListViewingStationDevicesOutputSchema>;

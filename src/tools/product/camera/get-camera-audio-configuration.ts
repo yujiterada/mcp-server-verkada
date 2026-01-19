@@ -43,9 +43,9 @@ type GetCameraAudioConfigurationInput = z.infer<typeof GetCameraAudioConfigurati
  */
 const GetCameraAudioConfigurationOutputSchema = z.object({
   /** The unique identifier of the camera. */
-  camera_id: z.string(),
+  camera_id: z.string().nullable(),
   /** The status of audio for the camera. If value is True, audio is turned on for the camera. */
-  enabled: z.boolean(),
+  enabled: z.boolean().nullable(),
 });
 
 type GetCameraAudioConfigurationOutput = z.infer<typeof GetCameraAudioConfigurationOutputSchema>;

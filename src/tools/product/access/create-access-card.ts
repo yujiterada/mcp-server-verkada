@@ -60,19 +60,19 @@ type CreateAccessCardInput = z.infer<typeof CreateAccessCardInputSchema>;
  */
 const CreateAccessCardOutputSchema = z.object({
   /** Bool value specifying if the credential is currently active. Can be True or False. Default value is False. */
-  active: z.boolean(),
+  active: z.boolean().nullable(),
   /** The unique identifier of the Access Card managed by Verkada. */
-  card_id: z.string(),
+  card_id: z.string().nullable(),
   /** The card number  used to grant or deny access to a door. */
-  card_number: z.string(),
+  card_number: z.string().nullable(),
   /** The card number in base36 used to grant or deny access to a door. */
-  card_number_base36: z.string(),
+  card_number_base36: z.string().nullable(),
   /** The card number in hexadecimal used to grant or deny access to a door. */
-  card_number_hex: z.string(),
+  card_number_hex: z.string().nullable(),
   /** The facility code used to grant or deny access to a door. */
-  facility_code: z.string(),
+  facility_code: z.string().nullable(),
   /** The type of card used during the credential evaluation process. */
-  type: z.string(),
+  type: z.string().nullable(),
 });
 
 type CreateAccessCardOutput = z.infer<typeof CreateAccessCardOutputSchema>;

@@ -49,23 +49,23 @@ type GetDashboardOccupancyTrendsInput = z.infer<typeof GetDashboardOccupancyTren
  */
 const GetDashboardOccupancyTrendsOutputSchema = z.object({
   /** The unique identifier of the dashboard. */
-  dashboard_id: z.string(),
+  dashboard_id: z.string().nullable(),
   /** The name of the dashboard. */
-  dashboard_name: z.string(),
+  dashboard_name: z.string().nullable(),
   /** The end of the time range for occupancy trends. */
-  end_time: z.number().int(),
+  end_time: z.number().int().nullable(),
   /** An array with range timestamps, and net occupancy. */
-  occupancy: z.array(z.array(z.number().int())),
+  occupancy: z.array(z.array(z.number().int())).nullable(),
   /** The unique identifier of the organization. */
-  org_id: z.string(),
+  org_id: z.string().nullable(),
   /** The name of the organization. */
-  org_name: z.string(),
+  org_name: z.string().nullable(),
   /** The start of the time range of occupancy trends. */
-  start_time: z.number().int(),
+  start_time: z.number().int().nullable(),
   /** An array with range timestamps, and count for “in” direction. */
-  trend_in: z.array(z.array(z.number().int())),
+  trend_in: z.array(z.array(z.number().int())).nullable(),
   /** An array with range timestamps, and count for “out” direction. */
-  trend_out: z.array(z.array(z.number().int())),
+  trend_out: z.array(z.array(z.number().int())).nullable(),
 });
 
 type GetDashboardOccupancyTrendsOutput = z.infer<typeof GetDashboardOccupancyTrendsOutputSchema>;

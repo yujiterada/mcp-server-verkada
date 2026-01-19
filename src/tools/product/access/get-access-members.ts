@@ -43,7 +43,7 @@ type GetAccessMembersInput = z.infer<typeof GetAccessMembersInputSchema>;
  */
 const GetAccessMembersOutputSchema = z.object({
   /** The list of access members in an organization. */
-  access_members: z.array(z.object({ company_name: z.string().optional(), department: z.string().optional(), department_id: z.string().optional(), email: z.string().optional(), employee_id: z.string().optional(), employee_title: z.string().optional(), external_id: z.string().optional(), full_name: z.string().optional(), has_profile_photo: z.boolean().optional(), is_visitor: z.boolean().optional(), profile_photo_last_updated: z.string().datetime().optional(), user_id: z.string().optional() })),
+  access_members: z.array(z.object({ company_name: z.string().optional(), department: z.string().optional(), department_id: z.string().optional(), email: z.string().optional(), employee_id: z.string().optional(), employee_title: z.string().optional(), external_id: z.string().optional(), full_name: z.string().optional(), has_profile_photo: z.boolean().optional(), is_visitor: z.boolean().optional(), profile_photo_last_updated: z.string().datetime().optional(), user_id: z.string().optional() })).nullable(),
 });
 
 type GetAccessMembersOutput = z.infer<typeof GetAccessMembersOutputSchema>;

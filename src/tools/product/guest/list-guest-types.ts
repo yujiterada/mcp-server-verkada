@@ -47,9 +47,9 @@ type ListGuestTypesInput = z.infer<typeof ListGuestTypesInputSchema>;
  */
 const ListGuestTypesOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. */
-  cursor: z.string(),
+  cursor: z.string().nullable(),
   /** List of guest types. */
-  items: z.array(z.object({ enabled_for_invites: z.boolean(), guest_type_id: z.string().uuid(), name: z.string() })),
+  items: z.array(z.object({ enabled_for_invites: z.boolean(), guest_type_id: z.string().uuid(), name: z.string() })).nullable(),
 });
 
 type ListGuestTypesOutput = z.infer<typeof ListGuestTypesOutputSchema>;

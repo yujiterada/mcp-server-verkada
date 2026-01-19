@@ -47,12 +47,12 @@ type GetThumbnailLinkInput = z.infer<typeof GetThumbnailLinkInputSchema>;
  */
 const GetThumbnailLinkOutputSchema = z.object({
   /** The expiry duration for the generated link. */
-  expiry: z.number().int(),
+  expiry: z.number().int().nullable(),
   /** The timestamp when thumbnail was captured.
 Formatted as a Unix timestamp in seconds. */
-  timestamp: z.number().int(),
+  timestamp: z.number().int().nullable(),
   /** The link to the thumbnail. */
-  url: z.string(),
+  url: z.string().nullable(),
 });
 
 type GetThumbnailLinkOutput = z.infer<typeof GetThumbnailLinkOutputSchema>;

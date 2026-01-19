@@ -45,7 +45,7 @@ type GetAccessDoorInformationInput = z.infer<typeof GetAccessDoorInformationInpu
  */
 const GetAccessDoorInformationOutputSchema = z.object({
   /** A DoorInformationObject per requested door. */
-  doors: z.array(z.object({ accessControllerId: z.string().optional(), accessControllerName: z.string().optional(), name: z.string().optional() })),
+  doors: z.array(z.object({ accessControllerId: z.string().optional(), accessControllerName: z.string().optional(), name: z.string().optional() })).nullable(),
 });
 
 type GetAccessDoorInformationOutput = z.infer<typeof GetAccessDoorInformationOutputSchema>;

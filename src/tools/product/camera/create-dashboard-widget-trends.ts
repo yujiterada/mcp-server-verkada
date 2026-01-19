@@ -71,17 +71,17 @@ type CreateDashboardWidgetTrendsInput = z.infer<typeof CreateDashboardWidgetTren
  */
 const CreateDashboardWidgetTrendsOutputSchema = z.object({
   /** The unique identifier of the dashboard. */
-  dashboard_id: z.string(),
+  dashboard_id: z.string().nullable(),
   /** The name of the dashboard. */
-  dashboard_name: z.string(),
+  dashboard_name: z.string().nullable(),
   /** The end of the time range for dashboard trends. */
-  end_time: z.string(),
+  end_time: z.string().nullable(),
   /** The time interval used. */
-  interval: z.enum(['PT15M', 'PT1H', 'PT1D']),
+  interval: z.enum(['PT15M', 'PT1H', 'PT1D']).nullable(),
   /** The start of the time range of dashboard trends. */
-  start_time: z.string(),
+  start_time: z.string().nullable(),
   /** List of widgets found. */
-  widgets: z.array(z.object({ conversion_data: z.object({ conversion_rates: z.record(z.string(), z.number()).optional(), helix_cameras_used: z.array(z.string()).optional(), helix_counts: z.record(z.string(), z.number()).optional(), occupancy_camera_presets_used: z.array(z.object({})).optional(), occupancy_in: z.record(z.string(), z.number()).optional() }).optional(), device_alerts_data: z.object({ alert_count: z.record(z.string(), z.number()).optional() }).optional(), helix_data: z.object({ cameras_used: z.array(z.string()).optional(), helix_stats: z.record(z.string(), z.number()).optional() }).optional(), occupancy_data: z.object({ camera_presets_used: z.array(z.object({})).optional(), in_counts: z.record(z.string(), z.number()).optional(), net_occupancy: z.record(z.string(), z.number()).optional(), out_counts: z.record(z.string(), z.number()).optional() }).optional(), queue_data: z.object({ avg_queue_length: z.record(z.string(), z.number()).optional(), avg_wait_time: z.record(z.string(), z.number()).optional(), camera_presets_used: z.array(z.object({})).optional(), max_queue_length: z.record(z.string(), z.number()).optional(), max_wait_time: z.record(z.string(), z.number()).optional() }).optional(), widget_id: z.string(), widget_name: z.string(), widget_type: z.enum(['occupancy', 'helix', 'conversion', 'queue', 'deviceAlerts']) })),
+  widgets: z.array(z.object({ conversion_data: z.object({ conversion_rates: z.record(z.string(), z.number()).optional(), helix_cameras_used: z.array(z.string()).optional(), helix_counts: z.record(z.string(), z.number()).optional(), occupancy_camera_presets_used: z.array(z.object({})).optional(), occupancy_in: z.record(z.string(), z.number()).optional() }).optional(), device_alerts_data: z.object({ alert_count: z.record(z.string(), z.number()).optional() }).optional(), helix_data: z.object({ cameras_used: z.array(z.string()).optional(), helix_stats: z.record(z.string(), z.number()).optional() }).optional(), occupancy_data: z.object({ camera_presets_used: z.array(z.object({})).optional(), in_counts: z.record(z.string(), z.number()).optional(), net_occupancy: z.record(z.string(), z.number()).optional(), out_counts: z.record(z.string(), z.number()).optional() }).optional(), queue_data: z.object({ avg_queue_length: z.record(z.string(), z.number()).optional(), avg_wait_time: z.record(z.string(), z.number()).optional(), camera_presets_used: z.array(z.object({})).optional(), max_queue_length: z.record(z.string(), z.number()).optional(), max_wait_time: z.record(z.string(), z.number()).optional() }).optional(), widget_id: z.string(), widget_name: z.string(), widget_type: z.enum(['occupancy', 'helix', 'conversion', 'queue', 'deviceAlerts']) })).nullable(),
 });
 
 type CreateDashboardWidgetTrendsOutput = z.infer<typeof CreateDashboardWidgetTrendsOutputSchema>;

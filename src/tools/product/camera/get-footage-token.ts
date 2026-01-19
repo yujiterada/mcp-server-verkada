@@ -36,20 +36,20 @@ const GetFootageTokenInputSchema = z.object({});
  */
 const GetFootageTokenOutputSchema = z.object({
   /** Allowed cameras for footage streaming for the JWT based on the provided API key. */
-  accessibleCameras: z.array(z.string()),
+  accessibleCameras: z.array(z.string()).nullable(),
   /** Allowed sites for footage streaming for the JWT based on the provided API key. */
-  accessibleSites: z.array(z.string()),
+  accessibleSites: z.array(z.string()).nullable(),
   /** The expiration time for the JWT in seconds from now. */
-  expiration: z.number().int(),
+  expiration: z.number().int().nullable(),
   /** The expiration time for the JWT in as an epoch timestamp (in seconds). */
-  expiresAt: z.number().int(),
+  expiresAt: z.number().int().nullable(),
   /** The JWT used to to stream footage.
 The token will expire after the expiration timestamp specified in the request.
 The token has permission to view streams that are live, history, or both based on the configuration of the API key provided.
 The token has permission to stream from certain cameras based on the configuration of the API key. */
-  jwt: z.string(),
+  jwt: z.string().nullable(),
   /** Footage streaming permissions for the JWT based on the provided API key. */
-  permission: z.array(z.string()),
+  permission: z.array(z.string()).nullable(),
 });
 
 type GetFootageTokenOutput = z.infer<typeof GetFootageTokenOutputSchema>;

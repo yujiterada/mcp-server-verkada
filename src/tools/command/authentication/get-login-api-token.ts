@@ -36,7 +36,7 @@ const GetLoginApiTokenInputSchema = z.object({});
  */
 const GetLoginApiTokenOutputSchema = z.object({
   /** Token to use for API requests */
-  token: z.string(),
+  token: z.string().nullable(),
 });
 
 type GetLoginApiTokenOutput = z.infer<typeof GetLoginApiTokenOutputSchema>;

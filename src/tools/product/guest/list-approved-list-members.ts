@@ -50,9 +50,9 @@ type ListApprovedListMembersInput = z.infer<typeof ListApprovedListMembersInputS
  */
 const ListApprovedListMembersOutputSchema = z.object({
   /** Pagination cursor for retrieving the next page of results. Continue paginating while this field is present. */
-  cursor: z.string(),
+  cursor: z.string().nullable(),
   /** List of people on the approved list. */
-  people: z.array(z.object({ address: z.string().optional(), date_of_birth: z.string().optional(), email: z.string(), expiration_timestamp: z.string().optional(), external_id: z.string().optional(), full_name: z.string(), person_id: z.string(), phone_number: z.string().optional() })),
+  people: z.array(z.object({ address: z.string().optional(), date_of_birth: z.string().optional(), email: z.string(), expiration_timestamp: z.string().optional(), external_id: z.string().optional(), full_name: z.string(), person_id: z.string(), phone_number: z.string().optional() })).nullable(),
 });
 
 type ListApprovedListMembersOutput = z.infer<typeof ListApprovedListMembersOutputSchema>;

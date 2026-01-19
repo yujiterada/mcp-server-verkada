@@ -43,7 +43,7 @@ type UpdateApprovedListRemoveInput = z.infer<typeof UpdateApprovedListRemoveInpu
  */
 const UpdateApprovedListRemoveOutputSchema = z.object({
   /** Number of records added, removed, or changed by the operation. */
-  count: z.number().int(),
+  count: z.number().int().nullable(),
 });
 
 type UpdateApprovedListRemoveOutput = z.infer<typeof UpdateApprovedListRemoveOutputSchema>;

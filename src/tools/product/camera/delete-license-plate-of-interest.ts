@@ -43,11 +43,11 @@ type DeleteLicensePlateOfInterestInput = z.infer<typeof DeleteLicensePlateOfInte
  */
 const DeleteLicensePlateOfInterestOutputSchema = z.object({
   /** The creation time of the License Plate of Interest. */
-  creation_time: z.number().int(),
+  creation_time: z.number().int().nullable(),
   /** The description of the License Plate of Interest. */
-  description: z.string(),
+  description: z.string().nullable(),
   /** The license plate number of the License Plate of Interest. */
-  license_plate: z.string(),
+  license_plate: z.string().nullable(),
 });
 
 type DeleteLicensePlateOfInterestOutput = z.infer<typeof DeleteLicensePlateOfInterestOutputSchema>;

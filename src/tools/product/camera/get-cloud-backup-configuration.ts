@@ -43,23 +43,23 @@ type GetCloudBackupConfigurationInput = z.infer<typeof GetCloudBackupConfigurati
  */
 const GetCloudBackupConfigurationOutputSchema = z.object({
   /** The unique identifier of the camera. */
-  camera_id: z.string(),
+  camera_id: z.string().nullable(),
   /** Array of booleans indicating for which days footage         should be uploaded. In order the elements in the array indicate the following days:         Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday. If value is 1,         cloud backup is on for that day. If value is 0, cloud backup is off for that day */
-  days_to_preserve: z.string(),
+  days_to_preserve: z.string().nullable(),
   /** Status of cloud backup for a camera. It has two possible values: 1, 0. */
-  enabled: z.number().int(),
+  enabled: z.number().int().nullable(),
   /** Epoch timestamp of the latest available backup segment in HD quality. */
-  last_updated_segment_hq: z.string(),
+  last_updated_segment_hq: z.string().nullable(),
   /** Epoch timestamp of the latest available backup segment in SD quality. */
-  last_updated_segment_sq: z.string(),
+  last_updated_segment_sq: z.string().nullable(),
   /** Delimited list of &lt;code&gt;start_time, end_time&lt;/code&gt; as timeslot for which a         user wants footage to be backed up to the cloud, start_time and end_time are integers         indicating seconds to midnight, i.e, [3600, 7200] means 1am - 2am */
-  time_to_preserve: z.string(),
+  time_to_preserve: z.string().nullable(),
   /** Delimited list of &lt;code&gt;start_time, end_time&lt;/code&gt; as timeslot for scheduled         time for footage upload, start_time and end_time are integers indicating seconds to         midnight, i.e, [3600, 7200] means 1am - 2am */
-  upload_timeslot: z.string(),
+  upload_timeslot: z.string().nullable(),
   /** Quality of the uploaded video.         Two values are possible: &lt;code&gt;STANDARD_QUALITY&lt;/code&gt; and &lt;code&gt;HIGH_QUALITY&lt;/code&gt;. */
-  video_quality: z.string(),
+  video_quality: z.string().nullable(),
   /** Defines what type of video is backed-up.         Two values are possible: &lt;code&gt;MOTION&lt;/code&gt; and &lt;code&gt;ALL&lt;/code&gt;. */
-  video_to_upload: z.string(),
+  video_to_upload: z.string().nullable(),
 });
 
 type GetCloudBackupConfigurationOutput = z.infer<typeof GetCloudBackupConfigurationOutputSchema>;

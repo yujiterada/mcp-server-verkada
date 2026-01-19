@@ -43,7 +43,7 @@ type DeleteLicensePlateOfInterestBulkOperationInput = z.infer<typeof DeleteLicen
  */
 const DeleteLicensePlateOfInterestBulkOperationOutputSchema = z.object({
   /** The time at which the csv file was uploaded. */
-  addedMs: z.number().int(),
+  addedMs: z.number().int().nullable(),
 });
 
 type DeleteLicensePlateOfInterestBulkOperationOutput = z.infer<typeof DeleteLicensePlateOfInterestBulkOperationOutputSchema>;

@@ -43,9 +43,9 @@ type UnlockAccessAdminApiUnlockInput = z.infer<typeof UnlockAccessAdminApiUnlock
  */
 const UnlockAccessAdminApiUnlockOutputSchema = z.object({
   /** The unique identifier of the door that was unlocked. */
-  door_id: z.string(),
+  door_id: z.string().nullable(),
   /** The duration of the unlock. */
-  unlock_duration: z.number().int(),
+  unlock_duration: z.number().int().nullable(),
 });
 
 type UnlockAccessAdminApiUnlockOutput = z.infer<typeof UnlockAccessAdminApiUnlockOutputSchema>;

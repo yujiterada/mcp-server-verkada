@@ -50,7 +50,7 @@ type PostMfaCodeViewV1Input = z.infer<typeof PostMfaCodeViewV1InputSchema>;
  */
 const PostMfaCodeViewV1OutputSchema = z.object({
   /** The code corresponding to a user&#x27;s MFA code credential. */
-  code: z.string(),
+  code: z.string().nullable(),
 });
 
 type PostMfaCodeViewV1Output = z.infer<typeof PostMfaCodeViewV1OutputSchema>;

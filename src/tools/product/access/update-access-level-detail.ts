@@ -56,19 +56,19 @@ type UpdateAccessLevelDetailInput = z.infer<typeof UpdateAccessLevelDetailInputS
  */
 const UpdateAccessLevelDetailOutputSchema = z.object({
   /** IDs of Access Groups granted door access via this Access Level */
-  access_groups: z.array(z.string()),
+  access_groups: z.array(z.string()).nullable(),
   /** Unique identifier for the Access Level */
-  access_level_id: z.string(),
+  access_level_id: z.string().nullable(),
   /** List of Access Schedule Events associated with this Access Level */
-  access_schedule_events: z.array(z.object({ access_schedule_event_id: z.string().optional(), door_status: z.enum(['access_granted']).optional(), end_time: z.string(), start_time: z.string(), weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']) })),
+  access_schedule_events: z.array(z.object({ access_schedule_event_id: z.string().optional(), door_status: z.enum(['access_granted']).optional(), end_time: z.string(), start_time: z.string(), weekday: z.enum(['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']) })).nullable(),
   /** IDs of Doors accessible under this Access Level */
-  doors: z.array(z.string()),
+  doors: z.array(z.string()).nullable(),
   /** Last updated timestamp of the Access Level (Unix timestamp in seconds) */
-  last_updated_at: z.number().int(),
+  last_updated_at: z.number().int().nullable(),
   /** Name of the Access Level */
-  name: z.string(),
+  name: z.string().nullable(),
   /** IDs of Sites containing the Doors this Access Level applies to */
-  sites: z.array(z.string()),
+  sites: z.array(z.string()).nullable(),
 });
 
 type UpdateAccessLevelDetailOutput = z.infer<typeof UpdateAccessLevelDetailOutputSchema>;

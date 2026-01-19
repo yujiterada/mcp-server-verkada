@@ -43,7 +43,7 @@ type CreateLicensePlateOfInterestBulkOperationInput = z.infer<typeof CreateLicen
  */
 const CreateLicensePlateOfInterestBulkOperationOutputSchema = z.object({
   /** The time at which the csv file was uploaded. */
-  addedMs: z.number().int(),
+  addedMs: z.number().int().nullable(),
 });
 
 type CreateLicensePlateOfInterestBulkOperationOutput = z.infer<typeof CreateLicensePlateOfInterestBulkOperationOutputSchema>;
