@@ -102,16 +102,6 @@ export async function createOccupancyTrendsMqttConfig(
     },
   });
 
-  // Validate response
-  if (response.success && response.data) {
-    try {
-      response.data = CreateOccupancyTrendsMqttConfigOutputSchema.parse(response.data);
-    } catch (error) {
-      // Log validation warning but don't fail
-      console.warn('Response validation warning:', error);
-    }
-  }
-
   return response;
 }
 

@@ -84,16 +84,6 @@ export async function getAccessDoorExceptionCalendar(
     path: fullPath,
   });
 
-  // Validate response
-  if (response.success && response.data) {
-    try {
-      response.data = GetAccessDoorExceptionCalendarOutputSchema.parse(response.data);
-    } catch (error) {
-      // Log validation warning but don't fail
-      console.warn('Response validation warning:', error);
-    }
-  }
-
   return response;
 }
 
