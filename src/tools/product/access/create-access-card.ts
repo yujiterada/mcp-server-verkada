@@ -37,8 +37,6 @@ const CreateAccessCardInputSchema = z.object({
     active: z.boolean().optional(),
     /** The card number used to grant or deny access to a door. */
     card_number: z.string().optional(),
-    /** The card number in base36 used to grant or deny access to a door. */
-    card_number_base36: z.string().optional(),
     /** The card number in hexadecimal used to grant or deny access to a door. */
     card_number_hex: z.string().optional(),
     /** The facility code used to grant or deny access to a door. */
@@ -65,8 +63,6 @@ const CreateAccessCardOutputSchema = z.object({
   card_id: z.string().nullable(),
   /** The card number  used to grant or deny access to a door. */
   card_number: z.string().nullable(),
-  /** The card number in base36 used to grant or deny access to a door. */
-  card_number_base36: z.string().nullable(),
   /** The card number in hexadecimal used to grant or deny access to a door. */
   card_number_hex: z.string().nullable(),
   /** The facility code used to grant or deny access to a door. */
@@ -88,7 +84,6 @@ type CreateAccessCardOutput = z.infer<typeof CreateAccessCardOutputSchema>;
  * @param input.query.user_id - The user_id parameter
  * @param input.body.active - Bool value specifying if the credential is currently active. Can be True or False. Default value is False.
  * @param input.body.card_number - The card number used to grant or deny access to a door.
- * @param input.body.card_number_base36 - The card number in base36 used to grant or deny access to a door.
  * @param input.body.card_number_hex - The card number in hexadecimal used to grant or deny access to a door.
  * @param input.body.facility_code - The facility code used to grant or deny access to a door.
  * @param input.body.type - One of the following supported card types, &lt;code&gt;Standard 26-bit Wiegand&lt;/code&gt;,&lt;code&gt;HID 37-bit&lt;/code&gt;, &lt;code&gt;HID 37-bit No Facility Code&lt;/code&gt;, &lt;code&gt;HID 34-bit&lt;/code&gt;,&lt;code&gt;Casi Rusco 40-Bit&lt;/code&gt;, &lt;code&gt;HID Corporate 1000-35&lt;/code&gt;, &lt;code&gt;HID Corporate 1000-48&lt;/code&gt;,&lt;code&gt;HID iClass&lt;/code&gt;, &lt;code&gt;DESFire CSN&lt;/code&gt;, &lt;code&gt;Verkada DESFire&lt;/code&gt;, &lt;code&gt;Third Party DESFire 40X&lt;/code&gt;,&lt;code&gt;Apple Wallet Pass&lt;/code&gt;, &lt;code&gt;MiFare 4-Byte (32 bit) CSN&lt;/code&gt;, &lt;code&gt;MDC Custom 64-bit&lt;/code&gt;,&lt;code&gt;HID 36-bit Keyscan&lt;/code&gt;, &lt;code&gt;HID 33-bit DSX&lt;/code&gt;, &lt;code&gt;HID 33-bit RS2&lt;/code&gt;,&lt;code&gt;HID 36-bit Simplex&lt;/code&gt;, &lt;code&gt;Cansec 37-bit&lt;/code&gt;, &lt;code&gt;Credit Card BIN Number&lt;/code&gt;,&lt;code&gt;Kantech XSF&lt;/code&gt;, &lt;code&gt;Schlage 34-bit&lt;/code&gt;, &lt;code&gt;Schlage 37-bit&lt;/code&gt;, &lt;code&gt;RBH 50-bit&lt;/code&gt;,&lt;code&gt;Guardall G-Prox II 36-bit&lt;/code&gt;, &lt;code&gt;AMAG 32-bit&lt;/code&gt;, &lt;code&gt;Securitas 37-bit&lt;/code&gt;,&lt;code&gt;Kastle 32-bit&lt;/code&gt;, &lt;code&gt;PointGuard MDI 37-bit&lt;/code&gt;, &lt;code&gt;Blackboard 64-bit&lt;/code&gt;,&lt;code&gt;IDm 64-bit&lt;/code&gt;, &lt;code&gt;Continental 36-bit&lt;/code&gt;, &lt;code&gt;AWID 34-bit&lt;/code&gt;, &lt;code&gt;License Plate&lt;/code&gt;,&lt;code&gt;HID Infinity 37-bit&lt;/code&gt;, &lt;code&gt;HID Ceridian 26-bit&lt;/code&gt;, &lt;code&gt;iClass 35-bit&lt;/code&gt;,&lt;code&gt;Andover Controls 37-bit&lt;/code&gt;.
@@ -121,7 +116,6 @@ export async function createAccessCard(
     body: {
       active: validated.body.active,
       card_number: validated.body.card_number,
-      card_number_base36: validated.body.card_number_base36,
       card_number_hex: validated.body.card_number_hex,
       facility_code: validated.body.facility_code,
       type: validated.body.type,

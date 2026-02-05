@@ -52,8 +52,6 @@ const ActivateAccessCardActivateOutputSchema = z.object({
   card_id: z.string().nullable(),
   /** The card number  used to grant or deny access to a door. */
   card_number: z.string().nullable(),
-  /** The card number in base36 used to grant or deny access to a door. */
-  card_number_base36: z.string().nullable(),
   /** The card number in hexadecimal used to grant or deny access to a door. */
   card_number_hex: z.string().nullable(),
   /** The facility code used to grant or deny access to a door. */
