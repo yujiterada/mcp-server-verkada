@@ -21,10 +21,17 @@ import type { APIResponse } from '../../../types/common.js';
 // ============================================================================
 
 /**
- * This tool takes no input parameters
+ * Input parameters for getFootageToken
  */
-const GetFootageTokenInputSchema = z.object({});
+const GetFootageTokenInputSchema = z.object({
+  /** Path parameters */
+  query: z.object({
+    /** The exclude_accessible_resources parameter */
+    exclude_accessible_resources: z.boolean().optional(),
+  }),
+});
 
+type GetFootageTokenInput = z.infer<typeof GetFootageTokenInputSchema>;
 
 // ============================================================================
 // OUTPUT SCHEMA
@@ -35,9 +42,9 @@ const GetFootageTokenInputSchema = z.object({});
  * OK
  */
 const GetFootageTokenOutputSchema = z.object({
-  /** Allowed cameras for footage streaming for the JWT based on the provided API key. */
+  /** Allowed cameras for footage streaming for the JWT based on the provided API key. Omitted if exclude_accessible_resources is true. */
   accessibleCameras: z.array(z.string()).nullable(),
-  /** Allowed sites for footage streaming for the JWT based on the provided API key. */
+  /** Allowed sites for footage streaming for the JWT based on the provided API key. Omitted if exclude_accessible_resources is true. */
   accessibleSites: z.array(z.string()).nullable(),
   /** The expiration time for the JWT in seconds from now. */
   expiration: z.number().int().nullable(),
@@ -61,14 +68,25 @@ type GetFootageTokenOutput = z.infer<typeof GetFootageTokenOutputSchema>;
 /**
  * Get a specific footage token by ID. Returns detailed information about the footage token.
  *
+ * @param input.query.exclude_accessible_resources - The exclude_accessible_resources parameter
  * @returns OK
  */
 export async function getFootageToken(
+  input: GetFootageTokenInput
 ): Promise<APIResponse<GetFootageTokenOutput>> {
+  // Validate input
+  const validated = GetFootageTokenInputSchema.parse(input);
+
   // Build path with parameters
   const path = '/cameras/v1/footage/token';
 
-  const fullPath = path;
+  // Build query string
+  const queryParams = new URLSearchParams();
+  if (validated.query.exclude_accessible_resources !== undefined) {
+    queryParams.set('exclude_accessible_resources', String(validated.query.exclude_accessible_resources));
+  }
+  const queryString = queryParams.toString();
+  const fullPath = queryString ? `${path}?${queryString}` : path;
 
   // Make API request
   const response = await callVerkadaAPI<GetFootageTokenOutput>({

@@ -38,7 +38,7 @@ Defaults to the end of the last full bucket of data. */
     /** The time interval for each array in &lt;code&gt;trend_in&lt;/code&gt; and &lt;code&gt;trend_out&lt;/code&gt;.
 Options available are: &lt;code&gt;PT15M&lt;/code&gt;, &lt;code&gt;PT1H&lt;/code&gt;, &lt;code&gt;PT1D&lt;/code&gt;.
 Defaults to &lt;code&gt;PT1H&lt;/code&gt;. */
-    interval: z.enum(['PT15M', 'PT1H', 'PT1D']).optional(),
+    interval: z.enum(['15_minutes', '1_hour', '1_day']).optional(),
     /** The unique site identifiers to filter on.
 Each value must be a valid site UID.
 Defaults to all sites in the dashboard. */
@@ -77,7 +77,7 @@ const CreateDashboardWidgetTrendsOutputSchema = z.object({
   /** The end of the time range for dashboard trends. */
   end_time: z.string().nullable(),
   /** The time interval used. */
-  interval: z.enum(['PT15M', 'PT1H', 'PT1D']).nullable(),
+  interval: z.enum(['15_minutes', '1_hour', '1_day']).nullable(),
   /** The start of the time range of dashboard trends. */
   start_time: z.string().nullable(),
   /** List of widgets found. */

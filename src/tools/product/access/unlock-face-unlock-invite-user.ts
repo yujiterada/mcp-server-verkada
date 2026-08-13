@@ -33,8 +33,6 @@ const UnlockFaceUnlockInviteUserInputSchema = z.object({
   body: z.object({
     /** Methods to send invitation through (email, sms). Default is [&quot;email&quot;, &quot;sms&quot;]. */
     invitation_methods: z.array(z.string()).optional(),
-    /** Whether to overwrite an existing face credential. Default is false. */
-    overwrite: z.boolean().optional(),
   }),
 });
 
@@ -62,7 +60,6 @@ type UnlockFaceUnlockInviteUserOutput = z.infer<typeof UnlockFaceUnlockInviteUse
  *
  * @param input.path.user_id - The user_id parameter
  * @param input.body.invitation_methods - Methods to send invitation through (email, sms). Default is [&quot;email&quot;, &quot;sms&quot;].
- * @param input.body.overwrite - Whether to overwrite an existing face credential. Default is false.
  * @returns ok
  */
 export async function unlockFaceUnlockInviteUser(
@@ -83,7 +80,6 @@ export async function unlockFaceUnlockInviteUser(
     path: fullPath,
     body: {
       invitation_methods: validated.body.invitation_methods,
-      overwrite: validated.body.overwrite,
     },
   });
 

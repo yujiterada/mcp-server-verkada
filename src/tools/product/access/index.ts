@@ -10,6 +10,7 @@ export { activateAccessScenarioActivate, activateAccessScenarioActivateMetadata 
 export { activateActivateBleMethod, activateActivateBleMethodMetadata } from './activate-activate-ble-method.js';
 export { activateActivateRemoteUnlock, activateActivateRemoteUnlockMetadata } from './activate-activate-remote-unlock.js';
 export { activateLicensePlateActivate, activateLicensePlateActivateMetadata } from './activate-license-plate-activate.js';
+export { activateScenariosActivate, activateScenariosActivateMetadata } from './activate-scenarios-activate.js';
 export { createAccessCard, createAccessCardMetadata } from './create-access-card.js';
 export { createAccessDoorExceptionCalendars, createAccessDoorExceptionCalendarsMetadata } from './create-access-door-exception-calendars.js';
 export { createAccessDoorExceptions, createAccessDoorExceptionsMetadata } from './create-access-door-exceptions.js';
@@ -18,6 +19,7 @@ export { createAccessLevel, createAccessLevelMetadata } from './create-access-le
 export { createAccessLevelSchedule, createAccessLevelScheduleMetadata } from './create-access-level-schedule.js';
 export { createAccessScenarioRelease, createAccessScenarioReleaseMetadata } from './create-access-scenario-release.js';
 export { createLicensePlate, createLicensePlateMetadata } from './create-license-plate.js';
+export { createScenariosRelease, createScenariosReleaseMetadata } from './create-scenarios-release.js';
 export { deactivateAccessCardDeactivate, deactivateAccessCardDeactivateMetadata } from './deactivate-access-card-deactivate.js';
 export { deactivateDeactivateBleMethod, deactivateDeactivateBleMethodMetadata } from './deactivate-deactivate-ble-method.js';
 export { deactivateDeactivateRemoteUnlock, deactivateDeactivateRemoteUnlockMetadata } from './deactivate-deactivate-remote-unlock.js';
@@ -35,6 +37,7 @@ export { deleteFaceUnlockDisableUser, deleteFaceUnlockDisableUserMetadata } from
 export { deleteLicensePlate, deleteLicensePlateMetadata } from './delete-license-plate.js';
 export { deleteMfaCodeViewV1, deleteMfaCodeViewV1Metadata } from './delete-mfa-code-view-v1.js';
 export { deleteProfilePhoto, deleteProfilePhotoMetadata } from './delete-profile-photo.js';
+export { deleteProfilePhotoUser, deleteProfilePhotoUserMetadata } from './delete-profile-photo-user.js';
 export { getAccessDoorException, getAccessDoorExceptionMetadata } from './get-access-door-exception.js';
 export { getAccessDoorExceptionCalendar, getAccessDoorExceptionCalendarMetadata } from './get-access-door-exception-calendar.js';
 export { getAccessDoorExceptionCalendars, getAccessDoorExceptionCalendarsMetadata } from './get-access-door-exception-calendars.js';
@@ -46,10 +49,12 @@ export { getAccessLevelSchedule, getAccessLevelScheduleMetadata } from './get-ac
 export { getAccessMembers, getAccessMembersMetadata } from './get-access-members.js';
 export { getAccessUser, getAccessUserMetadata } from './get-access-user.js';
 export { getProfilePhoto, getProfilePhotoMetadata } from './get-profile-photo.js';
+export { getProfilePhotoUser, getProfilePhotoUserMetadata } from './get-profile-photo-user.js';
 export { inviteSendPassAppInvite, inviteSendPassAppInviteMetadata } from './invite-send-pass-app-invite.js';
 export { listAccessEvents, listAccessEventsMetadata } from './list-access-events.js';
 export { listAccessGroups, listAccessGroupsMetadata } from './list-access-groups.js';
 export { listAccessScenarioList, listAccessScenarioListMetadata } from './list-access-scenario-list.js';
+export { listScenariosList, listScenariosListMetadata } from './list-scenarios-list.js';
 export { postMfaCodeViewV1, postMfaCodeViewV1Metadata } from './post-mfa-code-view-v1.js';
 export { unlockAccessAdminApiUnlock, unlockAccessAdminApiUnlockMetadata } from './unlock-access-admin-api-unlock.js';
 export { unlockAccessUserApiUnlock, unlockAccessUserApiUnlockMetadata } from './unlock-access-user-api-unlock.js';
@@ -68,3 +73,4 @@ export { updateAccessLevelSchedule, updateAccessLevelScheduleMetadata } from './
 export { updateAccessStartDate, updateAccessStartDateMetadata } from './update-access-start-date.js';
 export { updateAccessUserPin, updateAccessUserPinMetadata } from './update-access-user-pin.js';
 export { updateProfilePhoto, updateProfilePhotoMetadata } from './update-profile-photo.js';
+export { updateProfilePhotoUser, updateProfilePhotoUserMetadata } from './update-profile-photo-user.js';

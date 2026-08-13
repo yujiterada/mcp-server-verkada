@@ -7,6 +7,7 @@
 
 export { createHelixEvent, createHelixEventMetadata } from './create-helix-event.js';
 export { createHelixEventType, createHelixEventTypeMetadata } from './create-helix-event-type.js';
+export { createVideoTaggingEventBatch, createVideoTaggingEventBatchMetadata } from './create-video-tagging-event-batch.js';
 export { deleteHelixEvent, deleteHelixEventMetadata } from './delete-helix-event.js';
 export { deleteHelixEventType, deleteHelixEventTypeMetadata } from './delete-helix-event-type.js';
 export { getHelixEvent, getHelixEventMetadata } from './get-helix-event.js';

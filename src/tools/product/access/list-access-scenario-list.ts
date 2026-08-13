@@ -32,6 +32,8 @@ const ListAccessScenarioListInputSchema = z.object({
     site_ids: z.array(z.string()).optional(),
     /** The types parameter */
     types: z.array(z.string()).optional(),
+    /** The scenario_types parameter */
+    scenario_types: z.array(z.string()).optional(),
   }),
 });
 
@@ -47,7 +49,7 @@ type ListAccessScenarioListInput = z.infer<typeof ListAccessScenarioListInputSch
  */
 const ListAccessScenarioListOutputSchema = z.object({
   /** List of scenarios. */
-  scenarios: z.array(z.object({ doors_to_lock: z.array(z.string()).nullable().optional(), message: z.string().nullable().optional(), name: z.string().nullable(), scenario_id: z.string().nullable(), site_count: z.number().int().nullable(), sites: z.array(z.string()).nullable().optional(), state: z.enum(['ACTIVE', 'INACTIVE']).nullable(), type: z.enum(['lockdown']).nullable(), user_groups_with_disable_access: z.array(z.string()).nullable().optional(), user_groups_with_door_access: z.array(z.string()).nullable().optional(), user_groups_with_enable_access: z.array(z.string()).nullable().optional() })).nullable(),
+  scenarios: z.array(z.object({ door_configurations: z.array(z.object({ door_id: z.string().nullable(), door_lock_state: z.string().nullable() })).nullable().optional(), doors_to_lock: z.array(z.string()).nullable().optional(), doors_to_unlock: z.array(z.string()).nullable().optional(), message: z.string().nullable().optional(), name: z.string().nullable(), scenario_color: z.string().nullable().optional(), scenario_id: z.string().nullable(), scenario_message: z.string().nullable().optional(), scenario_type: z.string().nullable().optional(), site_count: z.number().int().nullable(), sites: z.array(z.string()).nullable().optional(), state: z.enum(['ACTIVE', 'INACTIVE']).nullable(), type: z.string().nullable(), user_groups_with_disable_access: z.array(z.string()).nullable().optional(), user_groups_with_door_access: z.array(z.string()).nullable().optional(), user_groups_with_enable_access: z.array(z.string()).nullable().optional() })).nullable(),
 });
 
 type ListAccessScenarioListOutput = z.infer<typeof ListAccessScenarioListOutputSchema>;
@@ -62,6 +64,7 @@ type ListAccessScenarioListOutput = z.infer<typeof ListAccessScenarioListOutputS
  * @param input.query.scenario_ids - The scenario_ids parameter
  * @param input.query.site_ids - The site_ids parameter
  * @param input.query.types - The types parameter
+ * @param input.query.scenario_types - The scenario_types parameter
  * @returns OK
  */
 export async function listAccessScenarioList(
@@ -88,6 +91,11 @@ export async function listAccessScenarioList(
   if (validated.query.types !== undefined) {
     for (const item of validated.query.types) {
       queryParams.append('types', String(item));
+    }
+  }
+  if (validated.query.scenario_types !== undefined) {
+    for (const item of validated.query.scenario_types) {
+      queryParams.append('scenario_types', String(item));
     }
   }
   const queryString = queryParams.toString();
