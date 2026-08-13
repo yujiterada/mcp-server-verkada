@@ -461,7 +461,9 @@ export const defaultConfig: GeneratorConfig = {
     // Rules for assigning operations to categories
     // Evaluated in order, first match wins
     rules: [
+      { pattern: /^\/v2\/batch/, category: 'command/batch' },
       { pattern: /^\/token/, category: 'command/authentication' },
+      { pattern: /^\/v2\/access/, category: 'product/access' },
       { pattern: /^\/access\/v1\/access_groups/, category: 'product/access' },
       { pattern: /^\/access\/v1\/access_users/, category: 'product/access' },
       { pattern: /^\/access\/v1\/credentials/, category: 'product/access' },
@@ -471,12 +473,12 @@ export const defaultConfig: GeneratorConfig = {
       { pattern: /^\/access\/v1\/scenarios/, category: 'product/access' },
       { pattern: /^\/alarms\/v1\/devices/, category: 'command/device' },
       { pattern: /^\/cameras\/v1\/devices/, category: 'command/device' },
-      { pattern: /^\/cameras\/v1\/occupancy_trend_enabled/, category: 'product/camera' },
       { pattern: /^\/viewing_station\/v1\/devices/, category: 'command/device' },
       { pattern: /^\/alarms\/v1\/sites/, category: 'command/site' },
       { pattern: /^\/guest\/v1\/sites/, category: 'command/site' },
       { pattern: /^\/cameras\/v1\/alerts/, category: 'command/alert' },
       { pattern: /^\/environment\/v1\/alerts/, category: 'command/alert' },
+      { pattern: /^\/cameras\/v1\/occupancy_trend_enabled/, category: 'product/camera' },
       { pattern: /^\/caneras\/v1\/analytics/, category: 'product/camera' },
       { pattern: /^\/v2\/analytics\/operational_dashboard/, category: 'product/camera' },
       { pattern: /^\/cameras\/v1\/analytics/, category: 'product/camera' },
@@ -485,6 +487,8 @@ export const defaultConfig: GeneratorConfig = {
       { pattern: /^\/cameras\/v1\/footage/, category: 'product/camera' },
       { pattern: /^\/stream\/cameras\/v1/, category: 'product/camera' },
       { pattern: /^\/cameras\/v1\/people/, category: 'product/camera' },
+      { pattern: /^\/v2\/cameras/, category: 'product/camera' },
+      { pattern: /^\/v2\/analytics\/cameras/, category: 'product/camera' },
       { pattern: /^\/cameras\/v1\/video_tagging/, category: 'product/helix' },
       { pattern: /^\/core\/v1\/audit_log/, category: 'command/audit-log' },
       { pattern: /^\/core\/v1\/user/, category: 'command/user' },
